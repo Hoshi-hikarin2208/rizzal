@@ -1,4 +1,9 @@
 {
+    "folders": [
+        {
+            "path": ".."
+        }
+    ]
 	"folders": [
 		{
 			"path": ".."
