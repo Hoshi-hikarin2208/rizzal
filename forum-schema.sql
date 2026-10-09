@@ -46,6 +46,10 @@ alter table public.forum_replies enable row level security;
 alter table public.forum_post_likes enable row level security;
 alter table public.forum_reply_likes enable row level security;
 
+grant select, insert, delete on public.forum_posts to authenticated;
+grant select, insert, delete on public.forum_replies to authenticated;
+grant select, insert, delete on public.forum_post_likes to authenticated;
+grant select, insert, delete on public.forum_reply_likes to authenticated;
 drop policy if exists "Signed-in readers can read forum posts" on public.forum_posts;
 create policy "Signed-in readers can read forum posts"
   on public.forum_posts for select to authenticated using (true);

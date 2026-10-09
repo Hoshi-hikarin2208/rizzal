@@ -4,23 +4,24 @@ An interactive, static history website about José Rizal, the Propaganda Movemen
 
 ## Run locally
 
-Open `index.html` in a browser, or serve this directory with any static web server. The site uses `styles.css` for presentation and `app.js` for its interactive timeline, quiz, audio player, community forum, and history memes.
+Install dependencies with `npm install`, then start the Next.js app with `npm run dev`. The site preserves its interactive timeline, quiz, audio player, community forum, and history memes.
 
-## Theme and creator credits
+## Theme and creator photos
 
-Choose **Light mode** or **Dark mode** from the navigation; the preference is remembered in the current browser. In **Website creators**, enter your team name above the prefilled member names, then upload each member's photo. Names and resized photos are saved in that browser only. To include the final credits for all visitors, add the approved photos to the project and update the creator cards in `index.html`.
+Choose **Light mode** or **Dark mode** from the fixed navigation; the preference is remembered in the current browser. Member photos and names are read-only for visitors and managed by the site admin in [`public/images/creators`](./public/images/creators) and [`app/site-content.html`](./app/site-content.html). There are no photo or name editing controls on the site.
 
 ## Shared forum setup
 
 The forum needs a Supabase project; until configured, the site displays setup guidance and the rest of the website still works.
 
-1. Create a Supabase project and enable **Anonymous Sign-Ins** under **Authentication → Sign In / Providers**.
-2. Open the project's SQL Editor and run [`forum-schema.sql`](./forum-schema.sql).
-3. In [`forum-config.js`](./forum-config.js), replace `YOUR_SUPABASE_PROJECT_URL` and `YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY` with the project's URL and publishable (or legacy anon) key. Never put a service-role key in frontend code.
-4. Deploy the site over HTTPS. The public forum supports anonymous or display-name posts, replies, likes, sorting, refresh, and deleting your own posts and their replies.
+1. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` in `.env.local` for local development and in the deployment environment. The local file is ignored by Git.
+2. In Supabase, enable **Anonymous Sign-Ins** under **Authentication → Sign In / Providers**, then run [`forum-schema.sql`](./forum-schema.sql) in the project's SQL Editor. If the forum was already set up, run the script again to apply its explicit Data API grants; row-level security remains enabled.
+3. Deploy the app over HTTPS. The forum uses cookie-based Supabase sessions, server-renders available community notes, and supports anonymous or display-name posts, replies, likes, sorting, refresh, and deleting your own posts and their replies.
 
-The Supabase URL and publishable/anon key are intended for browser use; row-level security in the SQL schema limits writes and deletions to the signed-in anonymous account that owns each item. A public anonymous forum can attract spam: enable Supabase's CAPTCHA protection for anonymous sign-in where available, monitor the discussion, and rotate/disable access if abuse occurs. The site does not provide moderator tooling.
+The Supabase URL and publishable key are intended for browser use; row-level security in the SQL schema limits writes and deletions to the signed-in account that owns each item. Never put a service-role key in frontend code. A public anonymous forum can attract spam: enable Supabase's CAPTCHA protection for anonymous sign-in where available, monitor the discussion, and rotate/disable access if abuse occurs. The site does not provide moderator tooling.
 
 ## Listening room
 
-The turntable plays audio files selected by the visitor in their browser. Audio is not uploaded or bundled with the site. The listening room also links to YouTube Music and Spotify searches for classic OPM; check that results are from official artist or rights-holder accounts. Use local recordings you have permission to play, since OPM recordings may be copyrighted.
+The site admin curates the song list in [`public/music/playlist.json`](./public/music/playlist.json). Add local audio files you have permission to use to [`public/music`](./public/music), or add HTTPS Spotify and YouTube links there. Visitors can choose from the approved list but cannot add or upload songs; local files play in the site player and streaming links open on their service. See [`public/music/README.md`](./public/music/README.md) for the playlist format.
+
+The quiz contains 15 questions: 12 multiple-choice and 3 true-or-false questions.
