@@ -4,4 +4,10 @@
             "path": ".."
         }
     ]
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {}
 }
