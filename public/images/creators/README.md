@@ -8,4 +8,4 @@ Only the site admin manages member photos in this project folder. Visitors canno
 - `kim-joshua-e-esmillarin.jpg`
 - `renze-daneille-p-rivero.jpg`
 
-To use different filenames or image formats, update the matching `src` in `app/site-content.html`. Creator names are also managed there.
+To use different filenames or image formats, update the matching `src` in `app/site-content.html` (or `index.html` for the static page). Creator names are managed in those same files.

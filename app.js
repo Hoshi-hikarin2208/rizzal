@@ -17,12 +17,7 @@
     });
 
     const themeSelect = document.querySelector("#theme-select");
-    const creatorStatus = document.querySelector("#creator-status");
     const themeStorageKey = "rizal-site-theme";
-    const creatorGroupStorageKey = "rizal-creator-group-name";
-    const creatorNameStoragePrefix = "rizal-creator-name-";
-    const creatorPhotoStoragePrefix = "rizal-creator-photo-";
-    const creatorRosterVersionKey = "rizal-creator-roster-version";
 
     function readSavedValue(key) {
       try {
@@ -50,101 +45,111 @@
     setTheme(readSavedValue(themeStorageKey));
     themeSelect.addEventListener("change", () => setTheme(themeSelect.value, true));
 
-    const creatorGroupName = document.querySelector("#creator-group-name");
-    const savedGroupName = readSavedValue(creatorGroupStorageKey);
-    if (savedGroupName !== null) creatorGroupName.value = savedGroupName;
-    creatorGroupName.addEventListener("input", () => {
-      try {
-        window.localStorage.setItem(creatorGroupStorageKey, creatorGroupName.value);
-      } catch (error) {
-        console.warn("Could not save the group name in browser storage.", error);
-        creatorStatus.textContent = "Group name updated for this visit, but browser storage is unavailable.";
-      }
+    document.querySelectorAll(".creator-photo img").forEach((image) => {
+      const showPlaceholder = () => {
+        image.hidden = true;
+        if (image.nextElementSibling) image.nextElementSibling.hidden = false;
+      };
+      image.addEventListener("error", showPlaceholder, { once: true });
+      if (image.complete && image.naturalWidth === 0) showPlaceholder();
     });
 
-    function updateCreatorImage(image, card, index, source) {
-      const placeholder = card.querySelector(".creator-photo-placeholder");
-      image.src = source;
-      image.hidden = false;
-      image.alt = `Photo of ${card.querySelector(".creator-name").value.trim() || `group creator ${index}`}`;
-      placeholder.hidden = true;
+    const heroProfiles = {
+      rizal: {
+        name: "José Rizal",
+        bio: "This archival portrait and monument represent a writer whose books and civic work helped Filipinos think about shared identity and colonial injustice.",
+        role: "Filipino doctor, novelist, essayist, and reformist (1861–1896). Rizal wrote Noli Me Tángere and El Filibusterismo, founded La Liga Filipina, and taught and practiced medicine during exile in Dapitan.",
+        connection: "Rizal's writing and execution influenced Filipino nationalism. He advocated peaceful reform and did not found or lead the Katipunan or its armed revolution.",
+        credit: "https://commons.wikimedia.org/wiki/File:Jose_Rizal_full.jpg"
+      },
+      bonifacio: {
+        name: "Andrés Bonifacio",
+        bio: "This portrait or monument commemorates a central organizer of the Philippine Revolution and founder of the Katipunan.",
+        role: "Revolutionary organizer and one of the founders and leaders of the Katipunan, which pursued independence from Spain.",
+        connection: "Rizal's novels helped nurture nationalist ideas among Filipinos, including revolutionaries. Bonifacio led a separate armed movement; Rizal favored peaceful reform and did not command the Katipunan.",
+        credit: "https://commons.wikimedia.org/wiki/File:Andr%C3%A9s_Bonifacio.jpg"
+      },
+      "del-pilar": {
+        name: "Marcelo H. del Pilar",
+        bio: "This portrait or monument honors one of the leading Filipino reformists of the Propaganda Movement.",
+        role: "Filipino lawyer, journalist, satirist, and reformist; he edited La Solidaridad and argued for equal rights and representation.",
+        connection: "Del Pilar and Rizal both used writing to advocate reform and Filipino representation. They shared goals but sometimes differed over leadership and strategy.",
+        credit: "https://commons.wikimedia.org/wiki/File:Marcelo_Hilario_del_Pilar_y_Gatmait%C3%A1n_(1850-1896)_portrait.jpg"
+      },
+      "lopez-jaena": {
+        name: "Graciano López Jaena",
+        bio: "This portrait or monument remembers an Ilonggo orator and journalist whose speeches and writing called attention to colonial abuses.",
+        role: "Journalist, orator, and leading Propaganda Movement reformist; he helped found La Solidaridad and served as its first editor.",
+        connection: "Like Rizal, López Jaena used writing and public argument to advocate reform. Their work helped spread the movement's ideas to a wider public.",
+        credit: "https://commons.wikimedia.org/wiki/File:1970-NHI-Graciano_Lopez_Jaena.png"
+      },
+      "rizal-del-pilar": {
+        name: "José Rizal & Marcelo H. del Pilar",
+        bio: "This archival photograph shows two major Filipino reformists in Madrid.",
+        role: "Rizal was a doctor, novelist, essayist, and reformist; del Pilar was a lawyer, journalist, satirist, and editor of La Solidaridad.",
+        connection: "Both took part in the Propaganda Movement and used writing to argue for reform. Their shared cause helped Filipino readers connect local injustices to a wider call for equality and representation.",
+        credit: "https://commons.wikimedia.org/wiki/File:Jos%C3%A9_Rizal_with_Marcelo_del_Pilar_in_Madrid.jpg"
+      },
+      dapitan: {
+        name: "Rizal Shrine, Dapitan",
+        bio: "This historic site recalls the four years José Rizal spent in exile in Dapitan, Mindanao, from 1892 to 1896.",
+        role: "During exile, Rizal taught students, treated patients as a physician, farmed, studied nature, and contributed to community projects.",
+        connection: "Dapitan shows how Rizal put his belief in education and public service into practice while separated from the reform movement in Manila.",
+        credit: "https://commons.wikimedia.org/wiki/File:Rizal_Shrine,_Dapitan_City_(Features_and_Structures)_02.JPG"
+      }
+    };
+    const heroImageDialog = document.querySelector("#hero-image-dialog");
+    const heroImageClose = document.querySelector("#hero-image-close");
+    const heroImageLarge = document.querySelector("#hero-image-large");
+    const heroImageCaption = document.querySelector("#hero-image-caption");
+    const heroImageTitle = document.querySelector("#hero-image-title");
+    const heroImageBio = document.querySelector("#hero-image-bio");
+    const heroImageRole = document.querySelector("#hero-image-role");
+    const heroImageConnection = document.querySelector("#hero-image-connection");
+    const heroImageCredit = document.querySelector("#hero-image-credit");
+
+    function openHeroImage(image) {
+      const profile = heroProfiles[image.dataset.heroProfile];
+      if (!profile) return;
+      heroImageLarge.src = image.currentSrc || image.src;
+      heroImageLarge.alt = image.alt;
+      heroImageCaption.textContent = image.closest("figure")?.querySelector("figcaption")?.textContent.trim() || image.alt;
+      heroImageTitle.textContent = profile.name;
+      heroImageBio.textContent = profile.bio;
+      heroImageRole.textContent = profile.role;
+      heroImageConnection.textContent = profile.connection;
+      heroImageCredit.href = image.closest("a")?.href || profile.credit;
+      heroImageCredit.hidden = false;
+      heroImageDialog.showModal();
     }
 
-    async function saveCreatorPhoto(file, image, card, index) {
-      if (!file.type.startsWith("image/")) {
-        creatorStatus.textContent = "Choose an image file for the creator photo.";
-        return;
-      }
-
-      try {
-        const bitmap = await createImageBitmap(file);
-        const canvas = document.createElement("canvas");
-        const scale = Math.min(1, 480 / Math.max(bitmap.width, bitmap.height));
-        canvas.width = Math.max(1, Math.round(bitmap.width * scale));
-        canvas.height = Math.max(1, Math.round(bitmap.height * scale));
-        const context = canvas.getContext("2d");
-        if (!context) throw new Error("Image preview is unavailable in this browser.");
-        context.fillStyle = "#e8ddca";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-        bitmap.close();
-
-        const photo = canvas.toDataURL("image/jpeg", 0.78);
-        try {
-          window.localStorage.setItem(`${creatorPhotoStoragePrefix}${index}`, photo);
-          updateCreatorImage(image, card, index, photo);
-          creatorStatus.textContent = "Creator photo saved on this device. To publish it for everyone, add the image to the project and update index.html.";
-        } catch (error) {
-          console.warn("Could not save creator photo in browser storage.", error);
-          const temporaryPhoto = URL.createObjectURL(file);
-          updateCreatorImage(image, card, index, temporaryPhoto);
-          creatorStatus.textContent = "Photo preview is active for this visit, but browser storage is full. Add the photo to the project to publish it permanently.";
-        }
-      } catch (error) {
-        console.error("Could not prepare the selected creator photo.", error);
-        creatorStatus.textContent = "Could not load that photo. Please choose another image file.";
-      }
-    }
-
-    document.querySelectorAll("[data-creator-name]").forEach((input) => {
-      const index = input.dataset.creatorName;
-      const card = input.closest(".creator-card");
-      const image = card.querySelector("img");
-      const savedName = readSavedValue(`${creatorNameStoragePrefix}${index}`);
-      const savedRosterVersion = readSavedValue(creatorRosterVersionKey);
-      if (savedName !== null &&
-          (savedName.trim() !== "" || savedRosterVersion === "1")) {
-        input.value = savedName;
-      }
-
-      input.addEventListener("input", () => {
-        if (!image.hidden) {
-          image.alt = `Photo of ${input.value.trim() || `group creator ${index}`}`;
-        }
-        try {
-          window.localStorage.setItem(`${creatorNameStoragePrefix}${index}`, input.value);
-        } catch (error) {
-          console.warn("Could not save a creator name in browser storage.", error);
-          creatorStatus.textContent = "Name updated for this visit, but browser storage is unavailable.";
-        }
-      });
+    document.querySelectorAll("img[data-hero-profile]").forEach((image) => {
+      const profile = heroProfiles[image.dataset.heroProfile];
+      if (!profile) return;
+      const trigger = image.closest("a") || image;
+      trigger.tabIndex = 0;
+      trigger.setAttribute("role", "button");
+      trigger.setAttribute("aria-haspopup", "dialog");
+      trigger.setAttribute("aria-label", `Enlarge image and view historical role and connection to Rizal: ${profile.name}`);
+      if (trigger !== image) image.tabIndex = -1;
     });
-    try {
-      window.localStorage.setItem(creatorRosterVersionKey, "1");
-    } catch (error) {
-      console.warn("Could not save the creator roster version.", error);
-    }
-
-    document.querySelectorAll("[data-creator-photo]").forEach((input) => {
-      const index = input.dataset.creatorPhoto;
-      const card = input.closest(".creator-card");
-      const image = card.querySelector("img");
-      const savedPhoto = readSavedValue(`${creatorPhotoStoragePrefix}${index}`);
-      if (savedPhoto) updateCreatorImage(image, card, index, savedPhoto);
-      input.addEventListener("change", () => {
-        const file = input.files?.[0];
-        if (file) saveCreatorPhoto(file, image, card, index);
-      });
+    document.addEventListener("click", (event) => {
+      const image = event.target.closest("img[data-hero-profile]") ||
+        event.target.closest("a")?.querySelector("img[data-hero-profile]");
+      if (!image) return;
+      if (image.closest("a")) event.preventDefault();
+      openHeroImage(image);
+    });
+    document.addEventListener("keydown", (event) => {
+      const image = event.target.closest?.("img[data-hero-profile]") ||
+        event.target.closest?.('a[aria-haspopup="dialog"]')?.querySelector("img[data-hero-profile]");
+      if (!image || (event.key !== "Enter" && event.key !== " ")) return;
+      event.preventDefault();
+      openHeroImage(image);
+    });
+    heroImageClose.addEventListener("click", () => heroImageDialog.close());
+    heroImageDialog.addEventListener("click", (event) => {
+      if (event.target === heroImageDialog) heroImageDialog.close();
     });
 
     const heroQuotes = [
@@ -354,6 +359,38 @@
         answers: ["It ended the revolution immediately", "It made him a powerful symbol of Filipino nationalism", "It changed the Katipunan into La Liga", "It meant Rizal had led the revolt"],
         correct: 1,
         explanation: "His execution galvanized nationalist feeling, even though he did not lead or endorse the uprising."
+      },
+      {
+        question: "In which year was La Liga Filipina founded?",
+        answers: ["1889", "1891", "1892", "1896"],
+        correct: 2,
+        explanation: "Rizal founded La Liga Filipina in Manila on 3 July 1892."
+      },
+      {
+        question: "Who led the Katipunan?",
+        answers: ["Marcelo H. del Pilar", "Andrés Bonifacio", "Graciano López Jaena", "Emilio Jacinto"],
+        correct: 1,
+        explanation: "Andrés Bonifacio helped establish and lead the Katipunan."
+      },
+      {
+        question: "Where was Rizal exiled from 1892 to 1896?",
+        answers: ["Madrid", "Cebu", "Dapitan", "Hong Kong"],
+        correct: 2,
+        explanation: "Rizal spent his exile in Dapitan, where he taught, practiced medicine, and served the community."
+      },
+      {
+        type: "truefalse",
+        question: "La Solidaridad was a reformist newspaper founded in 1889.",
+        answers: ["True", "False"],
+        correct: 0,
+        explanation: "La Solidaridad began publication in 1889 and shared reformist arguments."
+      },
+      {
+        type: "truefalse",
+        question: "José Rizal founded and led the Katipunan's armed revolution.",
+        answers: ["True", "False"],
+        correct: 1,
+        explanation: "Andrés Bonifacio led the Katipunan; Rizal's reformist path was separate."
       }
     ];
 
@@ -388,7 +425,7 @@
         const letter = document.createElement("span");
         letter.className = "answer-letter";
         letter.setAttribute("aria-hidden", "true");
-        letter.textContent = String.fromCharCode(65 + index);
+        letter.textContent = item.type === "truefalse" ? answer.charAt(0) : String.fromCharCode(65 + index);
         const text = document.createElement("span");
         text.textContent = answer;
         button.append(letter, text);
@@ -431,7 +468,7 @@
       const percentage = Math.round((quizPoints / questions.length) * 100);
       const message = quizPoints === questions.length
         ? "Excellent work—you kept the reform movement and the revolution distinct."
-        : quizPoints >= 3
+        : quizPoints >= 7
           ? "A strong start. Revisit the chapters to sharpen the historical connections."
           : "There is more to discover. Explore the chapters above and give it another try.";
       showingResult = true;
@@ -449,8 +486,6 @@
     renderQuestion();
 
     const audioPlayer = document.querySelector("#audio-player");
-    const audioFiles = document.querySelector("#audio-files");
-    const audioDropZone = document.querySelector("#audio-drop-zone");
     const audioNote = document.querySelector("#audio-note");
     const recordPlayer = document.querySelector(".record-player");
     const recordPlatter = document.querySelector("#record-platter");
@@ -466,61 +501,8 @@
     const playerStatus = document.querySelector("#player-status");
     const playlist = document.querySelector("#playlist");
     const playlistCount = document.querySelector("#playlist-count");
-    const classicOpmList = document.querySelector("#classic-opm-list");
     const recordTracks = [];
     let selectedTrack = -1;
-
-    const classicOpmSongs = [
-      { title: "Anak", artist: "Freddie Aguilar" },
-      { title: "Manila", artist: "Hotdog" },
-      { title: "Bongga Ka 'Day", artist: "Hotdog" },
-      { title: "Himig Natin", artist: "Juan dela Cruz Band" },
-      { title: "Handog", artist: "Florante" },
-      { title: "Kahit Maputi Na ang Buhok Ko", artist: "Rey Valera" },
-      { title: "Mr. DJ", artist: "Sharon Cuneta" },
-      { title: "Kapalaran", artist: "Rico J. Puno" },
-      { title: "Awitin Mo at Isasayaw Ko", artist: "VST & Company" },
-      { title: "Ikaw ang Miss Universe ng Buhay Ko", artist: "Hotdog" },
-      { title: "Tayo'y Mga Pinoy", artist: "Heber Bartolome" },
-      { title: "Panalangin", artist: "APO Hiking Society" }
-    ];
-
-    classicOpmSongs.forEach((song, index) => {
-      const row = document.createElement("li");
-      row.className = "classic-opm-item";
-
-      const number = document.createElement("span");
-      number.className = "classic-opm-index";
-      number.setAttribute("aria-hidden", "true");
-      number.textContent = String(index + 1).padStart(2, "0");
-
-      const details = document.createElement("span");
-      details.className = "classic-opm-name";
-      const title = document.createElement("b");
-      title.textContent = song.title;
-      const artist = document.createElement("span");
-      artist.textContent = song.artist;
-      details.append(title, artist);
-
-      const links = document.createElement("span");
-      links.className = "classic-opm-links";
-      const query = `${song.title} ${song.artist}`;
-      [
-        { label: "YouTube Music", url: `https://music.youtube.com/search?q=${encodeURIComponent(query)}` },
-        { label: "Spotify", url: `https://open.spotify.com/search/${encodeURIComponent(query)}` }
-      ].forEach((service) => {
-        const link = document.createElement("a");
-        link.href = service.url;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = service.label;
-        link.setAttribute("aria-label", `Search ${song.title} by ${song.artist} on ${service.label}`);
-        links.append(link);
-      });
-
-      row.append(number, details, links);
-      classicOpmList.append(row);
-    });
 
     audioPlayer.volume = Number(audioVolume.value);
 
@@ -543,7 +525,7 @@
       if (recordTracks.length === 0) {
         const empty = document.createElement("li");
         empty.className = "playlist-empty";
-        empty.textContent = "Your selected songs will appear here.";
+        empty.textContent = "The site admin is adding songs to the project playlist.";
         playlist.append(empty);
         return;
       }
@@ -588,7 +570,7 @@
       togglePlayback.title = isPlaying ? "Pause selected track" : "Play selected track";
       recordPlatter.setAttribute("aria-label", hasSelection
         ? `${isPlaying ? "Pause" : "Play"} ${recordTracks[selectedTrack].name}`
-        : "Choose an audio file first");
+        : "Choose a song from the project playlist");
     }
 
     async function startAudioPlayback() {
@@ -613,7 +595,7 @@
       audioPlayer.src = track.url;
       audioPlayer.load();
       trackTitle.textContent = track.name;
-      trackArtist.textContent = "A recording from your local playlist";
+      trackArtist.textContent = track.artist || "A recording selected for this project";
       playerStatus.textContent = "Record selected · ready to play";
       currentTimeLabel.textContent = "0:00";
       durationLabel.textContent = formatAudioTime(track.duration);
@@ -1184,54 +1166,44 @@
       memeShuffle.addEventListener("click", shuffleMemes);
       renderMemes(historyMemes);
 
-    function addAudioFiles(fileList) {
-      const incoming = Array.from(fileList);
-      if (incoming.length === 0) return;
-      const acceptedFiles = incoming.filter((file) =>
-        file.type.startsWith("audio/") || /\.(mp3|wav|m4a|ogg|flac|aac|opus|oga)$/i.test(file.name)
-      );
-      const rejectedCount = incoming.length - acceptedFiles.length;
-
-      acceptedFiles.forEach((file) => {
-        recordTracks.push({
-          name: file.name.replace(/\.[^.]+$/, "") || file.name,
-          url: URL.createObjectURL(file),
-          duration: 0
+    async function loadBundledMusic() {
+      try {
+        const response = await fetch("/music/playlist.json");
+        if (!response.ok) throw new Error(`Music playlist request failed (${response.status}).`);
+        const playlistData = await response.json();
+        if (!Array.isArray(playlistData.tracks)) {
+          throw new Error("The music playlist must contain a tracks array.");
+        }
+        const tracks = playlistData.tracks.map((track, index) => {
+          if (!track || typeof track.name !== "string" || !track.name.trim()) {
+            throw new Error(`Music playlist track ${index + 1} needs a name.`);
+          }
+          if (typeof track.src !== "string" ||
+              !/^\/music\/[^/\\%?#]+\.mp3$/i.test(track.src) ||
+              track.src.includes("..") ||
+              track.url ||
+              track.platform) {
+            throw new Error(`Music playlist track ${index + 1} needs a local MP3 path under /music/.`);
+          }
+          return {
+            name: track.name.trim(),
+            artist: typeof track.artist === "string" ? track.artist.trim() : "",
+            url: track.src,
+            duration: 0
+          };
         });
-      });
-
-      if (acceptedFiles.length > 0) {
-        const firstNewTrack = recordTracks.length - acceptedFiles.length;
-        if (selectedTrack < 0) selectAudioTrack(firstNewTrack);
-        else renderPlaylist();
-        showAudioMessage(rejectedCount
-          ? `Added ${acceptedFiles.length} audio file${acceptedFiles.length === 1 ? "" : "s"}. Skipped ${rejectedCount} unsupported file${rejectedCount === 1 ? "" : "s"}.`
-          : `Added ${acceptedFiles.length} audio file${acceptedFiles.length === 1 ? "" : "s"}. Choose a record or press play.`);
-      } else {
-        showAudioMessage("No supported audio files were selected. Try MP3, WAV, M4A, OGG, FLAC, or AAC.", true);
+        recordTracks.push(...tracks);
+        if (recordTracks.length > 0) {
+          selectAudioTrack(0);
+          showAudioMessage(`Loaded ${recordTracks.length} song${recordTracks.length === 1 ? "" : "s"} from the project playlist.`);
+        }
+        renderPlaylist();
+        updateAudioControls();
+      } catch (error) {
+        console.error("Could not load the project music playlist.", error);
+        showAudioMessage(`${error.message || "Could not load the project music playlist."} Check public/music/playlist.json.`, true);
       }
-      renderPlaylist();
-      updateAudioControls();
     }
-
-    audioFiles.addEventListener("change", () => {
-      addAudioFiles(audioFiles.files);
-      audioFiles.value = "";
-    });
-
-    ["dragenter", "dragover"].forEach((eventName) => {
-      audioDropZone.addEventListener(eventName, (event) => {
-        event.preventDefault();
-        audioDropZone.classList.add("is-dragging");
-      });
-    });
-    ["dragleave", "drop"].forEach((eventName) => {
-      audioDropZone.addEventListener(eventName, (event) => {
-        event.preventDefault();
-        audioDropZone.classList.remove("is-dragging");
-      });
-    });
-    audioDropZone.addEventListener("drop", (event) => addAudioFiles(event.dataTransfer.files));
 
     togglePlayback.addEventListener("click", () => {
       if (audioPlayer.paused) startAudioPlayback();
@@ -1307,9 +1279,6 @@
       audioVolume.style.setProperty("--slider-progress", `${Number(audioVolume.value) * 100}%`);
     });
     audioVolume.style.setProperty("--slider-progress", `${Number(audioVolume.value) * 100}%`);
-    window.addEventListener("pagehide", () => {
-      recordTracks.forEach((track) => URL.revokeObjectURL(track.url));
-    }, { once: true });
-
     renderPlaylist();
     updateAudioControls();
+    loadBundledMusic();
