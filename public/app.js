@@ -207,51 +207,30 @@
       if (event.key === "Escape" && !heroQuotePanel.hidden) setHeroQuoteOpen(false);
     });
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll("[data-reveal]").forEach((element) => revealObserver.observe(element));
-
-    const statueScene = document.querySelector("[data-statue-scene]");
-    const statueModel = document.querySelector("[data-statue-model]");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let statueFrame = 0;
+    const revealElements = [...document.querySelectorAll("[data-reveal]")];
+    const revealPositions = new Map();
+    revealElements.forEach((element) => {
+      const section = element.closest("section") || document;
+      const position = revealPositions.get(section) || 0;
+      revealPositions.set(section, position + 1);
+      element.style.setProperty("--reveal-delay", `${(position % 4) * 75}ms`);
+    });
 
-    function updateStatuePerspective() {
-      statueFrame = 0;
-      if (!statueScene || !statueModel || reduceMotion.matches) return;
-      const bounds = statueScene.getBoundingClientRect();
-      const start = window.innerHeight * 0.9;
-      const end = -bounds.height * 0.3;
-      const rawProgress = (start - bounds.top) / (start - end);
-      const progress = Math.min(1, Math.max(0, rawProgress));
-      const easedProgress = 1 - (1 - progress) ** 2;
-      const translateY = 112 - easedProgress * 140;
-      const translateZ = -50 + easedProgress * 50;
-      const rotateX = 17 - easedProgress * 18;
-      const rotateY = -20 + easedProgress * 25;
-      const rotateZ = -3 + easedProgress * 2;
-      const scale = 0.8 + easedProgress * 0.2;
+    if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+    } else {
+      document.documentElement.classList.add("has-scroll-reveal");
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
 
-      statueModel.style.transform =
-        `translate3d(0, ${translateY}px, ${translateZ}px) ` +
-        `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale})`;
-    }
-
-    function requestStatueUpdate() {
-      if (!statueFrame) statueFrame = window.requestAnimationFrame(updateStatuePerspective);
-    }
-
-    if (statueScene && statueModel && !reduceMotion.matches) {
-      window.addEventListener("scroll", requestStatueUpdate, { passive: true });
-      window.addEventListener("resize", requestStatueUpdate, { passive: true });
-      requestStatueUpdate();
+      revealElements.forEach((element) => revealObserver.observe(element));
     }
 
     const sections = document.querySelectorAll("main section[id]");

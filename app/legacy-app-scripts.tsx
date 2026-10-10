@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/client";
 import { useEffect } from "react";
 import type { InitialForumData } from "@/lib/supabase/forum-types";
+import StatueExperience from "./statue-experience";
 
 type Props = {
   supabaseUrl: string;
@@ -50,5 +51,5 @@ export default function LegacyAppScripts({
     }
   }, [initialForumData, supabaseKey, supabaseUrl]);
 
-  return null;
+  return <StatueExperience />;
 }

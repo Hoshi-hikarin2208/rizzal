@@ -68,9 +68,9 @@
       </div>
       <div class="hero-bottom">
         <span>From reform to revolution</span>
-        <span class="scroll-cue">Scroll to explore
+        <a class="scroll-cue" href="#statue">Scroll to meet the monument
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg>
-        </span>
+        </a>
         <span>Rizal: ideas · unity · change</span>
       </div>
     </section>
@@ -247,10 +247,18 @@
             </ul>
           </div>
           <aside class="league-card" data-reveal aria-label="La Liga Filipina summary">
-            <span class="eyebrow">Manila · 3 July 1892</span>
-            <blockquote>“What one cannot do alone, a people may do together.”</blockquote>
-            <p>La Liga's civic program emphasized solidarity and service. This is a modern paraphrase of its spirit—not a quotation from Rizal.</p>
-            <span class="league-seal">Una mano · una nación</span>
+            <img
+              class="league-card-photo"
+              src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/2015-NHC-La_Liga_Filipina-Surroundings.png/960px-2015-NHC-La_Liga_Filipina-Surroundings.png"
+              alt="La Liga Filipina monument and historical marker in Manila"
+              loading="lazy">
+            <div class="league-card-content">
+              <span class="eyebrow">Manila · 3 July 1892</span>
+              <blockquote>“What one cannot do alone, a people may do together.”</blockquote>
+              <p>La Liga's civic program emphasized solidarity and service. This is a modern paraphrase of its spirit—not a quotation from Rizal.</p>
+              <span class="league-seal">Una mano · una nación</span>
+              <a class="league-photo-credit" href="https://commons.wikimedia.org/wiki/File:2015-NHC-La_Liga_Filipina-Surroundings.png" target="_blank" rel="noopener noreferrer">Historical marker photo: AR Maceda · CC BY-SA 4.0</a>
+            </div>
           </aside>
         </div>
       </div>
@@ -318,7 +326,7 @@
       </div>
     </section>
 
-    <section class="statue-section" aria-labelledby="statue-title">
+    <section class="statue-section" id="statue" aria-labelledby="statue-title">
       <div class="wrap">
         <div class="statue-heading" data-reveal>
           <span class="eyebrow">A legacy cast in bronze</span>
@@ -329,11 +337,16 @@
           <div class="statue-scene" data-statue-scene data-reveal>
             <div class="statue-halo" aria-hidden="true"></div>
             <div class="statue-platform" aria-hidden="true"><span></span></div>
-            <figure class="statue-model" data-statue-model>
+            <figure
+              class="statue-model"
+              data-statue-model
+              tabindex="0"
+              role="img"
+              aria-label="Interactive three-dimensional bronze interpretation of José Rizal standing on a pedestal"
+              aria-describedby="statue-controls">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/3/37/20161015_Titopao_Rizal_Monument_Closeup.jpg"
                 alt="Bronze statue of José Rizal at the Rizal Monument in Rizal Park, Manila, photographed at an angle"
-                data-hero-profile="rizal"
                 loading="lazy">
               <figcaption class="statue-photo-label">MANILA · RIZAL PARK</figcaption>
             </figure>
@@ -342,7 +355,8 @@
           <div class="statue-story" data-reveal>
             <span class="statue-date">30 DECEMBER · EVERY YEAR</span>
             <h3>A figure in bronze.<br><em>A voice in motion.</em></h3>
-            <p>This is a photograph of the Rizal Monument in Manila—not a digital scan or a generated portrait. Tilt your pointer over the sculpture, or scroll it into view, to see the archival photograph take on a little depth.</p>
+            <p>This interactive 3D interpretation is inspired by public monuments to Rizal; it is not a scan of a particular statue. Drag the figure to turn it, or focus it and use the arrow keys.</p>
+            <p class="statue-controls" id="statue-controls">Drag left or right to rotate. With the statue focused, use the arrow keys to turn it.</p>
             <p>Monuments are not the whole story. Rizal’s legacy lives in the questions people keep asking about education, dignity, civic responsibility, and the many paths Filipinos took toward freedom.</p>
             <a class="statue-link" href="https://commons.wikimedia.org/wiki/File:20161015_Titopao_Rizal_Monument_Closeup.jpg" target="_blank" rel="noopener noreferrer">
               View the original statue photograph <span aria-hidden="true">↗</span>
