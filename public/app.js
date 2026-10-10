@@ -482,6 +482,46 @@
     const recordTracks = [];
     let selectedTrack = -1;
 
+    const miniPlayer = document.createElement("aside");
+    miniPlayer.className = "mini-player";
+    miniPlayer.setAttribute("aria-label", "Music player");
+    miniPlayer.hidden = true;
+    miniPlayer.innerHTML = `
+      <div class="mini-player-top">
+        <span class="mini-record" aria-hidden="true"><span>R</span></span>
+        <div class="mini-player-info">
+          <span class="mini-player-kicker">NOW PLAYING</span>
+          <span class="mini-player-title" id="mini-track-title">No record selected</span>
+          <span class="mini-player-artist" id="mini-track-artist"></span>
+        </div>
+        <a class="mini-player-open" href="#listening-title" aria-label="Open the listening room">↗</a>
+      </div>
+      <div class="mini-player-bottom">
+        <div class="mini-player-controls">
+          <button class="mini-control" id="mini-previous-track" type="button" aria-label="Previous track" disabled>‹</button>
+          <button class="mini-control mini-play" id="mini-toggle-playback" type="button" aria-label="Play selected track" aria-pressed="false" disabled>
+            <svg class="mini-play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.7c0-.8.9-1.3 1.6-.9l10 6.3a1 1 0 0 1 0 1.8l-10 6.3c-.7.4-1.6-.1-1.6-.9V5.7Z"/></svg>
+            <svg class="mini-pause-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zm7 0h4v14h-4z"/></svg>
+          </button>
+          <button class="mini-control" id="mini-next-track" type="button" aria-label="Next track" disabled>›</button>
+        </div>
+        <div class="mini-player-progress">
+          <span id="mini-current-time">0:00</span>
+          <label class="sr-only" for="mini-audio-seek">Seek through current track</label>
+          <input id="mini-audio-seek" type="range" min="0" max="1000" value="0" step="1" aria-valuetext="0:00 elapsed" disabled>
+          <span id="mini-audio-duration">0:00</span>
+        </div>
+      </div>`;
+    document.body.append(miniPlayer);
+    const miniTrackTitle = miniPlayer.querySelector("#mini-track-title");
+    const miniTrackArtist = miniPlayer.querySelector("#mini-track-artist");
+    const miniPreviousTrack = miniPlayer.querySelector("#mini-previous-track");
+    const miniTogglePlayback = miniPlayer.querySelector("#mini-toggle-playback");
+    const miniNextTrack = miniPlayer.querySelector("#mini-next-track");
+    const miniAudioSeek = miniPlayer.querySelector("#mini-audio-seek");
+    const miniCurrentTime = miniPlayer.querySelector("#mini-current-time");
+    const miniDuration = miniPlayer.querySelector("#mini-audio-duration");
+
     audioPlayer.volume = Number(audioVolume.value);
 
     function formatAudioTime(seconds) {
@@ -494,6 +534,22 @@
     function showAudioMessage(message, isError = false) {
       audioNote.textContent = message;
       audioNote.classList.toggle("is-error", isError);
+    }
+
+    function isSafeMusicPath(value) {
+      if (typeof value !== "string") return false;
+      const trimmed = value.trim();
+      if (!trimmed || !trimmed.startsWith("/music/")) return false;
+      if (trimmed.includes("\\") || trimmed.startsWith("//") || trimmed.includes("://")) return false;
+      if (trimmed.includes("..")) return false;
+      try {
+        const url = new URL(trimmed, window.location.origin);
+        if (url.origin !== window.location.origin) return false;
+        const decodedPath = decodeURIComponent(url.pathname);
+        return /^\/music\/.*\.mp3$/i.test(decodedPath) && !decodedPath.includes("..");
+      } catch (error) {
+        return false;
+      }
     }
 
     function renderPlaylist() {
@@ -540,16 +596,28 @@
       const hasSelection = Boolean(selected);
       const isPlaying = hasSelection && !audioPlayer.paused;
       recordPlayer.classList.toggle("is-playing", isPlaying);
+      miniPlayer.hidden = !hasSelection;
+      miniPlayer.classList.toggle("is-playing", isPlaying);
       togglePlayback.disabled = !hasSelection;
       previousTrack.disabled = recordTracks.length < 2;
       nextTrack.disabled = recordTracks.length < 2;
+      miniPreviousTrack.disabled = recordTracks.length < 2;
+      miniNextTrack.disabled = recordTracks.length < 2;
+      miniTogglePlayback.disabled = !hasSelection;
+      miniAudioSeek.disabled = !hasSelection || !Number.isFinite(audioPlayer.duration) || audioPlayer.duration <= 0;
       recordPlatter.disabled = !hasSelection;
       togglePlayback.setAttribute("aria-label", isPlaying ? "Pause selected track" : "Play selected track");
       togglePlayback.setAttribute("aria-pressed", String(isPlaying));
       togglePlayback.title = isPlaying ? "Pause selected track" : "Play selected track";
+      miniTogglePlayback.setAttribute("aria-label", isPlaying ? "Pause selected track" : "Play selected track");
+      miniTogglePlayback.setAttribute("aria-pressed", String(isPlaying));
       recordPlatter.setAttribute("aria-label", hasSelection
         ? `${isPlaying ? "Pause" : "Play"} ${recordTracks[selectedTrack].name}`
         : "Choose a song from the project playlist");
+      if (hasSelection) {
+        miniTrackTitle.textContent = selected.name;
+        miniTrackArtist.textContent = selected.artist || "A recording selected for this project";
+      }
     }
 
     async function startAudioPlayback() {
@@ -575,12 +643,18 @@
       audioPlayer.load();
       trackTitle.textContent = track.name;
       trackArtist.textContent = track.artist || "A recording selected for this project";
+      miniTrackTitle.textContent = track.name;
+      miniTrackArtist.textContent = track.artist || "A recording selected for this project";
       playerStatus.textContent = "Record selected · ready to play";
       showAudioMessage("This admin-selected MP3 plays in the project player.");
       currentTimeLabel.textContent = "0:00";
       durationLabel.textContent = formatAudioTime(track.duration);
       audioSeek.value = "0";
       audioSeek.style.setProperty("--slider-progress", "0%");
+      miniCurrentTime.textContent = "0:00";
+      miniDuration.textContent = formatAudioTime(track.duration);
+      miniAudioSeek.value = "0";
+      miniAudioSeek.style.setProperty("--slider-progress", "0%");
       renderPlaylist();
       updateAudioControls();
       if (autoplay) startAudioPlayback();
@@ -1174,6 +1248,12 @@
 
     previousTrack.addEventListener("click", () => skipTrack(-1));
     nextTrack.addEventListener("click", () => skipTrack(1));
+    miniPreviousTrack.addEventListener("click", () => skipTrack(-1));
+    miniNextTrack.addEventListener("click", () => skipTrack(1));
+    miniTogglePlayback.addEventListener("click", () => {
+      if (audioPlayer.paused) startAudioPlayback();
+      else audioPlayer.pause();
+    });
 
     audioPlayer.addEventListener("play", () => {
       if (selectedTrack >= 0) playerStatus.textContent = `Now playing · ${recordTracks[selectedTrack].name}`;
@@ -1190,7 +1270,9 @@
       const track = recordTracks[selectedTrack];
       track.duration = Number.isFinite(audioPlayer.duration) ? audioPlayer.duration : 0;
       durationLabel.textContent = formatAudioTime(track.duration);
+      miniDuration.textContent = formatAudioTime(track.duration);
       renderPlaylist();
+      updateAudioControls();
     });
     audioPlayer.addEventListener("timeupdate", () => {
       const duration = audioPlayer.duration;
@@ -1199,6 +1281,10 @@
       audioSeek.style.setProperty("--slider-progress", `${position * 100}%`);
       audioSeek.setAttribute("aria-valuetext", `${formatAudioTime(audioPlayer.currentTime)} elapsed`);
       currentTimeLabel.textContent = formatAudioTime(audioPlayer.currentTime);
+      miniAudioSeek.value = String(Math.round(position * 1000));
+      miniAudioSeek.style.setProperty("--slider-progress", `${position * 100}%`);
+      miniAudioSeek.setAttribute("aria-valuetext", `${formatAudioTime(audioPlayer.currentTime)} elapsed`);
+      miniCurrentTime.textContent = formatAudioTime(audioPlayer.currentTime);
     });
     audioPlayer.addEventListener("ended", () => {
       if (recordTracks.length > 1 && selectedTrack < recordTracks.length - 1) {
@@ -1226,6 +1312,10 @@
       if (!Number.isFinite(audioPlayer.duration) || audioPlayer.duration <= 0) return;
       audioPlayer.currentTime = (Number(audioSeek.value) / 1000) * audioPlayer.duration;
     });
+    miniAudioSeek.addEventListener("input", () => {
+      if (!Number.isFinite(audioPlayer.duration) || audioPlayer.duration <= 0) return;
+      audioPlayer.currentTime = (Number(miniAudioSeek.value) / 1000) * audioPlayer.duration;
+    });
     audioVolume.addEventListener("input", () => {
       audioPlayer.volume = Number(audioVolume.value);
       audioVolume.style.setProperty("--slider-progress", `${Number(audioVolume.value) * 100}%`);
@@ -1233,7 +1323,7 @@
     audioVolume.style.setProperty("--slider-progress", `${Number(audioVolume.value) * 100}%`);
     async function loadBundledMusic() {
       try {
-        const response = await fetch("/music/playlist.json");
+        const response = await fetch(new URL("music/playlist.json", document.baseURI));
         if (!response.ok) throw new Error(`Music playlist request failed (${response.status}).`);
         const playlistData = await response.json();
         if (!Array.isArray(playlistData.tracks)) {
@@ -1244,14 +1334,11 @@
             throw new Error(`Music playlist track ${index + 1} needs a name.`);
           }
           const artist = typeof track.artist === "string" ? track.artist : "";
-          if (typeof track.src !== "string" ||
-              !/^\/music\/[^/\\%?#]+\.mp3$/i.test(track.src) ||
-              track.src.includes("..") ||
-              track.url ||
-              track.platform) {
+          if (!isSafeMusicPath(track.src) || track.url || track.platform) {
             throw new Error(`Music playlist track ${index + 1} needs a local MP3 path under /music/.`);
           }
-          return { name: track.name.trim(), artist: artist.trim(), src: track.src, duration: 0 };
+          const src = new URL(track.src.trim().slice(1), document.baseURI).href;
+          return { name: track.name.trim(), artist: artist.trim(), src, duration: 0 };
         });
         recordTracks.push(...tracks);
         if (recordTracks.length > 0) {
