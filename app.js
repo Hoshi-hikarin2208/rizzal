@@ -504,6 +504,58 @@
     const recordTracks = [];
     let selectedTrack = -1;
 
+    const classicOpmSongs = [
+      { title: "Anak", artist: "Freddie Aguilar" },
+      { title: "Manila", artist: "Hotdog" },
+      { title: "Bongga Ka 'Day", artist: "Hotdog" },
+      { title: "Himig Natin", artist: "Juan dela Cruz Band" },
+      { title: "Handog", artist: "Florante" },
+      { title: "Kahit Maputi Na ang Buhok Ko", artist: "Rey Valera" },
+      { title: "Mr. DJ", artist: "Sharon Cuneta" },
+      { title: "Kapalaran", artist: "Rico J. Puno" },
+      { title: "Awitin Mo at Isasayaw Ko", artist: "VST & Company" },
+      { title: "Ikaw ang Miss Universe ng Buhay Ko", artist: "Hotdog" },
+      { title: "Tayo'y Mga Pinoy", artist: "Heber Bartolome" },
+      { title: "Panalangin", artist: "APO Hiking Society" }
+    ];
+
+    classicOpmSongs.forEach((song, index) => {
+      const row = document.createElement("li");
+      row.className = "classic-opm-item";
+
+      const number = document.createElement("span");
+      number.className = "classic-opm-index";
+      number.setAttribute("aria-hidden", "true");
+      number.textContent = String(index + 1).padStart(2, "0");
+
+      const details = document.createElement("span");
+      details.className = "classic-opm-name";
+      const title = document.createElement("b");
+      title.textContent = song.title;
+      const artist = document.createElement("span");
+      artist.textContent = song.artist;
+      details.append(title, artist);
+
+      const links = document.createElement("span");
+      links.className = "classic-opm-links";
+      const query = `${song.title} ${song.artist}`;
+      [
+        { label: "YouTube Music", url: `https://music.youtube.com/search?q=${encodeURIComponent(query)}` },
+        { label: "Spotify", url: `https://open.spotify.com/search/${encodeURIComponent(query)}` }
+      ].forEach((service) => {
+        const link = document.createElement("a");
+        link.href = service.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = service.label;
+        link.setAttribute("aria-label", `Search ${song.title} by ${song.artist} on ${service.label}`);
+        links.append(link);
+      });
+
+      row.append(number, details, links);
+      classicOpmList.append(row);
+    });
+
     audioPlayer.volume = Number(audioVolume.value);
 
     function formatAudioTime(seconds) {
@@ -516,6 +568,24 @@
     function showAudioMessage(message, isError = false) {
       audioNote.textContent = message;
       audioNote.classList.toggle("is-error", isError);
+    }
+
+    function isSafeMusicPath(value) {
+      if (typeof value !== "string") return false;
+      const trimmed = value.trim();
+      if (!trimmed || !trimmed.startsWith("/music/")) return false;
+      if (trimmed.includes("\\") || trimmed.startsWith("//") || trimmed.includes("://")) return false;
+      if (trimmed.includes("..")) return false;
+      try {
+        const url = new URL(trimmed, window.location.origin);
+        if (url.origin !== window.location.origin) return false;
+        const decodedPath = decodeURIComponent(url.pathname);
+        if (!/^\/music\/.*\.mp3$/i.test(decodedPath)) return false;
+        if (decodedPath.includes("..")) return false;
+        return true;
+      } catch (error) {
+        return false;
+      }
     }
 
     function renderPlaylist() {
@@ -561,16 +631,24 @@
       const hasSelection = selectedTrack >= 0 && Boolean(recordTracks[selectedTrack]);
       const isPlaying = hasSelection && !audioPlayer.paused;
       recordPlayer.classList.toggle("is-playing", isPlaying);
+      miniPlayer.hidden = !hasSelection;
+      miniPlayer.classList.toggle("is-playing", isPlaying);
       togglePlayback.disabled = !hasSelection;
       previousTrack.disabled = recordTracks.length < 2;
       nextTrack.disabled = recordTracks.length < 2;
+      miniPreviousTrack.disabled = recordTracks.length < 2;
+      miniNextTrack.disabled = recordTracks.length < 2;
+      miniTogglePlayback.disabled = !hasSelection;
+      miniAudioSeek.disabled = !hasSelection || !Number.isFinite(audioPlayer.duration) || audioPlayer.duration <= 0;
       recordPlatter.disabled = !hasSelection;
       togglePlayback.setAttribute("aria-label", isPlaying ? "Pause selected track" : "Play selected track");
       togglePlayback.setAttribute("aria-pressed", String(isPlaying));
       togglePlayback.title = isPlaying ? "Pause selected track" : "Play selected track";
+      miniTogglePlayback.setAttribute("aria-label", isPlaying ? "Pause selected track" : "Play selected track");
+      miniTogglePlayback.setAttribute("aria-pressed", String(isPlaying));
       recordPlatter.setAttribute("aria-label", hasSelection
         ? `${isPlaying ? "Pause" : "Play"} ${recordTracks[selectedTrack].name}`
-        : "Choose a song from the project playlist");
+        : "Choose an audio file first");
     }
 
     async function startAudioPlayback() {
@@ -595,12 +673,16 @@
       audioPlayer.src = track.url;
       audioPlayer.load();
       trackTitle.textContent = track.name;
-      trackArtist.textContent = track.artist || "A recording selected for this project";
+      trackArtist.textContent = "A recording from your local playlist";
       playerStatus.textContent = "Record selected · ready to play";
       currentTimeLabel.textContent = "0:00";
       durationLabel.textContent = formatAudioTime(track.duration);
       audioSeek.value = "0";
       audioSeek.style.setProperty("--slider-progress", "0%");
+      miniCurrentTime.textContent = "0:00";
+      miniDuration.textContent = formatAudioTime(track.duration);
+      miniAudioSeek.value = "0";
+      miniAudioSeek.style.setProperty("--slider-progress", "0%");
       renderPlaylist();
       updateAudioControls();
       if (autoplay) startAudioPlayback();
@@ -1166,44 +1248,54 @@
       memeShuffle.addEventListener("click", shuffleMemes);
       renderMemes(historyMemes);
 
-    async function loadBundledMusic() {
-      try {
-        const response = await fetch("/music/playlist.json");
-        if (!response.ok) throw new Error(`Music playlist request failed (${response.status}).`);
-        const playlistData = await response.json();
-        if (!Array.isArray(playlistData.tracks)) {
-          throw new Error("The music playlist must contain a tracks array.");
-        }
-        const tracks = playlistData.tracks.map((track, index) => {
-          if (!track || typeof track.name !== "string" || !track.name.trim()) {
-            throw new Error(`Music playlist track ${index + 1} needs a name.`);
-          }
-          if (typeof track.src !== "string" ||
-              !/^\/music\/[^/\\%?#]+\.mp3$/i.test(track.src) ||
-              track.src.includes("..") ||
-              track.url ||
-              track.platform) {
-            throw new Error(`Music playlist track ${index + 1} needs a local MP3 path under /music/.`);
-          }
-          return {
-            name: track.name.trim(),
-            artist: typeof track.artist === "string" ? track.artist.trim() : "",
-            url: track.src,
-            duration: 0
-          };
+    function addAudioFiles(fileList) {
+      const incoming = Array.from(fileList);
+      if (incoming.length === 0) return;
+      const acceptedFiles = incoming.filter((file) =>
+        file.type.startsWith("audio/") || /\.(mp3|wav|m4a|ogg|flac|aac|opus|oga)$/i.test(file.name)
+      );
+      const rejectedCount = incoming.length - acceptedFiles.length;
+
+      acceptedFiles.forEach((file) => {
+        recordTracks.push({
+          name: file.name.replace(/\.[^.]+$/, "") || file.name,
+          url: URL.createObjectURL(file),
+          duration: 0
         });
-        recordTracks.push(...tracks);
-        if (recordTracks.length > 0) {
-          selectAudioTrack(0);
-          showAudioMessage(`Loaded ${recordTracks.length} song${recordTracks.length === 1 ? "" : "s"} from the project playlist.`);
-        }
-        renderPlaylist();
-        updateAudioControls();
-      } catch (error) {
-        console.error("Could not load the project music playlist.", error);
-        showAudioMessage(`${error.message || "Could not load the project music playlist."} Check public/music/playlist.json.`, true);
+      });
+
+      if (acceptedFiles.length > 0) {
+        const firstNewTrack = recordTracks.length - acceptedFiles.length;
+        if (selectedTrack < 0) selectAudioTrack(firstNewTrack);
+        else renderPlaylist();
+        showAudioMessage(rejectedCount
+          ? `Added ${acceptedFiles.length} audio file${acceptedFiles.length === 1 ? "" : "s"}. Skipped ${rejectedCount} unsupported file${rejectedCount === 1 ? "" : "s"}.`
+          : `Added ${acceptedFiles.length} audio file${acceptedFiles.length === 1 ? "" : "s"}. Choose a record or press play.`);
+      } else {
+        showAudioMessage("No supported audio files were selected. Try MP3, WAV, M4A, OGG, FLAC, or AAC.", true);
       }
+      renderPlaylist();
+      updateAudioControls();
     }
+
+    audioFiles.addEventListener("change", () => {
+      addAudioFiles(audioFiles.files);
+      audioFiles.value = "";
+    });
+
+    ["dragenter", "dragover"].forEach((eventName) => {
+      audioDropZone.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        audioDropZone.classList.add("is-dragging");
+      });
+    });
+    ["dragleave", "drop"].forEach((eventName) => {
+      audioDropZone.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        audioDropZone.classList.remove("is-dragging");
+      });
+    });
+    audioDropZone.addEventListener("drop", (event) => addAudioFiles(event.dataTransfer.files));
 
     togglePlayback.addEventListener("click", () => {
       if (audioPlayer.paused) startAudioPlayback();
@@ -1222,6 +1314,12 @@
 
     previousTrack.addEventListener("click", () => skipTrack(-1));
     nextTrack.addEventListener("click", () => skipTrack(1));
+    miniPreviousTrack.addEventListener("click", () => skipTrack(-1));
+    miniNextTrack.addEventListener("click", () => skipTrack(1));
+    miniTogglePlayback.addEventListener("click", () => {
+      if (audioPlayer.paused) startAudioPlayback();
+      else audioPlayer.pause();
+    });
 
     audioPlayer.addEventListener("play", () => {
       if (selectedTrack >= 0) playerStatus.textContent = `Now playing · ${recordTracks[selectedTrack].name}`;
@@ -1238,7 +1336,9 @@
       const track = recordTracks[selectedTrack];
       track.duration = Number.isFinite(audioPlayer.duration) ? audioPlayer.duration : 0;
       durationLabel.textContent = formatAudioTime(track.duration);
+      miniDuration.textContent = formatAudioTime(track.duration);
       renderPlaylist();
+      updateAudioControls();
     });
     audioPlayer.addEventListener("timeupdate", () => {
       const duration = audioPlayer.duration;
@@ -1247,6 +1347,10 @@
       audioSeek.style.setProperty("--slider-progress", `${position * 100}%`);
       audioSeek.setAttribute("aria-valuetext", `${formatAudioTime(audioPlayer.currentTime)} elapsed`);
       currentTimeLabel.textContent = formatAudioTime(audioPlayer.currentTime);
+      miniAudioSeek.value = String(Math.round(position * 1000));
+      miniAudioSeek.style.setProperty("--slider-progress", `${position * 100}%`);
+      miniAudioSeek.setAttribute("aria-valuetext", `${formatAudioTime(audioPlayer.currentTime)} elapsed`);
+      miniCurrentTime.textContent = formatAudioTime(audioPlayer.currentTime);
     });
     audioPlayer.addEventListener("ended", () => {
       if (recordTracks.length > 1 && selectedTrack < recordTracks.length - 1) {
@@ -1274,11 +1378,47 @@
       if (!Number.isFinite(audioPlayer.duration) || audioPlayer.duration <= 0) return;
       audioPlayer.currentTime = (Number(audioSeek.value) / 1000) * audioPlayer.duration;
     });
+    miniAudioSeek.addEventListener("input", () => {
+      if (!Number.isFinite(audioPlayer.duration) || audioPlayer.duration <= 0) return;
+      audioPlayer.currentTime = (Number(miniAudioSeek.value) / 1000) * audioPlayer.duration;
+    });
     audioVolume.addEventListener("input", () => {
       audioPlayer.volume = Number(audioVolume.value);
       audioVolume.style.setProperty("--slider-progress", `${Number(audioVolume.value) * 100}%`);
     });
     audioVolume.style.setProperty("--slider-progress", `${Number(audioVolume.value) * 100}%`);
+    async function loadBundledMusic() {
+      try {
+        const response = await fetch(new URL("music/playlist.json", document.baseURI));
+        if (!response.ok) throw new Error(`Music playlist request failed (${response.status}).`);
+        const playlistData = await response.json();
+        if (!Array.isArray(playlistData.tracks)) {
+          throw new Error("The music playlist must contain a tracks array.");
+        }
+        const tracks = playlistData.tracks.map((track, index) => {
+          if (!track || typeof track.name !== "string" || !track.name.trim()) {
+            throw new Error(`Music playlist track ${index + 1} needs a name.`);
+          }
+          const artist = typeof track.artist === "string" ? track.artist : "";
+          if (!isSafeMusicPath(track.src) || track.url || track.platform) {
+            throw new Error(`Music playlist track ${index + 1} needs a local MP3 path under /music/.`);
+          }
+          const src = new URL(track.src.trim().slice(1), document.baseURI).href;
+          return { name: track.name.trim(), artist: artist.trim(), src, duration: 0 };
+        });
+        recordTracks.push(...tracks);
+        if (recordTracks.length > 0) {
+          selectAudioTrack(0);
+          showAudioMessage(`Loaded ${recordTracks.length} song${recordTracks.length === 1 ? "" : "s"} from the project playlist.`);
+        }
+        renderPlaylist();
+        updateAudioControls();
+      } catch (error) {
+        console.error("Could not load the project music playlist.", error);
+        showAudioMessage(`${error.message || "Could not load the project music playlist."} Check public/music/playlist.json.`, true);
+      }
+    }
+
     renderPlaylist();
     updateAudioControls();
     loadBundledMusic();
