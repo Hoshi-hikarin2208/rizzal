@@ -3,7 +3,7 @@
 Only the site admin manages member photos in this project folder. Visitors cannot upload or change these images. Add approved photos using these filenames:
 
 - `kim-g-mejica.jpg`
-- `vexvi-morales.jpg`
+- `vix.jpg`
 - `thomas-c-enriquez.jpg`
 - `kim-joshua-e-esmillarin.jpg`
 - `renze-daneille-p-rivero.jpg`
