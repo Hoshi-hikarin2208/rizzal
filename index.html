@@ -63,7 +63,7 @@
         <div class="hero-art" aria-label="Archival portrait of José Rizal">
           <span class="portrait-note">The Philippines, remembered</span>
           <div class="portrait-frame" data-tilt>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Jose_Rizal_full.jpg" alt="Archival portrait of José Rizal in a dark coat, circa the 1890s" fetchpriority="high">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Jose_Rizal_full.jpg" alt="Archival portrait of José Rizal in a dark coat, circa the 1890s" data-hero-profile="rizal" fetchpriority="high">
             <div class="portrait-caption"><b>José Rizal</b><span>1861 — 1896 · Writer & reformist</span></div>
           </div>
           <span class="hero-index">A DIGITAL HISTORY · VOL. 01</span>
@@ -97,19 +97,19 @@
             <span class="eyebrow">A soundtrack for the story</span>
             <h2 id="listening-title">Step into the listening room.</h2>
           </div>
-          <p>Bring your own OPM recordings and listen while you explore. Your music stays on this device; no files are uploaded.</p>
+          <p>Browse the songs selected for this project. Choose a track from the playlist, then play it here.</p>
         </div>
         <div class="record-player" data-reveal>
           <div class="player-machine">
             <div class="machine-topline"><span>THE HERITAGE RADIO CO.</span><span>EST. 1892 · MANILA</span></div>
-            <button class="player-platter" id="record-platter" type="button" aria-label="Choose an audio file first" disabled>
+            <button class="player-platter" id="record-platter" type="button" aria-label="Choose a song first" disabled>
               <div class="vinyl-record" aria-hidden="true">
                 <div class="record-grooves"></div>
                 <div class="record-label"><span class="record-label-small">LISTENING ROOM</span><b>OPM</b><span class="record-label-year">SIDE A · PH</span></div>
               </div>
               <div class="tonearm" aria-hidden="true"><span class="tonearm-head"></span></div>
               <span class="platter-number" aria-hidden="true">33⅓</span>
-            </div>
+            </button>
             <div class="machine-controls">
               <div class="machine-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
               <span class="machine-status" id="player-status" aria-live="polite">Ready when you are</span>
@@ -117,54 +117,43 @@
             </div>
           </div>
           <div class="player-console">
-            <div class="console-overline"><span>YOUR LOCAL RECORDS</span><span class="local-badge"><i aria-hidden="true"></i> ON THIS DEVICE</span></div>
+            <div class="console-overline"><span>PROJECT MUSIC LIBRARY</span><span class="local-badge"><i aria-hidden="true"></i> ADMIN CURATED</span></div>
             <div class="now-playing">
               <span class="now-playing-kicker">NOW SPINNING</span>
               <h3 id="track-title">No record selected</h3>
-              <p id="track-artist">Load your own OPM audio to begin</p>
+              <p id="track-artist">Choose a song from the project playlist</p>
             </div>
-            <label class="audio-upload" id="audio-drop-zone">
-              <input id="audio-files" type="file" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac,.aac" multiple>
-              <span class="upload-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15.5v3A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-3"/></svg>
-              </span>
-              <span><b>Choose OPM recordings</b><small>or drop audio files here · MP3, WAV, M4A and more</small></span>
-              <span class="upload-arrow" aria-hidden="true">↗</span>
-            </label>
-            <p class="audio-note" id="audio-note" role="status">Select audio files you have the right to play. Files stay local in your browser and are never uploaded.</p>
-            <div class="audio-progress-row">
-              <span id="audio-current-time">0:00</span>
-              <label class="sr-only" for="audio-seek">Seek through current track</label>
-              <input id="audio-seek" type="range" min="0" max="1000" value="0" step="1" aria-valuetext="0:00 elapsed">
-              <span id="audio-duration">0:00</span>
+            <p class="audio-note" id="audio-note" role="status">Songs added to the project playlist appear here for everyone.</p>
+            <div class="local-audio-controls">
+              <div class="audio-progress-row">
+                <span id="audio-current-time">0:00</span>
+                <label class="sr-only" for="audio-seek">Seek through current track</label>
+                <input id="audio-seek" type="range" min="0" max="1000" value="0" step="1" aria-valuetext="0:00 elapsed">
+                <span id="audio-duration">0:00</span>
+              </div>
+              <div class="deck-controls">
+                <button class="deck-button deck-secondary" id="previous-track" type="button" aria-label="Previous track" title="Previous track" disabled>
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zm12 1v12L9 12z"/></svg>
+                </button>
+                <button class="deck-button deck-play" id="toggle-playback" type="button" aria-label="Play selected track" title="Play selected track" disabled>
+                  <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.7c0-.8.9-1.3 1.6-.9l10 6.3a1 1 0 0 1 0 1.8l-10 6.3c-.7.4-1.6-.1-1.6-.9V5.7Z"/></svg>
+                  <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zm7 0h4v14h-4z"/></svg>
+                </button>
+                <button class="deck-button deck-secondary" id="next-track" type="button" aria-label="Next track" title="Next track" disabled>
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM6 6v12l9-6z"/></svg>
+                </button>
+                <span class="deck-divider" aria-hidden="true"></span>
+                <label class="volume-control">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path d="M16 9a4 4 0 0 1 0 6m2-9a7 7 0 0 1 0 12"/></svg>
+                  <span class="sr-only">Volume</span>
+                  <input id="audio-volume" type="range" min="0" max="1" value=".8" step=".01" aria-label="Volume">
+                </label>
+              </div>
             </div>
-            <div class="deck-controls">
-              <button class="deck-button deck-secondary" id="previous-track" type="button" aria-label="Previous track" title="Previous track" disabled>
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zm12 1v12L9 12z"/></svg>
-              </button>
-              <button class="deck-button deck-play" id="toggle-playback" type="button" aria-label="Play selected track" title="Play selected track" disabled>
-                <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.7c0-.8.9-1.3 1.6-.9l10 6.3a1 1 0 0 1 0 1.8l-10 6.3c-.7.4-1.6-.1-1.6-.9V5.7Z"/></svg>
-                <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zm7 0h4v14h-4z"/></svg>
-              </button>
-              <button class="deck-button deck-secondary" id="next-track" type="button" aria-label="Next track" title="Next track" disabled>
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM6 6v12l9-6z"/></svg>
-              </button>
-              <span class="deck-divider" aria-hidden="true"></span>
-              <label class="volume-control">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path d="M16 9a4 4 0 0 1 0 6m2-9a7 7 0 0 1 0 12"/></svg>
-                <span class="sr-only">Volume</span>
-                <input id="audio-volume" type="range" min="0" max="1" value=".8" step=".01" aria-label="Volume">
-              </label>
-            </div>
-            <div class="playlist-heading"><span>YOUR PLAYLIST</span><span id="playlist-count">0 TRACKS</span></div>
-            <ol class="playlist" id="playlist" aria-label="Your local audio playlist">
-              <li class="playlist-empty">Your selected songs will appear here.</li>
+            <div class="playlist-heading"><span>CURATED PLAYLIST</span><span id="playlist-count">0 TRACKS</span></div>
+            <ol class="playlist" id="playlist" aria-label="Admin-curated music playlist">
+              <li class="playlist-empty">Songs chosen for this project will appear here.</li>
             </ol>
-            <div class="classic-opm">
-              <div class="playlist-heading classic-opm-heading"><span>CLASSIC OPM TO DISCOVER</span><span>12 SONGS</span></div>
-              <p class="classic-opm-note">Choose a listening service to search for each song. Check that the result is from an official artist or rights-holder account.</p>
-              <ol class="classic-opm-list" id="classic-opm-list" aria-label="Classic OPM streaming searches"></ol>
-            </div>
             <audio id="audio-player" preload="metadata"></audio>
           </div>
         </div>
@@ -191,26 +180,26 @@
             <div class="note-card"><strong>Print gave far-flung voices a place to meet.</strong> Ideas turned separate grievances into a conversation about shared change.</div>
             <div class="people-strip" aria-label="Leading Propaganda Movement figures">
               <div class="person-chip">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Jose_Rizal_full.jpg" alt="" loading="lazy">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Jose_Rizal_full.jpg" alt="Portrait of José Rizal, Filipino novelist and reformist" data-hero-profile="rizal" loading="lazy">
                 <div><b>José Rizal</b><span>Novelist & essayist</span></div>
               </div>
               <div class="person-chip">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Marcelo_Hilario_del_Pilar_y_Gatmait%C3%A1n_%281850-1896%29_portrait.jpg" alt="" loading="lazy">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Marcelo_Hilario_del_Pilar_y_Gatmait%C3%A1n_%281850-1896%29_portrait.jpg" alt="Portrait of Marcelo H. del Pilar, journalist and Propaganda Movement reformist" data-hero-profile="del-pilar" loading="lazy">
                 <div><b>M. H. del Pilar</b><span>Writer & editor</span></div>
               </div>
               <div class="person-chip">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/1970-NHI-Graciano_Lopez_Jaena.png" alt="" loading="lazy">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/1970-NHI-Graciano_Lopez_Jaena.png" alt="Portrait of Graciano López Jaena, journalist and orator" data-hero-profile="lopez-jaena" loading="lazy">
                 <div><b>G. López Jaena</b><span>Orator & journalist</span></div>
               </div>
             </div>
           </div>
           <div class="image-spread" data-reveal>
             <figure class="archive-image image-main">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Jos%C3%A9_Rizal_with_Marcelo_del_Pilar_in_Madrid.jpg" alt="José Rizal and Marcelo H. del Pilar together in Madrid" loading="lazy">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Jos%C3%A9_Rizal_with_Marcelo_del_Pilar_in_Madrid.jpg" alt="José Rizal and Marcelo H. del Pilar together in Madrid" data-hero-profile="rizal-del-pilar" loading="lazy">
               <figcaption>José Rizal & Marcelo H. del Pilar · Madrid</figcaption>
             </figure>
             <figure class="archive-image image-small">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/1970-NHI-Graciano_Lopez_Jaena.png" alt="Historical image honoring Filipino propagandist Graciano López Jaena" loading="lazy">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/1970-NHI-Graciano_Lopez_Jaena.png" alt="Historical image honoring Filipino propagandist Graciano López Jaena" data-hero-profile="lopez-jaena" loading="lazy">
               <figcaption>Graciano López Jaena · a voice of the movement</figcaption>
             </figure>
             <span class="image-stamp" aria-hidden="true">voices<br>in print</span>
@@ -224,14 +213,14 @@
           <div class="figure-monuments-grid">
             <figure class="figure-monument-card" data-reveal>
               <a href="https://commons.wikimedia.org/wiki/File:FvfSanJuanH0895_28.JPG" target="_blank" rel="noopener noreferrer" aria-label="View the Marcelo H. del Pilar monument photo and license details">
-                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/FvfSanJuanH0895_28.JPG/960px-FvfSanJuanH0895_28.JPG" alt="Bronze statue of Marcelo H. del Pilar at the Bulacan Provincial Capitol" loading="lazy">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/FvfSanJuanH0895_28.JPG/960px-FvfSanJuanH0895_28.JPG" alt="Bronze statue of Marcelo H. del Pilar at the Bulacan Provincial Capitol" data-hero-profile="del-pilar" loading="lazy">
                 <span class="monument-open" aria-hidden="true">↗</span>
               </a>
               <figcaption><b>Marcelo H. del Pilar</b><span>Monument · Bulacan Provincial Capitol</span><small>Photo: Judgefloro · CC BY-SA 3.0</small></figcaption>
             </figure>
             <figure class="figure-monument-card" data-reveal>
               <a href="https://commons.wikimedia.org/wiki/File:Graciano_L%C3%B3pez_Jaena_Monument_in_Jaro_Plaza,_Iloilo_City,_Philippines.jpg" target="_blank" rel="noopener noreferrer" aria-label="View the Graciano López Jaena monument photo and license details">
-                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Graciano_L%C3%B3pez_Jaena_Monument_in_Jaro_Plaza%2C_Iloilo_City%2C_Philippines.jpg/960px-Graciano_L%C3%B3pez_Jaena_Monument_in_Jaro_Plaza%2C_Iloilo_City%2C_Philippines.jpg" alt="Graciano López Jaena monument in Jaro Plaza, Iloilo City" loading="lazy">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Graciano_L%C3%B3pez_Jaena_Monument_in_Jaro_Plaza%2C_Iloilo_City%2C_Philippines.jpg/960px-Graciano_L%C3%B3pez_Jaena_Monument_in_Jaro_Plaza%2C_Iloilo_City%2C_Philippines.jpg" alt="Graciano López Jaena monument in Jaro Plaza, Iloilo City" data-hero-profile="lopez-jaena" loading="lazy">
                 <span class="monument-open" aria-hidden="true">↗</span>
               </a>
               <figcaption><b>Graciano López Jaena</b><span>Monument · Jaro Plaza, Iloilo City</span><small>Photo: Eduardojr5 · CC BY-SA 4.0</small></figcaption>
@@ -279,7 +268,7 @@
         </div>
         <div class="dapitan-grid">
           <figure class="dapitan-photo" data-reveal>
-            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Rizal_Shrine%2C_Dapitan_City_%28Features_and_Structures%29_02.JPG/960px-Rizal_Shrine%2C_Dapitan_City_%28Features_and_Structures%29_02.JPG" alt="A structure at the Rizal Shrine in Dapitan, where Rizal lived during exile" loading="lazy">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Rizal_Shrine%2C_Dapitan_City_%28Features_and_Structures%29_02.JPG/960px-Rizal_Shrine%2C_Dapitan_City_%28Features_and_Structures%29_02.JPG" alt="A structure at the Rizal Shrine in Dapitan, where Rizal lived during exile" data-hero-profile="dapitan" loading="lazy">
             <figcaption class="photo-label"><b>Dapitan, 1892—1896</b><span>Four years of exile and community work</span></figcaption>
           </figure>
           <div class="dapitan-copy" data-reveal>
@@ -313,18 +302,18 @@
           </div>
           <div class="portrait-pair" data-reveal aria-label="Archival portraits of José Rizal and Andrés Bonifacio">
             <figure>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Jose_Rizal_full.jpg" alt="Archival portrait of José Rizal" loading="lazy">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Jose_Rizal_full.jpg" alt="Archival portrait of José Rizal" data-hero-profile="rizal" loading="lazy">
               <figcaption>José Rizal · reformist & writer</figcaption>
             </figure>
             <figure>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Andr%C3%A9s_Bonifacio.jpg" alt="Archival portrait of Andrés Bonifacio" loading="lazy">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Andr%C3%A9s_Bonifacio.jpg" alt="Archival portrait of Andrés Bonifacio" data-hero-profile="bonifacio" loading="lazy">
               <figcaption>Andrés Bonifacio · Katipunan leader</figcaption>
             </figure>
           </div>
         </div>
         <figure class="bonifacio-monument" data-reveal>
           <a href="https://commons.wikimedia.org/wiki/File:Andres_Bonifacio_Birthplace_Monument,_Tondo,_Manila,_March_2023.jpg" target="_blank" rel="noopener noreferrer" aria-label="View the Andrés Bonifacio monument photo and license details">
-            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Andres_Bonifacio_Birthplace_Monument%2C_Tondo%2C_Manila%2C_March_2023.jpg/960px-Andres_Bonifacio_Birthplace_Monument%2C_Tondo%2C_Manila%2C_March_2023.jpg" alt="Andrés Bonifacio birthplace monument in Tondo, Manila" loading="lazy">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Andres_Bonifacio_Birthplace_Monument%2C_Tondo%2C_Manila%2C_March_2023.jpg/960px-Andres_Bonifacio_Birthplace_Monument%2C_Tondo%2C_Manila%2C_March_2023.jpg" alt="Andrés Bonifacio birthplace monument in Tondo, Manila" data-hero-profile="bonifacio" loading="lazy">
             <span class="monument-open" aria-hidden="true">↗</span>
           </a>
           <figcaption><span><b>Andrés Bonifacio</b><small>Birthplace monument · Tondo, Manila</small></span><small>Photo: Ralff Nestor Nacor · CC BY-SA 4.0</small></figcaption>
@@ -347,6 +336,7 @@
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/3/37/20161015_Titopao_Rizal_Monument_Closeup.jpg"
                 alt="Bronze statue of José Rizal at the Rizal Monument in Rizal Park, Manila, photographed at an angle"
+                data-hero-profile="rizal"
                 loading="lazy">
               <figcaption class="statue-photo-label">MANILA · RIZAL PARK</figcaption>
             </figure>
@@ -488,14 +478,14 @@
       <div class="wrap">
         <div class="quiz-card" data-reveal>
           <div class="quiz-aside">
-            <span class="eyebrow">A five-question check-in</span>
+            <span class="eyebrow">10 questions · 2 true or false</span>
             <div>
               <h2 id="quiz-title">What stayed with you?</h2>
-              <p>Test what you remember from the story. Choose an answer to see how you did.</p>
+              <p>Check what you remember with 8 multiple-choice and 2 true-or-false questions.</p>
             </div>
           </div>
           <div class="quiz-main" id="quiz-main" aria-live="polite">
-            <div class="quiz-progress"><span id="quiz-count">Question 1 of 5</span><span id="quiz-score">Score: 0</span></div>
+            <div class="quiz-progress"><span id="quiz-count">Question 1 of 10</span><span id="quiz-score">Score: 0</span></div>
             <div class="quiz-track" aria-hidden="true"><span id="quiz-track-fill"></span></div>
             <h3 class="quiz-question" id="quiz-question"></h3>
             <div class="quiz-answers" id="quiz-answers" role="group" aria-labelledby="quiz-question"></div>
@@ -540,65 +530,71 @@
               <span class="eyebrow">Made by our group</span>
               <h3 id="creators-title">Website creators.</h3>
             </div>
-            <p>Add your group members’ names and photos. Your entries are saved in this browser.</p>
-          </div>
-          <div class="creator-group">
-            <label for="creator-group-name">Team name</label>
-            <input class="creator-group-name" id="creator-group-name" type="text" maxlength="80" placeholder="Enter your team name">
+            <p>Member names and portraits are managed by the site admin in the project files.</p>
           </div>
           <div class="creator-grid">
             <article class="creator-card" data-creator="1">
               <div class="creator-photo">
-                <img alt="" hidden>
-                <span class="creator-photo-placeholder" aria-hidden="true">01</span>
-                <label class="creator-photo-upload" for="creator-photo-1">Add photo<input id="creator-photo-1" type="file" accept="image/*" data-creator-photo="1"></label>
+                <img src="/images/creators/kim-g-mejica.jpg" alt="Photo of Kim G. Mejica">
+                <span class="creator-photo-placeholder" aria-hidden="true" hidden>01</span>
               </div>
-              <label class="sr-only" for="creator-name-1">Creator 1 name</label>
-              <input class="creator-name" id="creator-name-1" type="text" maxlength="60" value="Kim G. Mejica" placeholder="Add creator name" data-creator-name="1">
+              <p class="creator-name">Kim G. Mejica</p>
             </article>
             <article class="creator-card" data-creator="2">
               <div class="creator-photo">
-                <img alt="" hidden>
-                <span class="creator-photo-placeholder" aria-hidden="true">02</span>
-                <label class="creator-photo-upload" for="creator-photo-2">Add photo<input id="creator-photo-2" type="file" accept="image/*" data-creator-photo="2"></label>
+                <img src="/images/creators/vexvi-morales.jpg" alt="Photo of Vexvi Morales">
+                <span class="creator-photo-placeholder" aria-hidden="true" hidden>02</span>
               </div>
-              <label class="sr-only" for="creator-name-2">Creator 2 name</label>
-              <input class="creator-name" id="creator-name-2" type="text" maxlength="60" value="Vexvi Morales" placeholder="Add creator name" data-creator-name="2">
+              <p class="creator-name">Vexvi Morales</p>
               <span class="creator-role">Team leader</span>
             </article>
             <article class="creator-card" data-creator="3">
               <div class="creator-photo">
-                <img alt="" hidden>
-                <span class="creator-photo-placeholder" aria-hidden="true">03</span>
-                <label class="creator-photo-upload" for="creator-photo-3">Add photo<input id="creator-photo-3" type="file" accept="image/*" data-creator-photo="3"></label>
+                <img src="/images/creators/thomas-c-enriquez.jpg" alt="Photo of Thomas C. Enriquez">
+                <span class="creator-photo-placeholder" aria-hidden="true" hidden>03</span>
               </div>
-              <label class="sr-only" for="creator-name-3">Creator 3 name</label>
-              <input class="creator-name" id="creator-name-3" type="text" maxlength="60" value="Thomas c. Enriquez" placeholder="Add creator name" data-creator-name="3">
+              <p class="creator-name">Thomas C. Enriquez</p>
             </article>
             <article class="creator-card" data-creator="4">
               <div class="creator-photo">
-                <img alt="" hidden>
-                <span class="creator-photo-placeholder" aria-hidden="true">04</span>
-                <label class="creator-photo-upload" for="creator-photo-4">Add photo<input id="creator-photo-4" type="file" accept="image/*" data-creator-photo="4"></label>
+                <img src="/images/creators/kim-joshua-e-esmillarin.jpg" alt="Photo of Kim Joshua E. Esmillarin">
+                <span class="creator-photo-placeholder" aria-hidden="true" hidden>04</span>
               </div>
-              <label class="sr-only" for="creator-name-4">Creator 4 name</label>
-              <input class="creator-name" id="creator-name-4" type="text" maxlength="60" value="Kim joshua E. Esmillarin" placeholder="Add creator name" data-creator-name="4">
+              <p class="creator-name">Kim Joshua E. Esmillarin</p>
             </article>
             <article class="creator-card" data-creator="5">
               <div class="creator-photo">
-                <img alt="" hidden>
-                <span class="creator-photo-placeholder" aria-hidden="true">05</span>
-                <label class="creator-photo-upload" for="creator-photo-5">Add photo<input id="creator-photo-5" type="file" accept="image/*" data-creator-photo="5"></label>
+                <img src="/images/creators/renze-daneille-p-rivero.jpg" alt="Photo of Renze Daneille P. Rivero">
+                <span class="creator-photo-placeholder" aria-hidden="true" hidden>05</span>
               </div>
-              <label class="sr-only" for="creator-name-5">Creator 5 name</label>
-              <input class="creator-name" id="creator-name-5" type="text" maxlength="60" value="Renze Daneille P Rivero" placeholder="Add creator name" data-creator-name="5">
+              <p class="creator-name">Renze Daneille P. Rivero</p>
             </article>
           </div>
-          <p class="creator-status" id="creator-status" role="status" aria-live="polite">Names and photos are stored on this device only. To publish them for everyone, add the photos to the project and update the creator cards in index.html.</p>
+          <p class="creator-status" id="creator-status" role="status" aria-live="polite">Photos and names are read-only for visitors. The site admin manages images in public/images/creators and names in index.html.</p>
         </section>
       </div>
     </section>
   </main>
+
+  <dialog class="hero-image-dialog" id="hero-image-dialog" aria-labelledby="hero-image-title" aria-describedby="hero-image-bio hero-image-role hero-image-connection">
+    <div class="hero-image-dialog-inner">
+      <button class="hero-image-close" id="hero-image-close" type="button" aria-label="Close image details" autofocus>×</button>
+      <figure class="hero-image-preview">
+        <img id="hero-image-large" alt="">
+        <figcaption id="hero-image-caption"></figcaption>
+      </figure>
+      <div class="hero-image-copy">
+        <span class="eyebrow">A closer look</span>
+        <h2 id="hero-image-title"></h2>
+        <p id="hero-image-bio"></p>
+        <h3>Historical role</h3>
+        <p id="hero-image-role"></p>
+        <h3>Connection to Rizal</h3>
+        <p id="hero-image-connection"></p>
+        <a class="hero-image-credit" id="hero-image-credit" target="_blank" rel="noopener noreferrer" hidden>View image source and credit ↗</a>
+      </div>
+    </div>
+  </dialog>
 
   <aside class="hero-quote-widget" aria-label="Philippine heroes quote">
     <section class="hero-quote-panel" id="hero-quote-panel" aria-labelledby="hero-quote-heading" aria-hidden="true" hidden>

@@ -1,14 +1,14 @@
     :root {
       color-scheme: light;
-      --ink: #251a14;
-      --ink-soft: #534237;
-      --paper: #f4efe5;
-      --paper-light: #fbf8f1;
-      --paper-dark: #e8ddca;
-      --sepia: #89643f;
-      --sepia-light: #bd9667;
-      --rust: #a95032;
-      --line: rgba(62, 43, 30, .18);
+      --ink: #2b211a;
+      --ink-soft: #645448;
+      --paper: #f3ecdf;
+      --paper-light: #fcf8ef;
+      --paper-dark: #e5d6c0;
+      --sepia: #75533a;
+      --sepia-light: #b98a5d;
+      --rust: #995638;
+      --line: rgba(62, 43, 30, .17);
       --serif: "Playfair Display", Georgia, serif;
       --sans: "DM Sans", Arial, sans-serif;
       --page: min(1160px, calc(100% - 64px));
@@ -114,18 +114,18 @@
     .nav-links a:hover, .nav-links a[aria-current="location"] { color: #e5bc88; }
     .theme-choice { display: inline-flex; align-items: center; gap: 7px; margin-left: 2px; color: #e5c397; }
     .theme-choice > span { font-size: 1rem; }
-    .theme-choice select { max-width: 100px; min-height: 34px; padding: 5px 7px; border: 1px solid rgba(251, 248, 241, .3); border-radius: 2px; background: #2a1e17; color: var(--paper-light); font-size: .65rem; }
+    .theme-choice select { max-width: 100px; min-height: 38px; padding: 5px 7px; border: 1px solid rgba(251, 248, 241, .3); border-radius: 8px; background: #2a1e17; color: var(--paper-light); font-size: .65rem; }
     .nav-quiz {
       padding: 10px 15px;
       border: 1px solid rgba(251, 248, 241, .35);
-      border-radius: 2px;
+      border-radius: 8px;
     }
     .menu-toggle {
       display: none;
       width: 42px;
       height: 42px;
       border: 1px solid rgba(251, 248, 241, .3);
-      border-radius: 2px;
+      border-radius: 8px;
       background: transparent;
       cursor: pointer;
     }
@@ -146,6 +146,8 @@
       overflow: hidden;
       align-items: center;
       background:
+        linear-gradient(90deg, rgba(32, 23, 18, .94), rgba(38, 27, 20, .78) 48%, rgba(31, 22, 17, .58)),
+        url("https://upload.wikimedia.org/wikipedia/commons/3/37/20161015_Titopao_Rizal_Monument_Closeup.jpg") center 44% / cover no-repeat,
         radial-gradient(ellipse at 68% 46%, rgba(138, 93, 52, .22), transparent 40%),
         linear-gradient(112deg, #201712 0%, #2a1c15 64%, #39291e 100%);
       color: var(--paper-light);
@@ -202,7 +204,7 @@
       gap: 11px;
       padding: 0 20px;
       border: 1px solid transparent;
-      border-radius: 2px;
+      border-radius: 8px;
       background: #bd8151;
       color: #211711;
       font-size: .76rem;
@@ -654,7 +656,7 @@
 
     /* Knowledge check */
     .quiz { background: var(--paper-light); }
-    .quiz-card { display: grid; grid-template-columns: .72fr 1.28fr; min-height: 410px; overflow: hidden; background: #2b1e17; color: var(--paper-light); box-shadow: var(--shadow); }
+    .quiz-card { display: grid; grid-template-columns: .72fr 1.28fr; min-height: 410px; overflow: hidden; border: 1px solid rgba(77, 52, 35, .2); border-radius: 16px; background: #2b1e17; color: var(--paper-light); box-shadow: var(--shadow); }
     .quiz-aside { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 40px; overflow: hidden; background: #70492f; }
     .quiz-aside::after { position: absolute; right: -115px; bottom: -155px; width: 335px; height: 335px; border: 1px solid rgba(250, 239, 222, .24); border-radius: 50%; box-shadow: 0 0 0 33px rgba(250, 239, 222, .05), 0 0 0 66px rgba(250, 239, 222, .04); content: ""; }
     .quiz-aside .eyebrow { position: relative; z-index: 1; color: #f0d5b3; }
@@ -674,6 +676,8 @@
       gap: 13px;
       padding: 10px 14px;
       border: 1px solid rgba(250, 244, 235, .2);
+      border-radius: 8px;
+      border-radius: 8px;
       background: rgba(255, 255, 255, .025);
       color: rgba(251, 248, 241, .88);
       font-size: .78rem;
@@ -715,8 +719,8 @@
     .creator-heading h3 { margin: 7px 0 0; font: 500 1.65rem var(--serif); }
     .creator-heading p { max-width: 390px; margin: 0; color: var(--ink-soft); font-size: .69rem; line-height: 1.65; }
     .creator-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 13px; }
-    .creator-card { min-width: 0; padding: 10px; border: 1px solid var(--line); background: var(--paper-light); }
-    .creator-photo { position: relative; display: grid; aspect-ratio: 1 / .86; place-items: center; overflow: hidden; background: var(--paper-dark); }
+    .creator-card { min-width: 0; padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-light); }
+    .creator-photo { position: relative; display: grid; aspect-ratio: 1 / .86; place-items: center; overflow: hidden; border-radius: 7px; background: var(--paper-dark); }
     .creator-photo img { width: 100%; height: 100%; object-fit: cover; }
     .creator-photo-placeholder { color: var(--sepia); font: italic 2.4rem var(--serif); }
     .creator-name { margin: 11px 2px 2px; color: var(--ink); font: 500 .86rem/1.4 var(--serif); }
@@ -724,32 +728,34 @@
     .creator-status { margin: 12px 0 0; color: var(--ink-soft); font-size: .62rem; line-height: 1.6; }
 
     /* Scroll-revealed Rizal Monument */
-    .statue-section { position: relative; overflow: clip; padding: 105px 0 115px; background: #e6dccb; }
+    .statue-section { position: relative; isolation: isolate; overflow: clip; padding: 105px 0 115px; background: #201712; color: var(--paper-light); }
+    .statue-section::before { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(32, 23, 18, .94), rgba(38, 27, 20, .82) 52%, rgba(31, 22, 17, .72)), url("https://upload.wikimedia.org/wikipedia/commons/3/37/20161015_Titopao_Rizal_Monument_Closeup.jpg") center 46% / cover no-repeat; content: ""; }
     .statue-heading { max-width: 700px; margin-bottom: 36px; }
+    .statue-heading .eyebrow { color: #d6ad7e; }
     .statue-heading h2 { margin: 13px 0; font: 500 clamp(2.8rem, 5vw, 4.4rem)/1.03 var(--serif); letter-spacing: -.045em; }
-    .statue-heading p { max-width: 555px; margin: 0; color: var(--ink-soft); font-size: .91rem; line-height: 1.8; }
+    .statue-heading p { max-width: 555px; margin: 0; color: rgba(251, 248, 241, .74); font-size: .91rem; line-height: 1.8; }
     .statue-exhibit { display: grid; grid-template-columns: 1.03fr .97fr; min-height: 570px; align-items: center; gap: clamp(35px, 7vw, 90px); }
     .statue-scene { position: relative; display: grid; min-height: 570px; place-items: center; overflow: hidden; perspective: 1100px; isolation: isolate; }
-    .statue-scene::before { position: absolute; z-index: -2; inset: 8% 4% 2%; border: 1px solid rgba(91, 65, 43, .16); background: linear-gradient(155deg, rgba(250, 246, 237, .67), rgba(210, 192, 165, .23)); content: ""; }
-    .statue-scene::after { position: absolute; z-index: -2; right: 4%; bottom: 2%; left: 4%; height: 25%; background: linear-gradient(transparent, rgba(91, 65, 43, .08)); content: ""; }
-    .statue-halo { position: absolute; top: 10%; left: 50%; width: min(69%, 360px); aspect-ratio: 1; border: 1px solid rgba(132, 99, 64, .3); border-radius: 50%; box-shadow: 0 0 0 18px rgba(132, 99, 64, .035), 0 0 0 54px rgba(132, 99, 64, .025); transform: translateX(-50%) translateZ(-65px); }
-    .statue-model { position: relative; width: min(66%, 350px); height: min(500px, 84%); margin: 0 0 20px; border: 9px solid #f5efe4; background: #c8b69b; box-shadow: 20px 30px 48px rgba(47, 31, 20, .3), 0 0 0 1px rgba(83, 59, 38, .3); opacity: .12; transform: translate3d(0, 125px, -55px) rotateX(19deg) rotateY(-22deg) rotateZ(-3deg) scale(.78); transform-style: preserve-3d; will-change: transform, opacity; }
+    .statue-scene::before { position: absolute; z-index: -2; inset: 8% 4% 2%; border: 1px solid rgba(221, 185, 143, .25); background: linear-gradient(155deg, rgba(250, 246, 237, .09), rgba(210, 192, 165, .025)); backdrop-filter: blur(2px); content: ""; }
+    .statue-scene::after { position: absolute; z-index: -2; right: 4%; bottom: 2%; left: 4%; height: 25%; background: linear-gradient(transparent, rgba(15, 11, 8, .32)); content: ""; }
+    .statue-halo { position: absolute; top: 10%; left: 50%; width: min(69%, 360px); aspect-ratio: 1; border: 1px solid rgba(227, 195, 154, .3); border-radius: 50%; box-shadow: 0 0 0 18px rgba(227, 195, 154, .035), 0 0 0 54px rgba(227, 195, 154, .025); transform: translateX(-50%) translateZ(-65px); }
+    .statue-model { position: relative; width: min(66%, 350px); height: min(500px, 84%); margin: 0 0 20px; border: 1px solid rgba(221, 185, 143, .5); background: rgba(74, 51, 38, .58); box-shadow: 24px 36px 60px rgba(0, 0, 0, .42), 0 0 0 9px rgba(221, 185, 143, .055); opacity: .12; transform: translate3d(0, 125px, -55px) rotateX(19deg) rotateY(-22deg) rotateZ(-3deg) scale(.78); transform-style: preserve-3d; will-change: transform, opacity; }
     .statue-scene.is-visible .statue-model { opacity: 1; transition: opacity .7s ease; }
-    .statue-model img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: sepia(.4) contrast(1.08) saturate(.76); }
-    .statue-model::before { position: absolute; z-index: -1; inset: 16px -20px -15px 20px; border: 1px solid rgba(108, 76, 47, .55); background: rgba(134, 98, 64, .12); content: ""; transform: translateZ(-24px); }
+    .statue-model img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: sepia(.4) contrast(1.08) saturate(.76) drop-shadow(0 18px 18px rgba(0, 0, 0, .28)); }
+    .statue-model::before { position: absolute; z-index: -1; inset: 16px -20px -15px 20px; border: 1px solid rgba(221, 185, 143, .4); background: rgba(134, 98, 64, .08); content: ""; transform: translateZ(-24px); }
     .statue-photo-label { position: absolute; right: 0; bottom: 0; left: 0; padding: 28px 12px 11px; background: linear-gradient(transparent, rgba(31, 23, 18, .8)); color: #fbf8f1; font-size: .57rem; font-weight: 700; letter-spacing: .14em; }
     .statue-platform { position: absolute; z-index: -1; right: 11%; bottom: 8%; left: 11%; height: 30px; border: 1px solid #93775a; background: linear-gradient(#d2bd9e, #9c7a56 45%, #6c5037 48%, #a2815d); box-shadow: 0 18px 22px rgba(58, 39, 24, .28); transform: perspective(300px) rotateX(12deg); }
     .statue-platform::before { position: absolute; right: 5%; bottom: 100%; left: 5%; height: 28px; border: 1px solid #b39671; background: linear-gradient(#e2d2b8, #ab8d67); content: ""; }
     .statue-platform span { position: absolute; right: 9%; bottom: 100%; left: 9%; height: 12px; border: 1px solid rgba(84, 61, 39, .42); background: #c4aa84; }
-    .statue-axis-note { position: absolute; top: 50%; right: 3%; color: #826849; font-size: .56rem; font-weight: 700; letter-spacing: .18em; writing-mode: vertical-rl; }
+    .statue-axis-note { position: absolute; top: 50%; right: 3%; color: rgba(247, 234, 215, .68); font-size: .56rem; font-weight: 700; letter-spacing: .18em; writing-mode: vertical-rl; }
     .statue-story { max-width: 460px; }
-    .statue-date { color: var(--rust); font-size: .61rem; font-weight: 700; letter-spacing: .16em; }
+    .statue-date { color: #d6ad7e; font-size: .61rem; font-weight: 700; letter-spacing: .16em; }
     .statue-story h3 { margin: 15px 0 21px; font: 500 clamp(2.2rem, 4vw, 3.35rem)/1.08 var(--serif); letter-spacing: -.04em; }
-    .statue-story h3 em { color: #916a46; font-weight: 500; }
-    .statue-story p { color: var(--ink-soft); font-size: .88rem; line-height: 1.85; }
-    .statue-link { display: inline-flex; align-items: center; gap: 9px; margin-top: 9px; color: var(--rust); font-size: .76rem; font-weight: 700; text-decoration-color: rgba(169, 80, 50, .4); text-underline-offset: 5px; }
-    .statue-link:hover { color: #6f321f; }
-    .statue-credit { display: block; margin-top: 17px; color: #746353; font-size: .64rem; line-height: 1.6; }
+    .statue-story h3 em { color: #d4ad80; font-weight: 500; }
+    .statue-story p { color: rgba(251, 248, 241, .74); font-size: .88rem; line-height: 1.85; }
+    .statue-link { display: inline-flex; align-items: center; gap: 9px; margin-top: 9px; color: #e5bc88; font-size: .76rem; font-weight: 700; text-decoration-color: rgba(229, 188, 136, .45); text-underline-offset: 5px; }
+    .statue-link:hover { color: #f1d3ad; }
+    .statue-credit { display: block; margin-top: 17px; color: rgba(251, 248, 241, .56); font-size: .64rem; line-height: 1.6; }
 
     @media (max-width: 900px) {
       .statue-exhibit { grid-template-columns: .95fr 1.05fr; gap: 40px; }
@@ -820,7 +826,6 @@
     html[data-theme="dark"] .presentation-section,
     html[data-theme="dark"] .forum-section,
     html[data-theme="dark"] .meme-section,
-    html[data-theme="dark"] .statue-section { background: #25201b; }
     html[data-theme="dark"] .bridge div { background: #2b251f; }
     html[data-theme="dark"] .script-card { border-color: var(--line); background: #302820; }
     html[data-theme="dark"] .timeline-shell {
@@ -888,11 +893,9 @@
     html[data-theme="dark"] .meme-disclaimer { color: #ddc5a9; }
     html[data-theme="dark"] .meme-card .meme-bottom { border-color: var(--line); }
     html[data-theme="dark"] .meme-card .meme-action { border-color: rgba(238, 225, 208, .3); }
-    html[data-theme="dark"] .statue-scene::before { border-color: var(--line); background: linear-gradient(155deg, #393027, #29231d); }
     html[data-theme="dark"] .statue-axis-note,
     html[data-theme="dark"] .statue-credit,
     html[data-theme="dark"] .figure-monument-card figcaption small { color: #d0b99e; }
-    html[data-theme="dark"] .statue-model { border-color: #44372b; }
     html[data-theme="dark"] .hero-quote-panel { border-color: var(--line); background: #302820; color: var(--ink); }
     html[data-theme="dark"] .hero-quote-text,
     html[data-theme="dark"] .hero-quote-author { color: var(--ink); }
@@ -956,7 +959,7 @@
     .listening-heading { display: flex; align-items: end; justify-content: space-between; gap: 35px; margin-bottom: 35px; }
     .listening-heading h2 { max-width: 590px; margin: 12px 0 0; font: 500 clamp(2.4rem, 4.3vw, 3.65rem)/1.08 var(--serif); letter-spacing: -.04em; }
     .listening-heading > p { max-width: 385px; margin: 0 0 3px; color: var(--ink-soft); font-size: .83rem; line-height: 1.8; }
-    .record-player { display: grid; grid-template-columns: .88fr 1.12fr; overflow: hidden; border: 1px solid rgba(47, 31, 21, .55); background: #251a14; box-shadow: 0 28px 60px rgba(42, 28, 18, .2); }
+    .record-player { display: grid; grid-template-columns: .88fr 1.12fr; overflow: hidden; border: 1px solid rgba(47, 31, 21, .55); border-radius: 16px; background: #251a14; box-shadow: 0 28px 60px rgba(42, 28, 18, .2); }
     .player-machine { position: relative; display: flex; min-height: 440px; flex-direction: column; justify-content: space-between; padding: 25px 27px 23px; overflow: hidden; background: linear-gradient(145deg, #4b3425, #35241a 74%); color: var(--paper-light); }
     .player-machine::before { position: absolute; inset: 9px; border: 1px solid rgba(222, 188, 146, .18); pointer-events: none; content: ""; }
     .machine-topline, .console-overline { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 10px; color: #d1b28e; font-size: .55rem; font-weight: 700; letter-spacing: .14em; }
@@ -1037,8 +1040,6 @@
     .now-playing-kicker, .playlist-heading { color: #c7a681; font-size: .54rem; font-weight: 700; letter-spacing: .15em; }
     .now-playing h3 { overflow: hidden; margin: 7px 0 4px; font: 500 clamp(1.45rem, 2.7vw, 2rem)/1.2 var(--serif); text-overflow: ellipsis; white-space: nowrap; }
     .now-playing p { overflow: hidden; margin: 0; color: rgba(248, 239, 225, .58); font-size: .69rem; text-overflow: ellipsis; white-space: nowrap; }
-    .external-track-link { align-self: flex-start; min-height: 40px; margin: 0 0 12px; padding-inline: 14px; background: #c08756; color: #261a13; font-size: .67rem; }
-    .external-track-link[hidden] { display: none; }
     .audio-note { min-height: 24px; margin: 7px 0 9px; color: rgba(248, 239, 225, .58); font-size: .62rem; line-height: 1.55; }
     .audio-note.is-error { color: #e2a38f; }
     .local-audio-controls[hidden] { display: none; }
@@ -1069,7 +1070,7 @@
     .volume-control input { min-width: 55px; }
     .playlist-heading { display: flex; justify-content: space-between; gap: 12px; margin-top: 7px; padding: 10px 0; border-bottom: 1px solid rgba(230, 210, 185, .18); font-size: .51rem; }
     .playlist-heading span:last-child { color: rgba(248, 239, 225, .48); font-variant-numeric: tabular-nums; }
-    .playlist { display: grid; max-height: 126px; gap: 3px; overflow-y: auto; margin: 0; padding: 5px 0 0; list-style: none; scrollbar-color: #745638 transparent; scrollbar-width: thin; }
+    .playlist { display: grid; max-height: min(260px, 35vh); gap: 3px; overflow-y: auto; margin: 0; padding: 5px 0 0; list-style: none; scrollbar-color: #745638 transparent; scrollbar-width: thin; }
     .playlist-empty { padding: 11px 0; color: rgba(248, 239, 225, .46); font-size: .63rem; }
     .playlist-track { display: grid; grid-template-columns: 24px 1fr 40px; align-items: center; gap: 9px; min-width: 0; padding: 4px; }
     .playlist-select { display: flex; min-width: 0; align-items: center; gap: 9px; padding: 6px; overflow: hidden; border: 1px solid transparent; background: transparent; color: rgba(248, 239, 225, .72); text-align: left; transition: background .18s ease, border-color .18s ease, color .18s ease; cursor: pointer; }
@@ -1251,6 +1252,15 @@
       .creator-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
       .creator-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       body { padding-top: 66px; }
+    }
+    @media (pointer: coarse) {
+      .nav-links a, .theme-choice select, .button, .quiz-answer, .deck-button,
+      .playlist-select, .meme-action, .forum-action { min-height: 44px; }
+      .deck-button { width: 44px; height: 44px; }
+      .quiz-answer { padding-block: 12px; }
+    }
+    @media (hover: none) {
+      .portrait-frame { transform: none; will-change: auto; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
