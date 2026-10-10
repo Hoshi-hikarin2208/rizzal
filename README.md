@@ -24,6 +24,6 @@ The Supabase URL and publishable key are intended for browser use; row-level sec
 
 ## Listening room
 
-The site admin curates the MP3 song list in [`public/music/playlist.json`](./public/music/playlist.json). Add MP3 files you have permission to use to [`public/music`](./public/music) and list them in the playlist JSON. Visitors can choose from the approved list and play songs in the site player; the site has no visitor upload control. See [`public/music/README.md`](./public/music/README.md) for the playlist format.
+The site admin curates the song list in [`public/music/playlist.json`](./public/music/playlist.json). Add local audio files you have permission to use to [`public/music`](./public/music), or add HTTPS Spotify and YouTube links there. Visitors can choose from the approved list but cannot add or upload songs; local files play in the site player and streaming links open on their service. See [`public/music/README.md`](./public/music/README.md) for the playlist format.
 
 The quiz contains 10 questions: 8 multiple-choice and 2 true-or-false questions.
