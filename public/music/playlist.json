@@ -1,3 +1,19 @@
 {
-  "tracks": []
+  "tracks": [
+    {
+      "name": "Ako'y Pinoy",
+      "artist": "",
+      "src": "/music/Ako'y Pinoy.mp3"
+    },
+    {
+      "name": "Leonora",
+      "artist": "",
+      "src": "/music/Leonora.mp3"
+    },
+    {
+      "name": "mandirigma",
+      "artist": "",
+      "src": "/music/mandirigma.mp3"
+    }
+  ]
 }
