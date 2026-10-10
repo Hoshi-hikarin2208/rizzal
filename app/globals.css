@@ -2,6 +2,7 @@
       color-scheme: light;
       --ink: #2b211a;
       --ink-soft: #645448;
+      --ink-on-dark: #fcf8ef;
       --paper: #f3ecdf;
       --paper-light: #fcf8ef;
       --paper-dark: #e5d6c0;
@@ -9,6 +10,7 @@
       --sepia-light: #b98a5d;
       --rust: #995638;
       --line: rgba(62, 43, 30, .17);
+      --topic-scrim: rgba(243, 236, 223, .9);
       --serif: "Playfair Display", Georgia, serif;
       --sans: "DM Sans", Arial, sans-serif;
       --page: min(1160px, calc(100% - 64px));
@@ -115,7 +117,6 @@
     .theme-choice { display: inline-flex; align-items: center; gap: 7px; margin-left: 2px; color: #e5c397; }
     .theme-choice > span { font-size: 1rem; }
     .theme-choice select { max-width: 100px; min-height: 38px; padding: 5px 7px; border: 1px solid rgba(251, 248, 241, .3); border-radius: 8px; background: #2a1e17; color: var(--ink-on-dark); font-size: .65rem; }
-    .theme-choice select { max-width: 100px; min-height: 38px; padding: 5px 7px; border: 1px solid rgba(251, 248, 241, .3); border-radius: 8px; background: #2a1e17; color: var(--paper-light); font-size: .65rem; }
     .nav-quiz {
       padding: 10px 15px;
       border: 1px solid rgba(251, 248, 241, .35);
@@ -185,6 +186,7 @@
     h1 {
       max-width: 700px;
       margin: 0;
+      color: var(--ink-on-dark);
       font: 500 clamp(3.6rem, 7.1vw, 7.3rem)/.93 var(--serif);
       letter-spacing: -.065em;
     }
@@ -318,7 +320,15 @@
     .intro-copy strong { color: var(--ink); }
 
     /* Four chapters */
-    .movement { background: var(--paper); }
+    .movement {
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--topic-scrim), var(--topic-scrim)),
+        url("https://upload.wikimedia.org/wikipedia/commons/2/29/Jos%C3%A9_Rizal_with_Marcelo_del_Pilar_in_Madrid.jpg");
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
     .movement-grid { display: grid; grid-template-columns: .92fr 1.08fr; align-items: center; gap: 75px; }
     .movement-text h3, .chapter-copy h3 { margin: 0 0 17px; font: 500 clamp(1.9rem, 3.2vw, 2.7rem)/1.14 var(--serif); letter-spacing: -.035em; }
     .movement-text p, .chapter-copy p { color: var(--ink-soft); font-size: .91rem; line-height: 1.9; }
@@ -388,7 +398,15 @@
     .figure-monument-card figcaption span { margin-top: 4px; color: var(--ink-soft); font-size: .62rem; line-height: 1.5; }
     .figure-monument-card figcaption small { margin-top: 5px; color: #786653; font-size: .55rem; line-height: 1.5; }
 
-    .league { background: #e9dfcf; }
+    .league {
+      background-color: #e9dfcf;
+      background-image:
+        linear-gradient(var(--topic-scrim), var(--topic-scrim)),
+        url("https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/2015-NHC-La_Liga_Filipina-Surroundings.png/960px-2015-NHC-La_Liga_Filipina-Surroundings.png");
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
     .league-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .league-copy p { color: var(--ink-soft); font-size: .91rem; line-height: 1.9; }
     .league-card {
@@ -427,7 +445,15 @@
     .objective-grid li { display: flex; align-items: center; gap: 10px; padding: 14px 12px; border: 1px solid rgba(69, 47, 31, .19); color: var(--ink-soft); font-size: .75rem; }
     .objective-grid li::before { width: 6px; height: 6px; flex: 0 0 auto; border-radius: 50%; background: var(--rust); content: ""; }
 
-    .dapitan { background: var(--paper-light); }
+    .dapitan {
+      background-color: var(--paper-light);
+      background-image:
+        linear-gradient(var(--topic-scrim), var(--topic-scrim)),
+        url("https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Rizal_Shrine%2C_Dapitan_City_%28Features_and_Structures%29_02.JPG/960px-Rizal_Shrine%2C_Dapitan_City_%28Features_and_Structures%29_02.JPG");
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
     .dapitan-grid { display: grid; grid-template-columns: 1fr .88fr; gap: 80px; align-items: center; }
     .dapitan-photo { position: relative; min-height: 490px; }
     .dapitan-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(.24); box-shadow: var(--shadow); }
@@ -441,7 +467,18 @@
     .contribution-list b { display: block; margin: 0 0 4px; font-size: .78rem; }
     .contribution-list span:last-child { color: var(--ink-soft); font-size: .75rem; line-height: 1.65; }
 
-    .revolution { position: relative; overflow: hidden; background: #281b15; color: var(--ink-on-dark); }
+    .revolution {
+      position: relative;
+      overflow: hidden;
+      background-color: #281b15;
+      background-image:
+        linear-gradient(rgba(32, 23, 18, .87), rgba(32, 23, 18, .87)),
+        url("https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Andres_Bonifacio_Birthplace_Monument%2C_Tondo%2C_Manila%2C_March_2023.jpg/960px-Andres_Bonifacio_Birthplace_Monument%2C_Tondo%2C_Manila%2C_March_2023.jpg");
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+      color: var(--ink-on-dark);
+    }
     .revolution::after { position: absolute; right: -110px; bottom: -270px; width: 600px; height: 600px; border: 1px solid rgba(216, 176, 130, .13); border-radius: 50%; box-shadow: 0 0 0 55px rgba(216, 176, 130, .025), 0 0 0 110px rgba(216, 176, 130, .025); content: ""; }
     .revolution .section-heading p { color: rgba(251, 248, 241, .68); }
     .revolution .eyebrow { color: #d2a978; }
@@ -663,7 +700,7 @@
 
     /* Knowledge check */
     .quiz { background: var(--paper-light); }
-    .quiz-card { display: grid; grid-template-columns: .72fr 1.28fr; min-height: 410px; overflow: hidden; border: 1px solid rgba(77, 52, 35, .2); border-radius: 16px; background: #2b1e17; color: var(--paper-light); box-shadow: var(--shadow); }
+    .quiz-card { display: grid; grid-template-columns: .72fr 1.28fr; min-height: 410px; overflow: hidden; border: 1px solid rgba(77, 52, 35, .2); border-radius: 16px; background: #2b1e17; color: var(--ink-on-dark); box-shadow: var(--shadow); }
     .quiz-aside { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 40px; overflow: hidden; background: #70492f; }
     .quiz-aside::after { position: absolute; right: -115px; bottom: -155px; width: 335px; height: 335px; border: 1px solid rgba(250, 239, 222, .24); border-radius: 50%; box-shadow: 0 0 0 33px rgba(250, 239, 222, .05), 0 0 0 66px rgba(250, 239, 222, .04); content: ""; }
     .quiz-aside .eyebrow { position: relative; z-index: 1; color: #f0d5b3; }
@@ -736,7 +773,6 @@
 
     /* Scroll-revealed Rizal Monument */
     .statue-section { position: relative; isolation: isolate; overflow: clip; padding: 105px 0 115px; background: #201712; color: var(--ink-on-dark); }
-    .statue-section { position: relative; isolation: isolate; overflow: clip; padding: 105px 0 115px; background: #201712; color: var(--paper-light); }
     .statue-section::before { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(32, 23, 18, .94), rgba(38, 27, 20, .82) 52%, rgba(31, 22, 17, .72)), url("https://upload.wikimedia.org/wikipedia/commons/3/37/20161015_Titopao_Rizal_Monument_Closeup.jpg") center 46% / cover no-repeat; content: ""; }
     .statue-heading { max-width: 700px; margin-bottom: 36px; }
     .statue-heading .eyebrow { color: #d6ad7e; }
@@ -755,11 +791,6 @@
     .statue-canvas.is-dragging { cursor: grabbing; }
     .statue-model::before { position: absolute; z-index: -1; inset: 16px -20px -15px 20px; border: 1px solid rgba(221, 185, 143, .4); background: rgba(134, 98, 64, .08); content: ""; transform: translateZ(-24px); }
     .statue-photo-label { position: absolute; z-index: 2; right: 0; bottom: 0; left: 0; padding: 28px 12px 11px; background: linear-gradient(transparent, rgba(31, 23, 18, .8)); color: #fbf8f1; font-size: .57rem; font-weight: 700; letter-spacing: .14em; pointer-events: none; }
-    .statue-model { position: relative; width: min(66%, 350px); height: min(500px, 84%); margin: 0 0 20px; border: 1px solid rgba(221, 185, 143, .5); background: rgba(74, 51, 38, .58); box-shadow: 24px 36px 60px rgba(0, 0, 0, .42), 0 0 0 9px rgba(221, 185, 143, .055); opacity: .12; transform: translate3d(0, 125px, -55px) rotateX(19deg) rotateY(-22deg) rotateZ(-3deg) scale(.78); transform-style: preserve-3d; will-change: transform, opacity; }
-    .statue-scene.is-visible .statue-model { opacity: 1; transition: opacity .7s ease; }
-    .statue-model img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: sepia(.4) contrast(1.08) saturate(.76) drop-shadow(0 18px 18px rgba(0, 0, 0, .28)); }
-    .statue-model::before { position: absolute; z-index: -1; inset: 16px -20px -15px 20px; border: 1px solid rgba(221, 185, 143, .4); background: rgba(134, 98, 64, .08); content: ""; transform: translateZ(-24px); }
-    .statue-photo-label { position: absolute; right: 0; bottom: 0; left: 0; padding: 28px 12px 11px; background: linear-gradient(transparent, rgba(31, 23, 18, .8)); color: #fbf8f1; font-size: .57rem; font-weight: 700; letter-spacing: .14em; }
     .statue-platform { position: absolute; z-index: -1; right: 11%; bottom: 8%; left: 11%; height: 30px; border: 1px solid #93775a; background: linear-gradient(#d2bd9e, #9c7a56 45%, #6c5037 48%, #a2815d); box-shadow: 0 18px 22px rgba(58, 39, 24, .28); transform: perspective(300px) rotateX(12deg); }
     .statue-platform::before { position: absolute; right: 5%; bottom: 100%; left: 5%; height: 28px; border: 1px solid #b39671; background: linear-gradient(#e2d2b8, #ab8d67); content: ""; }
     .statue-platform span { position: absolute; right: 9%; bottom: 100%; left: 9%; height: 12px; border: 1px solid rgba(84, 61, 39, .42); background: #c4aa84; }
@@ -829,16 +860,17 @@
       --sepia-light: #d2ad82;
       --rust: #d98a68;
       --line: rgba(238, 225, 208, .23);
+      --topic-scrim: rgba(29, 25, 22, .9);
       --shadow: 0 28px 70px rgba(0, 0, 0, .38);
     }
     html[data-theme="dark"] body { background: var(--paper); }
     html[data-theme="dark"] .intro,
-    html[data-theme="dark"] .movement,
-    html[data-theme="dark"] .dapitan,
     html[data-theme="dark"] .quiz,
     html[data-theme="dark"] .references { background: var(--paper); }
-    html[data-theme="dark"] .listening-room,
+    html[data-theme="dark"] .movement,
     html[data-theme="dark"] .league,
+    html[data-theme="dark"] .dapitan { background-color: var(--paper); }
+    html[data-theme="dark"] .listening-room,
     html[data-theme="dark"] .connection,
     html[data-theme="dark"] .presentation-section,
     html[data-theme="dark"] .forum-section,
@@ -956,6 +988,12 @@
     html[data-theme="dark"] .hero-quote-next { border-color: var(--line); color: var(--ink); }
     html[data-theme="dark"] .hero-quote-close:hover,
     html[data-theme="dark"] .hero-quote-next:hover { background: #45382c; }
+    @media (max-width: 680px) {
+      .movement,
+      .league,
+      .dapitan,
+      .revolution { background-attachment: scroll; }
+    }
 
     /* Scroll entrance */
     [data-reveal] { opacity: 1; transform: none; }
@@ -987,7 +1025,6 @@
     .listening-heading > p { max-width: 385px; margin: 0 0 3px; color: var(--ink-soft); font-size: .83rem; line-height: 1.8; }
     .record-player { display: grid; grid-template-columns: .88fr 1.12fr; overflow: hidden; border: 1px solid rgba(47, 31, 21, .55); border-radius: 16px; background: #251a14; box-shadow: 0 28px 60px rgba(42, 28, 18, .2); }
     .player-machine { position: relative; display: flex; min-height: 440px; flex-direction: column; justify-content: space-between; padding: 25px 27px 23px; overflow: hidden; background: linear-gradient(145deg, #4b3425, #35241a 74%); color: var(--ink-on-dark); }
-    .player-machine { position: relative; display: flex; min-height: 440px; flex-direction: column; justify-content: space-between; padding: 25px 27px 23px; overflow: hidden; background: linear-gradient(145deg, #4b3425, #35241a 74%); color: var(--paper-light); }
     .player-machine::before { position: absolute; inset: 9px; border: 1px solid rgba(222, 188, 146, .18); pointer-events: none; content: ""; }
     .machine-topline, .console-overline { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 10px; color: #d1b28e; font-size: .55rem; font-weight: 700; letter-spacing: .14em; }
     .player-platter {
