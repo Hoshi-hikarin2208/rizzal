@@ -33,7 +33,7 @@
       document.documentElement.dataset.theme = selectedTheme;
       themeSelect.value = selectedTheme;
       document.querySelector('meta[name="theme-color"]').content =
-        selectedTheme === "dark" ? "#1d1916" : "#201712";
+        selectedTheme === "dark" ? "#171411" : "#f3ecdf";
       if (!save) return;
       try {
         window.localStorage.setItem(themeStorageKey, selectedTheme);
