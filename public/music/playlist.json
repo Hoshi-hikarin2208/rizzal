@@ -1,3 +1,19 @@
 {
-  "tracks": []
+  "tracks": [
+    {
+      "name": "Ako'y Pinoy",
+      "artist": "Florante",
+      "src": "/music/Ako'y Pinoy.mp3"
+    },
+    {
+      "name": "Leonora",
+      "artist": "SUGARCANE",
+      "src": "/music/Leonora.mp3"
+    },
+    {
+      "name": "mandirigma",
+      "artist": "Unit 406",
+      "src": "/music/mandirigma.mp3"
+    }
+  ]
 }
