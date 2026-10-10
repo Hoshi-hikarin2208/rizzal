@@ -68,9 +68,9 @@
       </div>
       <div class="hero-bottom">
         <span>From reform to revolution</span>
-        <span class="scroll-cue">Scroll to explore
+        <a class="scroll-cue" href="#statue">Scroll to meet the monument
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg>
-        </span>
+        </a>
         <span>Rizal: ideas · unity · change</span>
       </div>
     </section>
@@ -94,19 +94,19 @@
             <span class="eyebrow">A soundtrack for the story</span>
             <h2 id="listening-title">Step into the listening room.</h2>
           </div>
-          <p>Choose a song from the collection curated for this project. Local tracks play here; Spotify and YouTube picks open on their service.</p>
+          <p>Choose a song from the collection curated for this project. Every listed MP3 plays here in the listening room.</p>
         </div>
         <div class="record-player" data-reveal>
           <div class="player-machine">
             <div class="machine-topline"><span>THE HERITAGE RADIO CO.</span><span>EST. 1892 · MANILA</span></div>
-            <button class="player-platter" id="record-platter" type="button" aria-label="Choose an audio file first" disabled>
+            <button class="player-platter" id="record-platter" type="button" aria-label="Choose a song first" disabled>
               <div class="vinyl-record" aria-hidden="true">
                 <div class="record-grooves"></div>
                 <div class="record-label"><span class="record-label-small">LISTENING ROOM</span><b>OPM</b><span class="record-label-year">SIDE A · PH</span></div>
               </div>
               <div class="tonearm" aria-hidden="true"><span class="tonearm-head"></span></div>
               <span class="platter-number" aria-hidden="true">33⅓</span>
-            </div>
+            </button>
             <div class="machine-controls">
               <div class="machine-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
               <span class="machine-status" id="player-status" aria-live="polite">Ready when you are</span>
@@ -120,7 +120,6 @@
               <h3 id="track-title">No record selected</h3>
               <p id="track-artist">Choose a song from the project playlist</p>
             </div>
-            <a class="button external-track-link" id="external-track-link" href="#" target="_blank" rel="noopener noreferrer" hidden></a>
             <p class="audio-note" id="audio-note" role="status">Songs are selected from the admin-curated project playlist.</p>
             <div class="local-audio-controls">
               <div class="audio-progress-row">
@@ -178,15 +177,15 @@
             <div class="note-card"><strong>Print gave far-flung voices a place to meet.</strong> Ideas turned separate grievances into a conversation about shared change.</div>
             <div class="people-strip" aria-label="Leading Propaganda Movement figures">
               <div class="person-chip">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Jose_Rizal_full.jpg" alt="" data-hero-profile="rizal" loading="lazy">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Jose_Rizal_full.jpg" alt="Portrait of José Rizal, Filipino novelist and reformist" data-hero-profile="rizal" loading="lazy">
                 <div><b>José Rizal</b><span>Novelist & essayist</span></div>
               </div>
               <div class="person-chip">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Marcelo_Hilario_del_Pilar_y_Gatmait%C3%A1n_%281850-1896%29_portrait.jpg" alt="" data-hero-profile="del-pilar" loading="lazy">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Marcelo_Hilario_del_Pilar_y_Gatmait%C3%A1n_%281850-1896%29_portrait.jpg" alt="Portrait of Marcelo H. del Pilar, journalist and Propaganda Movement reformist" data-hero-profile="del-pilar" loading="lazy">
                 <div><b>M. H. del Pilar</b><span>Writer & editor</span></div>
               </div>
               <div class="person-chip">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/1970-NHI-Graciano_Lopez_Jaena.png" alt="" data-hero-profile="lopez-jaena" loading="lazy">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/1970-NHI-Graciano_Lopez_Jaena.png" alt="Portrait of Graciano López Jaena, journalist and orator" data-hero-profile="lopez-jaena" loading="lazy">
                 <div><b>G. López Jaena</b><span>Orator & journalist</span></div>
               </div>
             </div>
@@ -248,10 +247,18 @@
             </ul>
           </div>
           <aside class="league-card" data-reveal aria-label="La Liga Filipina summary">
-            <span class="eyebrow">Manila · 3 July 1892</span>
-            <blockquote>“What one cannot do alone, a people may do together.”</blockquote>
-            <p>La Liga's civic program emphasized solidarity and service. This is a modern paraphrase of its spirit—not a quotation from Rizal.</p>
-            <span class="league-seal">Una mano · una nación</span>
+            <img
+              class="league-card-photo"
+              src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/2015-NHC-La_Liga_Filipina-Surroundings.png/960px-2015-NHC-La_Liga_Filipina-Surroundings.png"
+              alt="La Liga Filipina monument and historical marker in Manila"
+              loading="lazy">
+            <div class="league-card-content">
+              <span class="eyebrow">Manila · 3 July 1892</span>
+              <blockquote>“What one cannot do alone, a people may do together.”</blockquote>
+              <p>La Liga's civic program emphasized solidarity and service. This is a modern paraphrase of its spirit—not a quotation from Rizal.</p>
+              <span class="league-seal">Una mano · una nación</span>
+              <a class="league-photo-credit" href="https://commons.wikimedia.org/wiki/File:2015-NHC-La_Liga_Filipina-Surroundings.png" target="_blank" rel="noopener noreferrer">Historical marker photo: AR Maceda · CC BY-SA 4.0</a>
+            </div>
           </aside>
         </div>
       </div>
@@ -319,7 +326,7 @@
       </div>
     </section>
 
-    <section class="statue-section" aria-labelledby="statue-title">
+    <section class="statue-section" id="statue" aria-labelledby="statue-title">
       <div class="wrap">
         <div class="statue-heading" data-reveal>
           <span class="eyebrow">A legacy cast in bronze</span>
@@ -330,11 +337,16 @@
           <div class="statue-scene" data-statue-scene data-reveal>
             <div class="statue-halo" aria-hidden="true"></div>
             <div class="statue-platform" aria-hidden="true"><span></span></div>
-            <figure class="statue-model" data-statue-model>
+            <figure
+              class="statue-model"
+              data-statue-model
+              tabindex="0"
+              role="img"
+              aria-label="Interactive three-dimensional bronze interpretation of José Rizal standing on a pedestal"
+              aria-describedby="statue-controls">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/3/37/20161015_Titopao_Rizal_Monument_Closeup.jpg"
                 alt="Bronze statue of José Rizal at the Rizal Monument in Rizal Park, Manila, photographed at an angle"
-                data-hero-profile="rizal"
                 loading="lazy">
               <figcaption class="statue-photo-label">MANILA · RIZAL PARK</figcaption>
             </figure>
@@ -343,7 +355,8 @@
           <div class="statue-story" data-reveal>
             <span class="statue-date">30 DECEMBER · EVERY YEAR</span>
             <h3>A figure in bronze.<br><em>A voice in motion.</em></h3>
-            <p>This is a photograph of the Rizal Monument in Manila—not a digital scan or a generated portrait. Tilt your pointer over the sculpture, or scroll it into view, to see the archival photograph take on a little depth.</p>
+            <p>This interactive 3D interpretation is inspired by public monuments to Rizal; it is not a scan of a particular statue. Drag the figure to turn it, or focus it and use the arrow keys.</p>
+            <p class="statue-controls" id="statue-controls">Drag left or right to rotate. With the statue focused, use the arrow keys to turn it.</p>
             <p>Monuments are not the whole story. Rizal’s legacy lives in the questions people keep asking about education, dignity, civic responsibility, and the many paths Filipinos took toward freedom.</p>
             <a class="statue-link" href="https://commons.wikimedia.org/wiki/File:20161015_Titopao_Rizal_Monument_Closeup.jpg" target="_blank" rel="noopener noreferrer">
               View the original statue photograph <span aria-hidden="true">↗</span>
@@ -583,14 +596,14 @@
       <div class="wrap">
         <div class="quiz-card" data-reveal>
           <div class="quiz-aside">
-            <span class="eyebrow">15 questions · 3 true or false</span>
+            <span class="eyebrow">10 questions · 2 true or false</span>
             <div>
               <h2 id="quiz-title">What stayed with you?</h2>
-              <p>Test what you remember with 12 multiple-choice questions and 3 true-or-false questions.</p>
+              <p>Check what you remember with 8 multiple-choice and 2 true-or-false questions.</p>
             </div>
           </div>
           <div class="quiz-main" id="quiz-main" aria-live="polite">
-            <div class="quiz-progress"><span id="quiz-count">Question 1 of 15</span><span id="quiz-score">Score: 0</span></div>
+            <div class="quiz-progress"><span id="quiz-count">Question 1 of 10</span><span id="quiz-score">Score: 0</span></div>
             <div class="quiz-track" aria-hidden="true"><span id="quiz-track-fill"></span></div>
             <h3 class="quiz-question" id="quiz-question"></h3>
             <div class="quiz-answers" id="quiz-answers" role="group" aria-labelledby="quiz-question"></div>
@@ -655,14 +668,14 @@
             </article>
             <article class="creator-card" data-creator="3">
               <div class="creator-photo">
-                <img src="/images/creators/thomas-c-enriquez.jpg" alt="Photo of Thomas c. Enriquez">
+                <img src="/images/creators/thomas-c-enriquez.jpg" alt="Photo of Thomas C. Enriquez">
                 <span class="creator-photo-placeholder" aria-hidden="true" hidden>03</span>
               </div>
               <p class="creator-name">Thomas C. Enriquez</p>
             </article>
             <article class="creator-card" data-creator="4">
               <div class="creator-photo">
-                <img src="/images/creators/kim-joshua-e-esmillarin.jpg" alt="Photo of Kim joshua E. Esmillarin">
+                <img src="/images/creators/kim-joshua-e-esmillarin.jpg" alt="Photo of Kim Joshua E. Esmillarin">
                 <span class="creator-photo-placeholder" aria-hidden="true" hidden>04</span>
               </div>
               <p class="creator-name">Kim Joshua E. Esmillarin</p>
@@ -681,9 +694,9 @@
     </section>
   </main>
 
-  <dialog class="hero-image-dialog" id="hero-image-dialog" aria-labelledby="hero-image-title" aria-describedby="hero-image-bio hero-image-connection">
+  <dialog class="hero-image-dialog" id="hero-image-dialog" aria-labelledby="hero-image-title" aria-describedby="hero-image-bio hero-image-role hero-image-connection">
     <div class="hero-image-dialog-inner">
-      <button class="hero-image-close" id="hero-image-close" type="button" aria-label="Close image details">×</button>
+      <button class="hero-image-close" id="hero-image-close" type="button" aria-label="Close image details" autofocus>×</button>
       <figure class="hero-image-preview">
         <img id="hero-image-large" alt="">
         <figcaption id="hero-image-caption"></figcaption>
@@ -692,6 +705,8 @@
         <span class="eyebrow">A closer look</span>
         <h2 id="hero-image-title"></h2>
         <p id="hero-image-bio"></p>
+        <h3>Historical role</h3>
+        <p id="hero-image-role"></p>
         <h3>Connection to Rizal</h3>
         <p id="hero-image-connection"></p>
         <a class="hero-image-credit" id="hero-image-credit" target="_blank" rel="noopener noreferrer" hidden>View image source and credit ↗</a>

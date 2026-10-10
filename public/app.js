@@ -33,7 +33,7 @@
       document.documentElement.dataset.theme = selectedTheme;
       themeSelect.value = selectedTheme;
       document.querySelector('meta[name="theme-color"]').content =
-        selectedTheme === "dark" ? "#1d1916" : "#201712";
+        selectedTheme === "dark" ? "#171411" : "#f3ecdf";
       if (!save) return;
       try {
         window.localStorage.setItem(themeStorageKey, selectedTheme);
@@ -57,38 +57,44 @@
     const heroProfiles = {
       rizal: {
         name: "José Rizal",
-        bio: "A Filipino doctor, novelist, and reformist (1861–1896), Rizal used writing and civic work to challenge colonial injustice. His novels Noli Me Tángere and El Filibusterismo helped readers recognize shared experiences.",
-        connection: "His writing helped shape Filipino national consciousness. He founded La Liga Filipina and served the community in Dapitan. Rizal inspired later revolutionaries, but he did not lead the Katipunan and opposed an unprepared armed uprising.",
+        bio: "This archival portrait and monument represent a writer whose books and civic work helped Filipinos think about shared identity and colonial injustice.",
+        role: "Filipino doctor, novelist, essayist, and reformist (1861–1896). Rizal wrote Noli Me Tángere and El Filibusterismo, founded La Liga Filipina, and taught and practiced medicine during exile in Dapitan.",
+        connection: "Rizal's writing and execution influenced Filipino nationalism. He advocated peaceful reform and did not found or lead the Katipunan or its armed revolution.",
         credit: "https://commons.wikimedia.org/wiki/File:Jose_Rizal_full.jpg"
       },
       bonifacio: {
         name: "Andrés Bonifacio",
-        bio: "A revolutionary organizer and one of the founders and leaders of the Katipunan, Bonifacio helped lead the movement for independence from Spain.",
-        connection: "Rizal’s writings helped nurture nationalist ideas that influenced many Filipinos, including Katipunan members. Bonifacio pursued armed revolution, while Rizal favored peaceful reform and did not command the Katipunan.",
+        bio: "This portrait or monument commemorates a central organizer of the Philippine Revolution and founder of the Katipunan.",
+        role: "Revolutionary organizer and one of the founders and leaders of the Katipunan, which pursued independence from Spain.",
+        connection: "Rizal's novels helped nurture nationalist ideas among Filipinos, including revolutionaries. Bonifacio led a separate armed movement; Rizal favored peaceful reform and did not command the Katipunan.",
         credit: "https://commons.wikimedia.org/wiki/File:Andr%C3%A9s_Bonifacio.jpg"
       },
       "del-pilar": {
         name: "Marcelo H. del Pilar",
-        bio: "A Filipino writer, lawyer, and leading Propaganda Movement reformist, del Pilar edited La Solidaridad and argued for Filipino representation and equal rights.",
-        connection: "He and Rizal were prominent reformist voices whose writing reached audiences in Spain and the Philippines. They shared reformist aims, though they differed at times over leadership and strategy.",
+        bio: "This portrait or monument honors one of the leading Filipino reformists of the Propaganda Movement.",
+        role: "Filipino lawyer, journalist, satirist, and reformist; he edited La Solidaridad and argued for equal rights and representation.",
+        connection: "Del Pilar and Rizal both used writing to advocate reform and Filipino representation. They shared goals but sometimes differed over leadership and strategy.",
         credit: "https://commons.wikimedia.org/wiki/File:Marcelo_Hilario_del_Pilar_y_Gatmait%C3%A1n_(1850-1896)_portrait.jpg"
       },
       "lopez-jaena": {
         name: "Graciano López Jaena",
-        bio: "An Ilonggo journalist and gifted orator, López Jaena was a leading voice of the Propaganda Movement and a founding editor of La Solidaridad.",
-        connection: "Like Rizal, he used journalism and public argument to expose colonial abuses and call for reform. Their work helped make the Propaganda Movement’s ideas known to a wider public.",
+        bio: "This portrait or monument remembers an Ilonggo orator and journalist whose speeches and writing called attention to colonial abuses.",
+        role: "Journalist, orator, and leading Propaganda Movement reformist; he helped found La Solidaridad and served as its first editor.",
+        connection: "Like Rizal, López Jaena used writing and public argument to advocate reform. Their work helped spread the movement's ideas to a wider public.",
         credit: "https://commons.wikimedia.org/wiki/File:1970-NHI-Graciano_Lopez_Jaena.png"
       },
       "rizal-del-pilar": {
         name: "José Rizal & Marcelo H. del Pilar",
         bio: "This archival photograph shows two major Filipino reformists in Madrid. Rizal wrote novels and essays; del Pilar was a journalist, lawyer, and editor.",
+        role: "Rizal was a doctor, novelist, essayist, and reformist; del Pilar was a lawyer, journalist, satirist, and editor of La Solidaridad.",
         connection: "Both took part in the Propaganda Movement and used writing to argue for reform. Their shared cause helped Filipino readers connect local injustices to a wider call for equality and representation.",
         credit: "https://commons.wikimedia.org/wiki/File:Jos%C3%A9_Rizal_with_Marcelo_del_Pilar_in_Madrid.jpg"
       },
       dapitan: {
         name: "Rizal Shrine, Dapitan",
-        bio: "This historic site recalls the years José Rizal spent in exile in Dapitan from 1892 to 1896, where he taught, practiced medicine, farmed, and contributed to community projects.",
-        connection: "Dapitan shows another side of Rizal’s influence: he put his belief in education and service into practice, even while separated from the reform movement in Manila.",
+        bio: "This historic site recalls the four years José Rizal spent in exile in Dapitan, Mindanao, from 1892 to 1896.",
+        role: "During exile, Rizal taught students, treated patients as a physician, farmed, studied nature, and contributed to community projects.",
+        connection: "Dapitan shows how Rizal put his belief in education and public service into practice while separated from the reform movement in Manila.",
         credit: "https://commons.wikimedia.org/wiki/File:Rizal_Shrine,_Dapitan_City_(Features_and_Structures)_02.JPG"
       }
     };
@@ -98,6 +104,7 @@
     const heroImageCaption = document.querySelector("#hero-image-caption");
     const heroImageTitle = document.querySelector("#hero-image-title");
     const heroImageBio = document.querySelector("#hero-image-bio");
+    const heroImageRole = document.querySelector("#hero-image-role");
     const heroImageConnection = document.querySelector("#hero-image-connection");
     const heroImageCredit = document.querySelector("#hero-image-credit");
 
@@ -109,6 +116,7 @@
       heroImageCaption.textContent = image.closest("figure")?.querySelector("figcaption")?.textContent.trim() || image.alt;
       heroImageTitle.textContent = profile.name;
       heroImageBio.textContent = profile.bio;
+      heroImageRole.textContent = profile.role;
       heroImageConnection.textContent = profile.connection;
       heroImageCredit.href = image.closest("a")?.href || profile.credit;
       heroImageCredit.hidden = false;
@@ -118,19 +126,23 @@
     document.querySelectorAll("img[data-hero-profile]").forEach((image) => {
       const profile = heroProfiles[image.dataset.heroProfile];
       if (!profile) return;
-      image.tabIndex = 0;
-      image.setAttribute("role", "button");
-      image.setAttribute("aria-haspopup", "dialog");
-      image.setAttribute("aria-label", `View image and learn about ${profile.name}`);
+      const trigger = image.closest("a") || image;
+      trigger.tabIndex = 0;
+      trigger.setAttribute("role", "button");
+      trigger.setAttribute("aria-haspopup", "dialog");
+      trigger.setAttribute("aria-label", `Enlarge image and view historical role and connection to Rizal: ${profile.name}`);
+      if (trigger !== image) image.tabIndex = -1;
     });
     document.addEventListener("click", (event) => {
-      const image = event.target.closest("img[data-hero-profile]");
+      const image = event.target.closest("img[data-hero-profile]") ||
+        event.target.closest("a")?.querySelector("img[data-hero-profile]");
       if (!image) return;
       if (image.closest("a")) event.preventDefault();
       openHeroImage(image);
     });
     document.addEventListener("keydown", (event) => {
-      const image = event.target.closest?.("img[data-hero-profile]");
+      const image = event.target.closest?.("img[data-hero-profile]") ||
+        event.target.closest?.('a[aria-haspopup="dialog"]')?.querySelector("img[data-hero-profile]");
       if (!image || (event.key !== "Enter" && event.key !== " ")) return;
       event.preventDefault();
       openHeroImage(image);
@@ -195,51 +207,30 @@
       if (event.key === "Escape" && !heroQuotePanel.hidden) setHeroQuoteOpen(false);
     });
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll("[data-reveal]").forEach((element) => revealObserver.observe(element));
-
-    const statueScene = document.querySelector("[data-statue-scene]");
-    const statueModel = document.querySelector("[data-statue-model]");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let statueFrame = 0;
+    const revealElements = [...document.querySelectorAll("[data-reveal]")];
+    const revealPositions = new Map();
+    revealElements.forEach((element) => {
+      const section = element.closest("section") || document;
+      const position = revealPositions.get(section) || 0;
+      revealPositions.set(section, position + 1);
+      element.style.setProperty("--reveal-delay", `${(position % 4) * 75}ms`);
+    });
 
-    function updateStatuePerspective() {
-      statueFrame = 0;
-      if (!statueScene || !statueModel || reduceMotion.matches) return;
-      const bounds = statueScene.getBoundingClientRect();
-      const start = window.innerHeight * 0.9;
-      const end = -bounds.height * 0.3;
-      const rawProgress = (start - bounds.top) / (start - end);
-      const progress = Math.min(1, Math.max(0, rawProgress));
-      const easedProgress = 1 - (1 - progress) ** 2;
-      const translateY = 112 - easedProgress * 140;
-      const translateZ = -50 + easedProgress * 50;
-      const rotateX = 17 - easedProgress * 18;
-      const rotateY = -20 + easedProgress * 25;
-      const rotateZ = -3 + easedProgress * 2;
-      const scale = 0.8 + easedProgress * 0.2;
+    if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+    } else {
+      document.documentElement.classList.add("has-scroll-reveal");
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
 
-      statueModel.style.transform =
-        `translate3d(0, ${translateY}px, ${translateZ}px) ` +
-        `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale})`;
-    }
-
-    function requestStatueUpdate() {
-      if (!statueFrame) statueFrame = window.requestAnimationFrame(updateStatuePerspective);
-    }
-
-    if (statueScene && statueModel && !reduceMotion.matches) {
-      window.addEventListener("scroll", requestStatueUpdate, { passive: true });
-      window.addEventListener("resize", requestStatueUpdate, { passive: true });
-      requestStatueUpdate();
+      revealElements.forEach((element) => revealObserver.observe(element));
     }
 
     const sections = document.querySelectorAll("main section[id]");
@@ -367,30 +358,6 @@
         explanation: "Rizal spent his exile in Dapitan, where he taught, practiced medicine, and served the community."
       },
       {
-        question: "Which novel did Rizal publish in 1891?",
-        answers: ["Noli Me Tangere", "El Filibusterismo", "Florante at Laura", "La Solidaridad"],
-        correct: 1,
-        explanation: "Rizal's second novel, El Filibusterismo, was published in 1891."
-      },
-      {
-        question: "What was La Solidaridad?",
-        answers: ["A reformist newspaper", "A revolutionary army", "A school in Dapitan", "A Spanish colonial court"],
-        correct: 0,
-        explanation: "La Solidaridad was a newspaper that carried Filipino reformist arguments."
-      },
-      {
-        question: "On what date was Rizal executed?",
-        answers: ["3 July 1892", "7 July 1892", "30 December 1896", "12 June 1898"],
-        correct: 2,
-        explanation: "Rizal was executed in Manila on 30 December 1896."
-      },
-      {
-        question: "What was one central purpose of La Liga Filipina?",
-        answers: ["Mutual aid and unity among its members", "To replace every local language with Spanish", "To begin an armed revolt led by Rizal", "To run the Spanish Cortes"],
-        correct: 0,
-        explanation: "La Liga organized peaceful civic cooperation, mutual assistance, and social reform."
-      },
-      {
         type: "truefalse",
         question: "La Solidaridad was a reformist newspaper founded in 1889.",
         answers: ["True", "False"],
@@ -403,13 +370,6 @@
         answers: ["True", "False"],
         correct: 1,
         explanation: "Andrés Bonifacio led the Katipunan; Rizal's reformist path was separate."
-      },
-      {
-        type: "truefalse",
-        question: "Rizal was executed in 1896, after La Liga Filipina was founded in 1892.",
-        answers: ["True", "False"],
-        correct: 0,
-        explanation: "La Liga was founded in Manila in 1892; Rizal was executed on 30 December 1896."
       }
     ];
 
@@ -486,7 +446,7 @@
       const percentage = Math.round((quizPoints / questions.length) * 100);
       const message = quizPoints === questions.length
         ? "Excellent work—you kept the reform movement and the revolution distinct."
-        : quizPoints >= 3
+        : quizPoints >= 7
           ? "A strong start. Revisit the chapters to sharpen the historical connections."
           : "There is more to discover. Explore the chapters above and give it another try.";
       showingResult = true;
@@ -519,8 +479,6 @@
     const playerStatus = document.querySelector("#player-status");
     const playlist = document.querySelector("#playlist");
     const playlistCount = document.querySelector("#playlist-count");
-    const externalTrackLink = document.querySelector("#external-track-link");
-    const localAudioControls = document.querySelector(".local-audio-controls");
     const recordTracks = [];
     let selectedTrack = -1;
 
@@ -571,9 +529,7 @@
 
         const detail = document.createElement("span");
         detail.className = "playlist-track-duration";
-        detail.textContent = track.platform
-          ? track.platform.toUpperCase()
-          : formatAudioTime(track.duration);
+        detail.textContent = formatAudioTime(track.duration);
         row.append(number, select, detail);
         playlist.append(row);
       });
@@ -582,32 +538,22 @@
     function updateAudioControls() {
       const selected = recordTracks[selectedTrack];
       const hasSelection = Boolean(selected);
-      const isLocalTrack = hasSelection && !selected.platform;
-      const isPlaying = isLocalTrack && !audioPlayer.paused;
+      const isPlaying = hasSelection && !audioPlayer.paused;
       recordPlayer.classList.toggle("is-playing", isPlaying);
-      localAudioControls.hidden = !isLocalTrack;
-      externalTrackLink.hidden = !hasSelection || isLocalTrack;
-      togglePlayback.disabled = !isLocalTrack;
+      togglePlayback.disabled = !hasSelection;
       previousTrack.disabled = recordTracks.length < 2;
       nextTrack.disabled = recordTracks.length < 2;
-      recordPlatter.disabled = !isLocalTrack;
+      recordPlatter.disabled = !hasSelection;
       togglePlayback.setAttribute("aria-label", isPlaying ? "Pause selected track" : "Play selected track");
       togglePlayback.setAttribute("aria-pressed", String(isPlaying));
       togglePlayback.title = isPlaying ? "Pause selected track" : "Play selected track";
-      recordPlatter.setAttribute("aria-label", isLocalTrack
+      recordPlatter.setAttribute("aria-label", hasSelection
         ? `${isPlaying ? "Pause" : "Play"} ${recordTracks[selectedTrack].name}`
-        : "Choose a local audio track to play here");
-      if (hasSelection && !isLocalTrack) {
-        externalTrackLink.href = selected.url;
-        externalTrackLink.textContent = `Listen on ${selected.platform === "youtube" ? "YouTube" : "Spotify"} ↗`;
-        externalTrackLink.setAttribute("aria-label", `Open ${selected.name} on ${selected.platform === "youtube" ? "YouTube" : "Spotify"} in a new tab`);
-      } else {
-        externalTrackLink.removeAttribute("href");
-      }
+        : "Choose a song from the project playlist");
     }
 
     async function startAudioPlayback() {
-      if (selectedTrack < 0 || !recordTracks[selectedTrack] || recordTracks[selectedTrack].platform) return;
+      if (selectedTrack < 0 || !recordTracks[selectedTrack]) return;
       try {
         await audioPlayer.play();
         playerStatus.textContent = `Now playing · ${recordTracks[selectedTrack].name}`;
@@ -625,23 +571,12 @@
       if (!track) return;
       audioPlayer.pause();
       selectedTrack = index;
-      if (track.platform) {
-        audioPlayer.removeAttribute("src");
-        audioPlayer.load();
-      } else {
-        audioPlayer.src = track.src;
-        audioPlayer.load();
-      }
+      audioPlayer.src = track.src;
+      audioPlayer.load();
       trackTitle.textContent = track.name;
-      trackArtist.textContent = track.artist || (track.platform
-        ? `Curated ${track.platform === "youtube" ? "YouTube" : "Spotify"} pick`
-        : "A recording from this project");
-      playerStatus.textContent = track.platform
-        ? `Selected · open on ${track.platform === "youtube" ? "YouTube" : "Spotify"}`
-        : "Record selected · ready to play";
-      showAudioMessage(track.platform
-        ? `Open this admin-selected song on ${track.platform === "youtube" ? "YouTube" : "Spotify"}.`
-        : "This admin-selected song plays in the project player.");
+      trackArtist.textContent = track.artist || "A recording selected for this project";
+      playerStatus.textContent = "Record selected · ready to play";
+      showAudioMessage("This admin-selected MP3 plays in the project player.");
       currentTimeLabel.textContent = "0:00";
       durationLabel.textContent = formatAudioTime(track.duration);
       audioSeek.value = "0";
@@ -1274,7 +1209,7 @@
       }
     });
     audioPlayer.addEventListener("error", () => {
-      if (selectedTrack < 0 || recordTracks[selectedTrack]?.platform || !audioPlayer.error) return;
+      if (selectedTrack < 0 || !audioPlayer.error) return;
       const messages = {
         1: "Playback was interrupted.",
         2: "A problem occurred while reading this audio file.",
@@ -1309,43 +1244,19 @@
             throw new Error(`Music playlist track ${index + 1} needs a name.`);
           }
           const artist = typeof track.artist === "string" ? track.artist : "";
-          if (typeof track.src === "string" && !track.platform && !track.url &&
-              track.src.startsWith("/music/") && !track.src.includes("..") &&
-              !track.src.includes("\\")) {
-            return { name: track.name, artist, src: track.src, duration: 0 };
+          if (typeof track.src !== "string" ||
+              !/^\/music\/[^/\\%?#]+\.mp3$/i.test(track.src) ||
+              track.src.includes("..") ||
+              track.url ||
+              track.platform) {
+            throw new Error(`Music playlist track ${index + 1} needs a local MP3 path under /music/.`);
           }
-          if ((track.platform === "spotify" || track.platform === "youtube") &&
-              typeof track.url === "string" && !track.src) {
-            let url;
-            try {
-              url = new URL(track.url);
-            } catch {
-              throw new Error(`Music playlist track ${index + 1} needs a valid ${track.platform} URL.`);
-            }
-            const hostname = url.hostname.toLowerCase();
-            const isYoutubeHost = hostname === "youtube.com" ||
-              hostname.endsWith(".youtube.com") || hostname === "youtu.be";
-            const isSpotifyHost = hostname === "spotify.com" ||
-              hostname.endsWith(".spotify.com");
-            if (url.protocol !== "https:" ||
-                (track.platform === "youtube" && !isYoutubeHost) ||
-                (track.platform === "spotify" && !isSpotifyHost)) {
-              throw new Error(`Music playlist track ${index + 1} needs an HTTPS ${track.platform} link.`);
-            }
-            return {
-              name: track.name,
-              artist,
-              platform: track.platform,
-              url: url.href,
-              duration: 0
-            };
-          }
-          throw new Error(`Music playlist track ${index + 1} needs either a local /music/ path or a Spotify/YouTube URL.`);
+          return { name: track.name.trim(), artist: artist.trim(), src: track.src, duration: 0 };
         });
         recordTracks.push(...tracks);
         if (recordTracks.length > 0) {
           selectAudioTrack(0);
-          showAudioMessage(`Loaded ${recordTracks.length} song${recordTracks.length === 1 ? "" : "s"} from the project music folder.`);
+          showAudioMessage(`Loaded ${recordTracks.length} song${recordTracks.length === 1 ? "" : "s"} from the project playlist.`);
         }
         renderPlaylist();
         updateAudioControls();
