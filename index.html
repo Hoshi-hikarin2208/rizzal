@@ -430,7 +430,21 @@
               </div>
               <p class="forum-status" id="forum-status" role="status" aria-live="polite">Connect the forum to Supabase to join the shared conversation.</p>
             </form>
-            <p class="forum-guideline">Be kind and stay on topic. Don’t post personal information. Posts can be removed by their author.</p>
+            <p class="forum-guideline">Be kind and stay on topic. Don’t post personal information. Authors can remove their own notes and replies; the site admin can remove any note or reply.</p>
+            <details class="forum-admin-access">
+              <summary>Site owner? Sign in to moderate</summary>
+              <form id="forum-admin-form" class="forum-admin-form">
+                <div class="forum-admin-fields">
+                  <label for="forum-admin-email">Admin email</label>
+                  <input id="forum-admin-email" name="email" type="email" autocomplete="username" required>
+                  <label for="forum-admin-password">Admin password</label>
+                  <input id="forum-admin-password" name="password" type="password" autocomplete="current-password" required>
+                  <button class="button forum-submit" type="submit">Sign in as admin</button>
+                </div>
+                <button class="forum-action forum-admin-signout" id="forum-admin-signout" type="button" hidden>Sign out of admin</button>
+                <p class="forum-status" id="forum-admin-status" role="status" aria-live="polite">Admin access must be enabled on your Supabase account.</p>
+              </form>
+            </details>
           </div>
           <div class="forum-board" data-reveal>
             <div class="forum-board-top">
@@ -478,10 +492,10 @@
       <div class="wrap">
         <div class="quiz-card" data-reveal>
           <div class="quiz-aside">
-            <span class="eyebrow">10 questions · 2 true or false</span>
+            <span class="eyebrow">40 questions · 10 per round</span>
             <div>
               <h2 id="quiz-title">What stayed with you?</h2>
-              <p>Check what you remember with 8 multiple-choice and 2 true-or-false questions.</p>
+              <p>Each visit draws 10 questions from a 40-question history bank. See your score and review your answers at the end.</p>
             </div>
           </div>
           <div class="quiz-main" id="quiz-main" aria-live="polite">
@@ -535,18 +549,14 @@
           <div class="creator-grid">
             <article class="creator-card" data-creator="1">
               <div class="creator-photo">
-<<<<<<< Updated upstream
-                <img src="/images/creators/kim-g-mejica.jpg" alt="Photo of Kim G. Mejica">
-=======
                 <img src="public/images/creators/kim-g-mejica.jpg" alt="Photo of Kim G. Mejica">
->>>>>>> Stashed changes
                 <span class="creator-photo-placeholder" aria-hidden="true" hidden>01</span>
               </div>
               <p class="creator-name">Kim G. Mejica</p>
             </article>
             <article class="creator-card" data-creator="2">
               <div class="creator-photo">
-                <img src="images/creators/vix.jpg" alt="Photo of Vexvi Morales">
+                <img src="public/images/creators/vix.jpg" alt="Photo of Vexvi Morales">
                 <span class="creator-photo-placeholder" aria-hidden="true" hidden>02</span>
               </div>
               <p class="creator-name">Vexvi Morales</p>
@@ -554,33 +564,21 @@
             </article>
             <article class="creator-card" data-creator="3">
               <div class="creator-photo">
-<<<<<<< Updated upstream
-                <img src="/images/creators/thomas-c-enriquez.jpg" alt="Photo of Thomas C. Enriquez">
-=======
                 <img src="public/images/creators/thomas-c-enriquez.jpg" alt="Photo of Thomas C. Enriquez">
->>>>>>> Stashed changes
                 <span class="creator-photo-placeholder" aria-hidden="true" hidden>03</span>
               </div>
               <p class="creator-name">Thomas C. Enriquez</p>
             </article>
             <article class="creator-card" data-creator="4">
               <div class="creator-photo">
-<<<<<<< Updated upstream
-                <img src="/images/creators/kim-joshua-e-esmillarin.jpg" alt="Photo of Kim Joshua E. Esmillarin">
-=======
                 <img src="public/images/creators/kim-joshua-e-esmillarin.jpg" alt="Photo of Kim Joshua E. Esmillarin">
->>>>>>> Stashed changes
                 <span class="creator-photo-placeholder" aria-hidden="true" hidden>04</span>
               </div>
               <p class="creator-name">Kim Joshua E. Esmillarin</p>
             </article>
             <article class="creator-card" data-creator="5">
               <div class="creator-photo">
-<<<<<<< Updated upstream
-                <img src="/images/creators/renze-daneille-p-rivero.jpg" alt="Photo of Renze Daneille P. Rivero">
-=======
-                <img src="public/images/creators/renze-daneille-p-rivero.jpg" alt="Photo of Renze Daneille P. Rivero">
->>>>>>> Stashed changes
+                <img src="public/images/creators/enzer.jpg" alt="Photo of Renze Daneille P. Rivero">
                 <span class="creator-photo-placeholder" aria-hidden="true" hidden>05</span>
               </div>
               <p class="creator-name">Renze Daneille P. Rivero</p>
