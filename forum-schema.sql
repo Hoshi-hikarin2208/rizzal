@@ -60,9 +60,13 @@ create policy "Readers can create their own forum posts"
   with check (author_id = (select auth.uid()));
 
 drop policy if exists "Authors can delete their own forum posts" on public.forum_posts;
-create policy "Authors can delete their own forum posts"
+drop policy if exists "Authors and forum admins can delete forum posts" on public.forum_posts;
+create policy "Authors and forum admins can delete forum posts"
   on public.forum_posts for delete to authenticated
-  using (author_id = (select auth.uid()));
+  using (
+    author_id = (select auth.uid())
+    or coalesce((select auth.jwt() -> 'app_metadata' ->> 'forum_admin'), 'false') = 'true'
+  );
 
 drop policy if exists "Signed-in readers can read forum replies" on public.forum_replies;
 create policy "Signed-in readers can read forum replies"
@@ -74,9 +78,13 @@ create policy "Readers can create their own forum replies"
   with check (author_id = (select auth.uid()));
 
 drop policy if exists "Authors can delete their own forum replies" on public.forum_replies;
-create policy "Authors can delete their own forum replies"
+drop policy if exists "Authors and forum admins can delete forum replies" on public.forum_replies;
+create policy "Authors and forum admins can delete forum replies"
   on public.forum_replies for delete to authenticated
-  using (author_id = (select auth.uid()));
+  using (
+    author_id = (select auth.uid())
+    or coalesce((select auth.jwt() -> 'app_metadata' ->> 'forum_admin'), 'false') = 'true'
+  );
 
 drop policy if exists "Signed-in readers can read forum post likes" on public.forum_post_likes;
 create policy "Signed-in readers can read forum post likes"
