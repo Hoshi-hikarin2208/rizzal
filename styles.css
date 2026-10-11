@@ -580,6 +580,16 @@
     .forum-status[data-state="error"] { color: #9a3928; }
     .forum-status[data-state="success"] { color: #386844; }
     .forum-guideline { margin: 10px 0 0; padding-top: 12px; border-top: 1px solid var(--line); color: #796957; font-size: .61rem; line-height: 1.65; }
+    .forum-admin-access { margin-top: 12px; color: var(--ink-soft); font-size: .65rem; }
+    .forum-admin-access summary { width: fit-content; color: #796957; cursor: pointer; }
+    .forum-admin-access summary:hover { color: var(--rust); }
+    .forum-admin-form { margin-top: 10px; }
+    .forum-admin-fields { display: grid; gap: 7px; }
+    .forum-admin-fields[hidden], .forum-admin-signout[hidden] { display: none; }
+    .forum-admin-fields label { color: var(--ink-soft); font-size: .65rem; }
+    .forum-admin-fields input { width: 100%; min-height: 38px; padding: 8px 10px; border: 1px solid rgba(62, 43, 30, .2); border-radius: 1px; background: #fffdf9; color: var(--ink); font: inherit; }
+    .forum-admin-fields .forum-submit { justify-self: start; margin-top: 4px; }
+    .forum-admin-signout { margin-top: 8px; }
     .forum-board { min-height: 350px; padding: 21px 22px 18px; }
     .forum-board-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .forum-board-kicker { color: var(--rust); font-size: .56rem; font-weight: 700; letter-spacing: .15em; }
@@ -700,6 +710,17 @@
     .quiz-result p { color: rgba(251, 248, 241, .72); font-size: .85rem; line-height: 1.8; }
     .quiz-result .button { margin-top: 12px; }
     .quiz-result-score { color: #dfb78e; font: 500 3.8rem var(--serif); }
+    .quiz-result { display: flex; align-items: baseline; justify-content: flex-start; gap: 14px; text-align: left; }
+    .quiz-result-percent { color: #dec7a9; font-size: .85rem; }
+    .quiz-review { border-top: 1px solid rgba(230, 210, 185, .22); border-bottom: 1px solid rgba(230, 210, 185, .22); color: #f8efe1; }
+    .quiz-review summary { padding: 11px 2px; color: #e7c59d; font-size: .73rem; cursor: pointer; }
+    .quiz-review[open] { max-height: 260px; overflow: auto; }
+    .quiz-review-list { display: grid; max-height: 210px; gap: 8px; overflow: auto; margin: 0; padding: 0 7px 12px 22px; list-style: decimal; }
+    .quiz-review-item { padding: 10px 11px; border: 1px solid rgba(230, 210, 185, .16); border-left: 2px solid #bd806b; border-radius: 6px; background: rgba(255, 255, 255, .025); }
+    .quiz-review-item.is-correct { border-left-color: #7ea98c; }
+    .quiz-review-item h4 { margin: 0 0 6px; font: 500 .88rem/1.4 var(--serif); }
+    .quiz-review-item p { margin: 4px 0 0; color: rgba(251, 248, 241, .68); font-size: .67rem; line-height: 1.55; }
+    .quiz-review-item.is-correct p:first-of-type { color: #b8d5c2; }
 
     /* References and ending */
     .references { padding: 88px 0 94px; background: var(--paper); }
@@ -842,6 +863,8 @@
     html[data-theme="dark"] .forum-reply-form textarea,
     html[data-theme="dark"] .forum-board-tools select { border-color: var(--line); background: #211c18; color: var(--ink); }
     html[data-theme="dark"] .forum-identity input[type="text"]:disabled { background: #3b3229; }
+    html[data-theme="dark"] .forum-admin-fields input { border-color: var(--line); background: #302820; color: var(--ink); }
+    html[data-theme="dark"] .forum-admin-access summary { color: var(--ink-soft); }
     html[data-theme="dark"] .forum-author-name,
     html[data-theme="dark"] .forum-post-body,
     html[data-theme="dark"] .forum-action,
@@ -1245,9 +1268,6 @@
       .hero-image-copy h3 { margin-top: 14px; }
       .hero-image-credit { margin-top: 15px; }
     }
-<<<<<<< Updated upstream
-=======
-
     .mini-player {
       position: fixed;
       z-index: 45;
@@ -1311,4 +1331,3 @@
     @media (prefers-reduced-motion: reduce) {
       .mini-player.is-playing .mini-record { animation: none; }
     }
->>>>>>> Stashed changes
