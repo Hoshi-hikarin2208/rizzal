@@ -329,7 +329,7 @@
     });
     timelineRange.addEventListener("input", () => showMilestone(Number(timelineRange.value)));
 
-    const questions = [
+    const questionBank = [
       {
         question: "What was the Propaganda Movement mainly seeking?",
         answers: ["Immediate armed independence led by Rizal", "Political and social reforms under Spanish rule", "A return to pre-colonial rule", "The abolition of all public education"],
@@ -394,6 +394,206 @@
       }
     ];
 
+    questionBank.push(
+      {
+        question: "In what year was Noli Me Tangere first published?",
+        answers: ["1887", "1889", "1891", "1896"],
+        correct: 0,
+        explanation: "Rizal's Noli Me Tangere was published in 1887."
+      },
+      {
+        question: "In which city was the first edition of Noli Me Tangere published?",
+        answers: ["Madrid", "Berlin", "Ghent", "Manila"],
+        correct: 1,
+        explanation: "The first edition of Noli Me Tangere was printed in Berlin."
+      },
+      {
+        question: "What is the title of Rizal's second novel?",
+        answers: ["La Solidaridad", "Mi Ultimo Adios", "El Filibusterismo", "La Liga Filipina"],
+        correct: 2,
+        explanation: "El Filibusterismo followed Noli Me Tangere as Rizal's second novel."
+      },
+      {
+        question: "In what year was El Filibusterismo published?",
+        answers: ["1887", "1889", "1891", "1896"],
+        correct: 2,
+        explanation: "Rizal published El Filibusterismo in 1891."
+      },
+      {
+        question: "Where was El Filibusterismo published?",
+        answers: ["Ghent", "Berlin", "Barcelona", "Dapitan"],
+        correct: 0,
+        explanation: "El Filibusterismo was published in Ghent, Belgium."
+      },
+      {
+        question: "Who was the first editor of La Solidaridad?",
+        answers: ["Jose Rizal", "Andres Bonifacio", "Marcelo H. del Pilar", "Graciano Lopez Jaena"],
+        correct: 3,
+        explanation: "Graciano Lopez Jaena was La Solidaridad's first editor."
+      },
+      {
+        question: "Which reformist later edited La Solidaridad?",
+        answers: ["Andres Bonifacio", "Marcelo H. del Pilar", "Emilio Jacinto", "Apolinario Mabini"],
+        correct: 1,
+        explanation: "Marcelo H. del Pilar later took over as editor of La Solidaridad."
+      },
+      {
+        question: "Which Spanish institution did reformists ask to represent the Philippines?",
+        answers: ["The Spanish Cortes", "The Katipunan", "La Liga Filipina", "The Dapitan council"],
+        correct: 0,
+        explanation: "Filipino reformists called for representation in the Spanish Cortes."
+      },
+      {
+        question: "What role did La Solidaridad play in the reform campaign?",
+        answers: ["It was an armed unit", "It served as a newspaper for reformist arguments", "It governed Dapitan", "It replaced the Katipunan"],
+        correct: 1,
+        explanation: "The newspaper carried Filipino reformist arguments to readers across the Spanish empire."
+      },
+      {
+        question: "What did Rizal's novels help expose to readers?",
+        answers: ["Colonial abuses and social injustice", "The Katipunan's military plans", "A program for Spanish expansion", "The rules of La Liga membership"],
+        correct: 0,
+        explanation: "Rizal's novels used fiction to criticize colonial abuses and social injustice."
+      },
+      {
+        question: "In which city did Rizal found La Liga Filipina?",
+        answers: ["Madrid", "Dapitan", "Manila", "Ghent"],
+        correct: 2,
+        explanation: "Rizal founded La Liga Filipina in Manila."
+      },
+      {
+        question: "On what date did Rizal found La Liga Filipina?",
+        answers: ["3 July 1892", "7 July 1892", "30 December 1896", "12 June 1898"],
+        correct: 0,
+        explanation: "La Liga Filipina was founded in Manila on 3 July 1892."
+      },
+      {
+        question: "Which idea was central to La Liga Filipina?",
+        answers: ["Mutual aid among members", "Immediate military rule", "A separate Spanish colony", "Ending all local education"],
+        correct: 0,
+        explanation: "La Liga emphasized unity, mutual protection, education, and shared progress."
+      },
+      {
+        question: "Which goal did NOT belong to La Liga Filipina's civic program?",
+        answers: ["Education", "Mutual assistance", "Peaceful social reform", "Organizing an armed revolt"],
+        correct: 3,
+        explanation: "La Liga was a peaceful civic association, distinct from the Katipunan's armed strategy."
+      },
+      {
+        question: "What happened to Rizal soon after La Liga Filipina was founded?",
+        answers: ["He was arrested and ordered into exile", "He became a Katipunan commander", "He returned permanently to Spain", "He was elected to the Spanish Cortes"],
+        correct: 0,
+        explanation: "Spanish authorities arrested Rizal days after the meeting and sent him into exile in Dapitan."
+      },
+      {
+        question: "What public works project did Rizal help develop in Dapitan?",
+        answers: ["A gravity-fed water system", "A railway to Manila", "A seaport for Spanish troops", "An electric telegraph across Mindanao"],
+        correct: 0,
+        explanation: "Rizal worked with local collaborators on a gravity-fed water system."
+      },
+      {
+        question: "What kind of education did Rizal provide to students in Dapitan?",
+        answers: ["Practical skills alongside academic lessons", "Military training for the Katipunan", "Only lessons in European law", "No formal instruction"],
+        correct: 0,
+        explanation: "His small school combined academic subjects with practical learning."
+      },
+      {
+        question: "How did Rizal serve patients while living in Dapitan?",
+        answers: ["As a physician", "As a military governor", "As a newspaper editor", "As a Spanish judge"],
+        correct: 0,
+        explanation: "Rizal practiced medicine and cared for people in the community."
+      },
+      {
+        question: "Where was Dapitan, the place of Rizal's exile?",
+        answers: ["On Mindanao's northern coast", "In central Madrid", "On the island of Luzon near Manila", "In southern Spain"],
+        correct: 0,
+        explanation: "Dapitan is on Mindanao's northern coast."
+      },
+      {
+        question: "On what date was the Katipunan founded?",
+        answers: ["3 July 1892", "7 July 1892", "19 June 1861", "30 December 1896"],
+        correct: 1,
+        explanation: "The Katipunan was founded on 7 July 1892 by Bonifacio and fellow organizers."
+      },
+      {
+        question: "What was the Katipunan's central aim?",
+        answers: ["Independence from Spain", "Representation in the Spanish Cortes only", "Reopening La Solidaridad in Manila", "Exile in Dapitan"],
+        correct: 0,
+        explanation: "The Katipunan pursued independence from Spain through revolution."
+      },
+      {
+        question: "Where was Rizal executed on 30 December 1896?",
+        answers: ["Bagumbayan in Manila", "Dapitan town plaza", "Madrid's central square", "The port of Ghent"],
+        correct: 0,
+        explanation: "Rizal was executed at Bagumbayan in Manila, now part of Rizal Park."
+      },
+      {
+        question: "By what title is Rizal's final poem widely known, often translated as 'My Last Farewell'?",
+        answers: ["Mi Ultimo Adios", "Noli Me Tangere", "La Solidaridad", "El Consejo de los Dioses"],
+        correct: 0,
+        explanation: "Mi Ultimo Adios is the poem Rizal wrote before his execution."
+      },
+      {
+        question: "How did Rizal's execution affect Filipino nationalism?",
+        answers: ["His death became a powerful nationalist symbol", "It ended all resistance to Spain", "It made him the leader of the Katipunan", "It dissolved the Propaganda Movement"],
+        correct: 0,
+        explanation: "Rizal's death became a powerful symbol, while the revolutionaries continued to act independently."
+      },
+      {
+        type: "truefalse",
+        question: "The Propaganda Movement used print and public argument to seek reforms.",
+        answers: ["True", "False"],
+        correct: 0,
+        explanation: "Reformists used essays, speeches, and journalism to make their arguments."
+      },
+      {
+        type: "truefalse",
+        question: "La Liga Filipina was founded as an armed revolutionary group.",
+        answers: ["True", "False"],
+        correct: 1,
+        explanation: "La Liga was a civic association centered on mutual aid and peaceful reform."
+      },
+      {
+        type: "truefalse",
+        question: "Rizal continued teaching and serving patients during his exile in Dapitan.",
+        answers: ["True", "False"],
+        correct: 0,
+        explanation: "His Dapitan years included teaching, medical care, and community projects."
+      },
+      {
+        type: "truefalse",
+        question: "The Katipunan and La Liga Filipina were the same organization with the same strategy.",
+        answers: ["True", "False"],
+        correct: 1,
+        explanation: "They were separate organizations: La Liga pursued civic reform, while the Katipunan pursued independence by revolution."
+      },
+      {
+        type: "truefalse",
+        question: "The 1896 uprising began before Rizal was executed in December 1896.",
+        answers: ["True", "False"],
+        correct: 0,
+        explanation: "The uprising began in August 1896; Rizal was executed on 30 December."
+      },
+      {
+        type: "truefalse",
+        question: "Rizal led the Katipunan's armed revolution.",
+        answers: ["True", "False"],
+        correct: 1,
+        explanation: "Andres Bonifacio led the Katipunan; Rizal did not lead or endorse its armed revolt."
+      }
+    );
+
+    const quizRoundSize = 10;
+    function drawQuizQuestions() {
+      const shuffled = [...questionBank];
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+      }
+      return shuffled.slice(0, quizRoundSize);
+    }
+    let questions = drawQuizQuestions();
+
     const quizQuestion = document.querySelector("#quiz-question");
     const quizAnswers = document.querySelector("#quiz-answers");
     const quizCount = document.querySelector("#quiz-count");
@@ -403,6 +603,7 @@
     const quizTrackFill = document.querySelector("#quiz-track-fill");
     let quizIndex = 0;
     let quizPoints = 0;
+    let quizResponses = [];
     let answered = false;
     let showingResult = false;
 
@@ -434,6 +635,13 @@
           answered = true;
           const isCorrect = index === item.correct;
           if (isCorrect) quizPoints += 1;
+          quizResponses.push({
+            question: item.question,
+            selected: answer,
+            correctAnswer: item.answers[item.correct],
+            explanation: item.explanation,
+            isCorrect
+          });
           quizScore.textContent = `Score: ${quizPoints}`;
           quizAnswers.querySelectorAll("button").forEach((choice, choiceIndex) => {
             choice.disabled = true;
@@ -452,8 +660,10 @@
     quizNext.addEventListener("click", () => {
       if (showingResult) {
         showingResult = false;
+        questions = drawQuizQuestions();
         quizIndex = 0;
         quizPoints = 0;
+        quizResponses = [];
         renderQuestion();
         quizAnswers.querySelector("button")?.focus();
         return;
@@ -475,10 +685,42 @@
       quizCount.textContent = "Quiz complete";
       quizScore.textContent = `Score: ${quizPoints}/${questions.length}`;
       quizTrackFill.style.width = "100%";
-      quizQuestion.textContent = `${quizPoints} of ${questions.length} correct`;
+      quizQuestion.textContent = "Your result";
       quizAnswers.replaceChildren();
+      const resultSummary = document.createElement("div");
+      resultSummary.className = "quiz-result";
+      const resultScore = document.createElement("strong");
+      resultScore.className = "quiz-result-score";
+      resultScore.textContent = `${quizPoints}/${questions.length}`;
+      const resultPercent = document.createElement("span");
+      resultPercent.className = "quiz-result-percent";
+      resultPercent.textContent = `${percentage}%`;
+      resultSummary.append(resultScore, resultPercent);
+
+      const review = document.createElement("details");
+      review.className = "quiz-review";
+      const reviewHeading = document.createElement("summary");
+      reviewHeading.textContent = `Review your answers (${quizResponses.filter((response) => !response.isCorrect).length} to revisit)`;
+      const reviewList = document.createElement("ol");
+      reviewList.className = "quiz-review-list";
+      quizResponses.forEach((response, index) => {
+        const reviewItem = document.createElement("li");
+        reviewItem.className = `quiz-review-item${response.isCorrect ? " is-correct" : " is-incorrect"}`;
+        const question = document.createElement("h4");
+        question.textContent = `${index + 1}. ${response.question}`;
+        const answer = document.createElement("p");
+        answer.textContent = response.isCorrect
+          ? `Your answer: ${response.selected} — correct`
+          : `Your answer: ${response.selected} · Correct answer: ${response.correctAnswer}`;
+        const explanation = document.createElement("p");
+        explanation.textContent = response.explanation;
+        reviewItem.append(question, answer, explanation);
+        reviewList.append(reviewItem);
+      });
+      review.append(reviewHeading, reviewList);
+      quizAnswers.append(resultSummary, review);
       quizFeedback.textContent = `${percentage}%. ${message}`;
-      quizNext.textContent = "Try again";
+      quizNext.textContent = "Try another 10";
       quizNext.hidden = false;
       quizNext.focus();
     });
@@ -503,58 +745,52 @@
     const playlistCount = document.querySelector("#playlist-count");
     const recordTracks = [];
     let selectedTrack = -1;
-
-    const classicOpmSongs = [
-      { title: "Anak", artist: "Freddie Aguilar" },
-      { title: "Manila", artist: "Hotdog" },
-      { title: "Bongga Ka 'Day", artist: "Hotdog" },
-      { title: "Himig Natin", artist: "Juan dela Cruz Band" },
-      { title: "Handog", artist: "Florante" },
-      { title: "Kahit Maputi Na ang Buhok Ko", artist: "Rey Valera" },
-      { title: "Mr. DJ", artist: "Sharon Cuneta" },
-      { title: "Kapalaran", artist: "Rico J. Puno" },
-      { title: "Awitin Mo at Isasayaw Ko", artist: "VST & Company" },
-      { title: "Ikaw ang Miss Universe ng Buhay Ko", artist: "Hotdog" },
-      { title: "Tayo'y Mga Pinoy", artist: "Heber Bartolome" },
-      { title: "Panalangin", artist: "APO Hiking Society" }
+    // Browsers block fetch() of playlist.json from file:// pages. Keep this offline list aligned with that manifest.
+    const offlinePlaylistTracks = [
+      { name: "Ako'y Pinoy", artist: "Florante", path: "public/music/Ako'y Pinoy.mp3" },
+      { name: "Leonora", artist: "SUGARCANE", path: "public/music/Leonora.mp3" },
+      { name: "mandirigma", artist: "Unit 406", path: "public/music/mandirigma.mp3" }
     ];
 
-    classicOpmSongs.forEach((song, index) => {
-      const row = document.createElement("li");
-      row.className = "classic-opm-item";
-
-      const number = document.createElement("span");
-      number.className = "classic-opm-index";
-      number.setAttribute("aria-hidden", "true");
-      number.textContent = String(index + 1).padStart(2, "0");
-
-      const details = document.createElement("span");
-      details.className = "classic-opm-name";
-      const title = document.createElement("b");
-      title.textContent = song.title;
-      const artist = document.createElement("span");
-      artist.textContent = song.artist;
-      details.append(title, artist);
-
-      const links = document.createElement("span");
-      links.className = "classic-opm-links";
-      const query = `${song.title} ${song.artist}`;
-      [
-        { label: "YouTube Music", url: `https://music.youtube.com/search?q=${encodeURIComponent(query)}` },
-        { label: "Spotify", url: `https://open.spotify.com/search/${encodeURIComponent(query)}` }
-      ].forEach((service) => {
-        const link = document.createElement("a");
-        link.href = service.url;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = service.label;
-        link.setAttribute("aria-label", `Search ${song.title} by ${song.artist} on ${service.label}`);
-        links.append(link);
-      });
-
-      row.append(number, details, links);
-      classicOpmList.append(row);
-    });
+    const miniPlayer = document.createElement("aside");
+    miniPlayer.className = "mini-player";
+    miniPlayer.setAttribute("aria-label", "Music player");
+    miniPlayer.hidden = true;
+    miniPlayer.innerHTML = `
+      <div class="mini-player-top">
+        <span class="mini-record" aria-hidden="true"><span>R</span></span>
+        <div class="mini-player-info">
+          <span class="mini-player-kicker">NOW PLAYING</span>
+          <span class="mini-player-title" id="mini-track-title">No record selected</span>
+          <span class="mini-player-artist" id="mini-track-artist"></span>
+        </div>
+        <a class="mini-player-open" href="#listening-title" aria-label="Open the listening room">↗</a>
+      </div>
+      <div class="mini-player-bottom">
+        <div class="mini-player-controls">
+          <button class="mini-control" id="mini-previous-track" type="button" aria-label="Previous track" disabled>‹</button>
+          <button class="mini-control mini-play" id="mini-toggle-playback" type="button" aria-label="Play selected track" aria-pressed="false" disabled>
+            <svg class="mini-play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.7c0-.8.9-1.3 1.6-.9l10 6.3a1 1 0 0 1 0 1.8l-10 6.3c-.7.4-1.6-.1-1.6-.9V5.7Z"/></svg>
+            <svg class="mini-pause-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zm7 0h4v14h-4z"/></svg>
+          </button>
+          <button class="mini-control" id="mini-next-track" type="button" aria-label="Next track" disabled>›</button>
+        </div>
+        <div class="mini-player-progress">
+          <span id="mini-current-time">0:00</span>
+          <label class="sr-only" for="mini-audio-seek">Seek through current track</label>
+          <input id="mini-audio-seek" type="range" min="0" max="1000" value="0" step="1" aria-valuetext="0:00 elapsed" disabled>
+          <span id="mini-audio-duration">0:00</span>
+        </div>
+      </div>`;
+    document.body.append(miniPlayer);
+    const miniTrackTitle = miniPlayer.querySelector("#mini-track-title");
+    const miniTrackArtist = miniPlayer.querySelector("#mini-track-artist");
+    const miniPreviousTrack = miniPlayer.querySelector("#mini-previous-track");
+    const miniTogglePlayback = miniPlayer.querySelector("#mini-toggle-playback");
+    const miniNextTrack = miniPlayer.querySelector("#mini-next-track");
+    const miniAudioSeek = miniPlayer.querySelector("#mini-audio-seek");
+    const miniCurrentTime = miniPlayer.querySelector("#mini-current-time");
+    const miniDuration = miniPlayer.querySelector("#mini-audio-duration");
 
     audioPlayer.volume = Number(audioVolume.value);
 
@@ -646,6 +882,11 @@
       togglePlayback.title = isPlaying ? "Pause selected track" : "Play selected track";
       miniTogglePlayback.setAttribute("aria-label", isPlaying ? "Pause selected track" : "Play selected track");
       miniTogglePlayback.setAttribute("aria-pressed", String(isPlaying));
+      if (hasSelection) {
+        const track = recordTracks[selectedTrack];
+        miniTrackTitle.textContent = track.name;
+        miniTrackArtist.textContent = track.artist || "A recording from your local playlist";
+      }
       recordPlatter.setAttribute("aria-label", hasSelection
         ? `${isPlaying ? "Pause" : "Play"} ${recordTracks[selectedTrack].name}`
         : "Choose an audio file first");
@@ -673,14 +914,14 @@
       audioPlayer.src = track.url;
       audioPlayer.load();
       trackTitle.textContent = track.name;
-      trackArtist.textContent = "A recording from your local playlist";
+      trackArtist.textContent = track.artist || "A recording from your local playlist";
       playerStatus.textContent = "Record selected · ready to play";
       currentTimeLabel.textContent = "0:00";
       durationLabel.textContent = formatAudioTime(track.duration);
-      audioSeek.value = "0";
-      audioSeek.style.setProperty("--slider-progress", "0%");
       miniCurrentTime.textContent = "0:00";
       miniDuration.textContent = formatAudioTime(track.duration);
+      audioSeek.value = "0";
+      audioSeek.style.setProperty("--slider-progress", "0%");
       miniAudioSeek.value = "0";
       miniAudioSeek.style.setProperty("--slider-progress", "0%");
       renderPlaylist();
@@ -699,6 +940,10 @@
       const forumPostCount = document.querySelector("#forum-post-count");
       const forumSort = document.querySelector("#forum-sort");
       const forumRefresh = document.querySelector("#forum-refresh");
+      const forumAdminForm = document.querySelector("#forum-admin-form");
+      const forumAdminFields = forumAdminForm.querySelector(".forum-admin-fields");
+      const forumAdminStatus = document.querySelector("#forum-admin-status");
+      const forumAdminSignout = document.querySelector("#forum-admin-signout");
       const forumConfig = window.RIZAL_FORUM_CONFIG || {};
       const forumReady = Boolean(
         forumConfig.supabaseUrl &&
@@ -756,6 +1001,29 @@
       function forumAuthorName(item) {
         if (item.is_anonymous) return "Anonymous reader";
         return item.author_name;
+      }
+
+      function isForumAdmin() {
+        return forumUser?.app_metadata?.forum_admin === true;
+      }
+
+      function canDeleteForumItem(item) {
+        return Boolean(forumUser && item && (isForumAdmin() || item.author_id === forumUser.id));
+      }
+
+      function setForumAdminStatus(message, state = "") {
+        forumAdminStatus.textContent = message;
+        forumAdminStatus.dataset.state = state;
+      }
+
+      function updateForumAdminPanel() {
+        const admin = isForumAdmin();
+        forumAdminFields.hidden = admin;
+        forumAdminSignout.hidden = !admin;
+        setForumAdminStatus(
+          admin ? "You are signed in as the site admin. You can remove any note or reply." : "Admin access must be enabled on your Supabase account.",
+          admin ? "success" : ""
+        );
       }
 
       function forumDate(value) {
@@ -842,6 +1110,9 @@
           const hasLiked = likes.some((like) => like.user_id === forumUser?.id);
           const actions = createForumElement("div", "forum-post-actions forum-reply-actions");
           actions.append(forumAction(`♥ ${likes.length}`, "like-reply", post.id, hasLiked));
+          if (canDeleteForumItem(post)) {
+            actions.append(forumAction("Delete", "delete-reply", post.id));
+          }
           item.append(actions);
           return item;
         }
@@ -851,7 +1122,7 @@
         const hasLiked = likes.some((like) => like.user_id === forumUser?.id);
         actions.append(forumAction(`♥ ${likes.length}`, "like-post", post.id, hasLiked));
         actions.append(forumAction(`↳ Reply · ${(replyMap.get(post.id) || []).length}`, "reply", post.id));
-        if (post.author_id === forumUser?.id) {
+        if (canDeleteForumItem(post)) {
           actions.append(forumAction("Delete", "delete-post", post.id, false, false));
         }
         item.append(actions);
@@ -963,7 +1234,12 @@
             ? "Shared with readers across the project."
             : "You’re here first—start the conversation.");
           if (!silent && forumStatus.dataset.state !== "error") {
-            setForumStatus("Your anonymous session is ready. Posts are shared with everyone who opens this site.", "success");
+            const sessionMessage = isForumAdmin()
+              ? "Admin moderation is active. You can delete any note or reply."
+              : forumUser?.is_anonymous
+                ? "Your anonymous session is ready. Posts are shared with everyone who opens this site."
+                : "Your signed-in forum session is ready. Posts are shared with everyone who opens this site.";
+            setForumStatus(sessionMessage, "success");
           }
         } catch (error) {
           const message = escapeForumError(error, "Could not load the shared forum.");
@@ -998,7 +1274,10 @@
           }
           if (!session?.user) throw new Error("Supabase did not return an anonymous reader session.");
           forumUser = session.user;
-          setForumStatus("Anonymous mode is on. Uncheck it if you’d like to add a display name.", "success");
+          updateForumAdminPanel();
+          setForumStatus(isForumAdmin()
+            ? "Admin moderation is active. You can delete any note or reply."
+            : "Anonymous mode is on. Uncheck it if you’d like to add a display name.", "success");
           await refreshForum();
         } catch (error) {
           setForumStatus(`Could not connect to the shared forum: ${escapeForumError(error, "Check Supabase setup.")}`, "error");
@@ -1113,16 +1392,84 @@
       }
 
       async function deleteForumPost(postId) {
-        if (!forumClient || !forumUser) return;
-        const { error } = await forumClient.from("forum_posts")
-          .delete()
-          .eq("id", postId)
-          .eq("author_id", forumUser.id);
+        const post = forumPosts.find((item) => item.id === postId);
+        if (!forumClient || !canDeleteForumItem(post)) return;
+        let request = forumClient.from("forum_posts").delete().eq("id", postId);
+        if (!isForumAdmin()) request = request.eq("author_id", forumUser.id);
+        const { error } = await request;
         if (error) {
           setForumFeedStatus(`Could not delete note: ${escapeForumError(error, "Please try again.")}`, "error");
           return;
         }
         await refreshForum(true);
+      }
+
+      async function deleteForumReply(replyId) {
+        const reply = forumReplies.find((item) => item.id === replyId);
+        if (!forumClient || !canDeleteForumItem(reply)) return;
+        let request = forumClient.from("forum_replies").delete().eq("id", replyId);
+        if (!isForumAdmin()) request = request.eq("author_id", forumUser.id);
+        const { error } = await request;
+        if (error) {
+          setForumFeedStatus(`Could not delete reply: ${escapeForumError(error, "Please try again.")}`, "error");
+          return;
+        }
+        await refreshForum(true);
+      }
+
+      async function restoreAnonymousForumSession() {
+        const { error: signOutError } = await forumClient.auth.signOut();
+        if (signOutError) throw signOutError;
+        const { data, error } = await forumClient.auth.signInAnonymously();
+        if (error) throw error;
+        forumUser = data.user;
+        updateForumAdminPanel();
+        renderForum();
+        await refreshForum(true);
+      }
+
+      async function signInForumAdmin(event) {
+        event.preventDefault();
+        if (!forumClient) {
+          setForumAdminStatus("Connect the Supabase forum before signing in.", "error");
+          return;
+        }
+        const submit = forumAdminForm.querySelector('button[type="submit"]');
+        const email = forumAdminForm.elements.email.value.trim();
+        const password = forumAdminForm.elements.password.value;
+        submit.disabled = true;
+        setForumAdminStatus("Signing in…");
+        try {
+          const { data, error } = await forumClient.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+          forumUser = data.user;
+          if (!isForumAdmin()) {
+            await restoreAnonymousForumSession();
+            setForumAdminStatus("This account does not have forum admin access. Ask the project owner to enable it.", "error");
+            return;
+          }
+          forumAdminForm.reset();
+          updateForumAdminPanel();
+          setForumStatus("Admin moderation is active. You can delete any note or reply.", "success");
+          await refreshForum(true);
+        } catch (error) {
+          setForumAdminStatus(`Could not sign in: ${escapeForumError(error, "Check the admin email and password.")}`, "error");
+        } finally {
+          submit.disabled = false;
+        }
+      }
+
+      async function signOutForumAdmin() {
+        forumAdminSignout.disabled = true;
+        try {
+          await restoreAnonymousForumSession();
+          setForumAdminStatus("You are signed out. The forum returned to anonymous mode.", "success");
+          setForumStatus("Anonymous mode is on. Uncheck it if you’d like to add a display name.", "success");
+        } catch (error) {
+          setForumAdminStatus(`Could not sign out: ${escapeForumError(error, "Please reload the page and try again.")}`, "error");
+        } finally {
+          forumAdminSignout.disabled = false;
+        }
       }
 
       forumAnonymous.addEventListener("change", updateMainIdentity);
@@ -1136,6 +1483,8 @@
       });
       forumRefresh.addEventListener("click", () => refreshForum());
       forumSort.addEventListener("change", renderForum);
+      forumAdminForm.addEventListener("submit", signInForumAdmin);
+      forumAdminSignout.addEventListener("click", signOutForumAdmin);
       forumFeed.addEventListener("submit", (event) => {
         const form = event.target.closest(".forum-reply-form");
         if (!form) return;
@@ -1158,6 +1507,8 @@
           toggleForumReplyLike(id, button);
         } else if (action === "delete-post") {
           if (window.confirm("Delete your note and its replies? This can’t be undone.")) deleteForumPost(id);
+        } else if (action === "delete-reply") {
+          if (window.confirm("Delete this reply? This can’t be undone.")) deleteForumReply(id);
         }
       });
       updateMainIdentity();
@@ -1247,55 +1598,6 @@
 
       memeShuffle.addEventListener("click", shuffleMemes);
       renderMemes(historyMemes);
-
-    function addAudioFiles(fileList) {
-      const incoming = Array.from(fileList);
-      if (incoming.length === 0) return;
-      const acceptedFiles = incoming.filter((file) =>
-        file.type.startsWith("audio/") || /\.(mp3|wav|m4a|ogg|flac|aac|opus|oga)$/i.test(file.name)
-      );
-      const rejectedCount = incoming.length - acceptedFiles.length;
-
-      acceptedFiles.forEach((file) => {
-        recordTracks.push({
-          name: file.name.replace(/\.[^.]+$/, "") || file.name,
-          url: URL.createObjectURL(file),
-          duration: 0
-        });
-      });
-
-      if (acceptedFiles.length > 0) {
-        const firstNewTrack = recordTracks.length - acceptedFiles.length;
-        if (selectedTrack < 0) selectAudioTrack(firstNewTrack);
-        else renderPlaylist();
-        showAudioMessage(rejectedCount
-          ? `Added ${acceptedFiles.length} audio file${acceptedFiles.length === 1 ? "" : "s"}. Skipped ${rejectedCount} unsupported file${rejectedCount === 1 ? "" : "s"}.`
-          : `Added ${acceptedFiles.length} audio file${acceptedFiles.length === 1 ? "" : "s"}. Choose a record or press play.`);
-      } else {
-        showAudioMessage("No supported audio files were selected. Try MP3, WAV, M4A, OGG, FLAC, or AAC.", true);
-      }
-      renderPlaylist();
-      updateAudioControls();
-    }
-
-    audioFiles.addEventListener("change", () => {
-      addAudioFiles(audioFiles.files);
-      audioFiles.value = "";
-    });
-
-    ["dragenter", "dragover"].forEach((eventName) => {
-      audioDropZone.addEventListener(eventName, (event) => {
-        event.preventDefault();
-        audioDropZone.classList.add("is-dragging");
-      });
-    });
-    ["dragleave", "drop"].forEach((eventName) => {
-      audioDropZone.addEventListener(eventName, (event) => {
-        event.preventDefault();
-        audioDropZone.classList.remove("is-dragging");
-      });
-    });
-    audioDropZone.addEventListener("drop", (event) => addAudioFiles(event.dataTransfer.files));
 
     togglePlayback.addEventListener("click", () => {
       if (audioPlayer.paused) startAudioPlayback();
@@ -1389,12 +1691,40 @@
     audioVolume.style.setProperty("--slider-progress", `${Number(audioVolume.value) * 100}%`);
     async function loadBundledMusic() {
       try {
-        const response = await fetch(new URL("music/playlist.json", document.baseURI));
-        if (!response.ok) throw new Error(`Music playlist request failed (${response.status}).`);
+        if (window.location.protocol === "file:") {
+          recordTracks.push(...offlinePlaylistTracks.map((track) => ({
+            name: track.name,
+            artist: track.artist,
+            url: new URL(track.path, document.baseURI).href,
+            duration: 0
+          })));
+          selectAudioTrack(0);
+          showAudioMessage("Loaded the three local songs. For playlist.json updates, run the site through a local server.");
+          renderPlaylist();
+          updateAudioControls();
+          return;
+        }
+
+        const playlistUrls = [
+          new URL("music/playlist.json", document.baseURI),
+          new URL("public/music/playlist.json", document.baseURI)
+        ];
+        let response = null;
+        let lastStatus = 0;
+        for (const playlistUrl of playlistUrls) {
+          const candidate = await fetch(playlistUrl);
+          if (candidate.ok) {
+            response = candidate;
+            break;
+          }
+          lastStatus = candidate.status;
+        }
+        if (!response) throw new Error(`Music playlist request failed (${lastStatus}).`);
         const playlistData = await response.json();
         if (!Array.isArray(playlistData.tracks)) {
           throw new Error("The music playlist must contain a tracks array.");
         }
+        const musicDirectory = new URL(".", response.url);
         const tracks = playlistData.tracks.map((track, index) => {
           if (!track || typeof track.name !== "string" || !track.name.trim()) {
             throw new Error(`Music playlist track ${index + 1} needs a name.`);
@@ -1403,8 +1733,8 @@
           if (!isSafeMusicPath(track.src) || track.url || track.platform) {
             throw new Error(`Music playlist track ${index + 1} needs a local MP3 path under /music/.`);
           }
-          const src = new URL(track.src.trim().slice(1), document.baseURI).href;
-          return { name: track.name.trim(), artist: artist.trim(), src, duration: 0 };
+          const url = new URL(track.src.trim().slice("/music/".length), musicDirectory).href;
+          return { name: track.name.trim(), artist: artist.trim(), url, duration: 0 };
         });
         recordTracks.push(...tracks);
         if (recordTracks.length > 0) {
