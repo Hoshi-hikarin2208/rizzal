@@ -1,249 +1,218 @@
-Rizal: The Power of Ideas, Unity & Revolution
+# Rizal: The Power of Ideas, Unity & Revolution
 
-An interactive history website exploring the life, ideas, and legacy of Dr. José Rizal, one of the Philippines’ most influential national heroes. Through engaging content and interactive features, the project highlights Rizal’s role in the Propaganda Movement, the founding of La Liga Filipina, his exile in Dapitan, and the events surrounding the Philippine Revolution.
+An interactive history website exploring the life, ideas, and legacy of Dr. José Rizal, one of the Philippines' most influential national heroes. It covers the Propaganda Movement, the founding of La Liga Filipina, his exile in Dapitan, and the events surrounding the Philippine Revolution.
 
- Explore the project: Rizal: The Power of Ideas, Unity & Revolution
+---
 
- About the Project
+## 🔗 GitHub Repository
 
-This website aims to make Philippine history more engaging and accessible through a combination of historical content, interactive learning tools, community discussions, and multimedia experiences.
+### 👉 **https://github.com/Hoshi-hikarin2208/rizzal** 👈
 
-Visitors can explore important events in Rizal’s life, test their historical knowledge, listen to curated music, and participate in community discussions.
+Click **Code** (green button) → **Download ZIP**, or clone it with Git.
 
- Features
-Interactive Historical Timeline — Explore key events in José Rizal’s life and their historical significance.
-Educational Quiz — Test your knowledge with 10 questions, including 8 multiple-choice questions and 2 true-or-false questions.
-Listening Room — Play locally hosted audio files or open approved Spotify and YouTube links.
-Community Forum — Share historical insights, reply to posts, like discussions, sort and refresh posts, and delete your own posts and replies.
-Light and Dark Modes — Switch between themes using the fixed navigation. Your preference is remembered in the current browser.
-Historical Image Viewer — Select a historical portrait or monument to open an enlarged, keyboard-accessible view with its caption, historical role, and connection to Rizal.
-History Memes — Explore a more informal and engaging perspective on historical topics.
-Creator Profiles — Display creator names and photos managed by the site administrator.
-Standalone Static Page — Access a standalone version of the website alongside the Next.js application.
- Historical Topics
+---
 
-The website explores several important themes in Philippine history:
+## 🚀 How to Open It Locally
 
-The Propaganda Movement — The campaign for reforms and equal rights under Spanish colonial rule.
-La Liga Filipina — Rizal’s organization promoting unity, mutual assistance, and peaceful reform.
-Exile in Dapitan — Rizal’s work in education, medicine, agriculture, and community development.
-The Philippine Revolution — The historical context of the revolution and Rizal’s influence on Filipino nationalism.
-Rizal’s Legacy — His enduring contributions to Filipino identity, civic consciousness, and the pursuit of reform.
- Technology
+Pick **one** of the two options below.
 
-The project includes a Next.js application and a standalone static page, with Supabase providing optional backend services for the community forum.
+### Option A: Quick Open (no installation)
 
-Next.js — Web application framework.
-JavaScript, HTML, and CSS — Website functionality and presentation.
-Supabase — Authentication and database services for the shared community forum.
-JSON — Configuration of the curated music playlist.
+Use this if you just want to view the site.
 
-The exact framework and library versions are defined by the project's package configuration.
+1. Go to **https://github.com/Hoshi-hikarin2208/rizzal**
+2. Click the green **`<> Code`** button.
+3. Click **Download ZIP**.
+4. Right-click the downloaded ZIP and choose **Extract All** (Windows) or double-click it (Mac).
+5. Open the extracted folder.
+6. **Double-click `index.html`**. It opens in your browser.
 
- Getting Started
-Prerequisites
+> This opens the standalone static version. The shared community forum needs Supabase and will only show setup guidance in this mode. Everything else works.
 
-Before running the Next.js application, make sure you have:
+### Option B: Full Next.js App (recommended for developers)
 
-Node.js installed.
-npm, which is included with standard Node.js installations.
-Git, if you plan to clone the repository.
-1. Clone the repository
-git clone https://github.com/Hoshi-hikarin2208/rizzal.git
-cd rizzal
+**Before you start, install:**
+- [Node.js](https://nodejs.org) (npm comes with it)
+- [Git](https://git-scm.com) (optional, only needed for cloning)
 
-2. Install dependencies
-npm install
+**Steps:**
 
-3. Configure environment variables
+1. Open a terminal (Command Prompt, PowerShell, Terminal, or the VS Code terminal).
+2. Clone the repository and enter the folder:
+   ```bash
+   git clone https://github.com/Hoshi-hikarin2208/rizzal.git
+   cd rizzal
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+5. **Click or open this link in your browser:**
 
-The main website can run without Supabase configuration. The shared community forum requires a Supabase project.
+   👉 **http://localhost:3000**
 
-Create a .env.local file in the project root and add the following variables:
+To stop the server, press `Ctrl + C` in the terminal.
 
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+> The main website runs without any Supabase setup. Only the community forum needs it (see [Setting Up the Community Forum](#-setting-up-the-community-forum)).
 
+---
 
-Replace the placeholder values with your project's actual Supabase URL and publishable key.
+## ✨ Features
 
-Keep .env.local private. It is ignored by Git so that local environment configuration is not committed to the repository.
+- **Interactive Historical Timeline**: Explore key events in Rizal's life and why they matter.
+- **Educational Quiz**: 10 questions (8 multiple-choice, 2 true-or-false).
+- **Listening Room**: Play local audio files or open approved Spotify and YouTube links.
+- **Community Forum**: Post, reply, like, sort, refresh, and delete your own posts and replies.
+- **Light and Dark Modes**: Switch from the fixed navigation; your choice is remembered in the browser.
+- **Historical Image Viewer**: Click a portrait or monument for an enlarged, keyboard-accessible view with a caption and its connection to Rizal.
+- **History Memes**: A lighter, more informal take on historical topics.
+- **Creator Profiles**: Names and photos managed by the site administrator.
+- **Standalone Static Page**: A standalone version (`index.html`) alongside the Next.js app.
 
-Security note: The Supabase publishable key is intended for client-side use. Never expose a Supabase service-role key in frontend code.
+## 📚 Historical Topics
 
-4. Start the development server
-npm run dev
+- **The Propaganda Movement**: The campaign for reforms and equal rights under Spanish colonial rule.
+- **La Liga Filipina**: Rizal's organization promoting unity, mutual aid, and peaceful reform.
+- **Exile in Dapitan**: His work in education, medicine, agriculture, and community development.
+- **The Philippine Revolution**: The historical context of the revolution and Rizal's influence on Filipino nationalism.
+- **Rizal's Legacy**: His lasting contributions to Filipino identity and civic consciousness.
 
+## 🛠 Technology
 
-Open the local address shown in your terminal, typically:
+| Tool | Use |
+|------|-----|
+| Next.js | Web application framework |
+| JavaScript, HTML, CSS | Functionality and presentation |
+| Supabase | Authentication and database for the community forum |
+| JSON | Listening-room playlist configuration |
 
-http://localhost:3000
+Exact versions are defined in `package.json`.
 
-The Next.js application should now be available in your browser.
+---
 
- Setting Up the Community Forum
+## 💬 Setting Up the Community Forum
 
-The community forum uses Supabase for authentication and data storage. Without a configured Supabase project, the website displays setup guidance while the other features remain available.
+The forum is optional. Without Supabase, the site shows setup guidance and every other feature still works.
 
-1. Create a Supabase project
+1. **Create a Supabase project** at [supabase.com](https://supabase.com) and copy its project URL and publishable key.
+2. **Create `.env.local`** in the project root:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+   ```
+   Keep this file private. It is ignored by Git. Never put a Supabase **service-role** key in frontend code.
+3. **Enable anonymous sign-ins:** Supabase dashboard → **Authentication → Sign In / Providers** → turn on **Anonymous Sign-Ins** → Save.
+4. **Apply the database schema:** open the Supabase **SQL Editor** and run `forum-schema.sql`. If the forum was set up before, run it again to apply updated grants. Keep **Row-Level Security (RLS)** enabled.
+5. **Restart** `npm run dev`.
 
-Create a project at Supabase and obtain its project URL and publishable key.
+### Forum security and moderation
 
-Add both values to .env.local for local development. Configure the same variables in your hosting provider's environment settings when deploying.
+A public anonymous forum can attract spam or abuse. Recommended precautions:
 
-2. Enable anonymous sign-ins
+- Enable Supabase CAPTCHA for anonymous sign-ins where available.
+- Review database policies and grants before deployment.
+- Monitor discussions and handle abuse through appropriate administrative steps.
+- Rotate credentials or disable public access if abuse becomes a problem.
 
-In the Supabase dashboard:
+**Limitation:** There is no dedicated moderator tooling. Database policies are not a substitute for content moderation.
 
-Navigate to Authentication → Sign In / Providers.
-Enable Anonymous Sign-Ins.
-Save the changes.
+---
 
-Anonymous authentication allows visitors to participate without creating a conventional account.
+## 🎵 Managing the Listening Room
 
-3. Apply the database schema
-
-Open the Supabase SQL Editor and run the repository's forum-schema.sql script.
-
-This script sets up the forum's database structure, security policies, and the explicit Data API grants needed by the application. If the forum was previously configured, run the script again to apply the updated grants.
-
-Important: Row-level security (RLS) must remain enabled. The database policies should restrict users to the actions permitted by the schema, including deleting only their own posts and replies.
-
-4. Deploy over HTTPS
-
-Deploy the application to an HTTPS-enabled hosting environment and configure the required environment variables.
-
-The forum uses cookie-based Supabase sessions and supports server-rendering of available community notes, anonymous or display-name posts, replies, likes, sorting, refreshing, and deletion of a user's own posts and their replies.
-
-Forum security and moderation
-
-A publicly accessible anonymous forum may attract spam or abusive content.
-
-Recommended precautions:
-
-Enable Supabase CAPTCHA protection for anonymous sign-ins where available.
-Review database access policies and grants before deployment.
-Monitor community discussions and address abuse through appropriate administrative procedures.
-Rotate credentials or disable public access if abuse becomes a concern.
-
-Current limitation: The website does not include dedicated moderator tooling. Database security policies should not be treated as a substitute for content moderation.
-
- Managing the Listening Room
-
-The listening room uses a curated playlist maintained by the site administrator.
-
-Playlist location
+```
 public/
 └── music/
     ├── playlist.json
     └── README.md
+```
 
-Adding music
-Add permitted local audio files to public/music/.
-Update public/music/playlist.json using the format documented in public/music/README.md.
-Alternatively, add supported HTTPS Spotify or YouTube links to the playlist.
-Verify that each entry points to a valid audio file or streaming destination.
+1. Add permitted audio files to `public/music/`.
+2. Update `public/music/playlist.json` using the format in `public/music/README.md`.
+3. Or add supported HTTPS Spotify or YouTube links.
+4. Check that every entry points to a valid file or link.
 
-Visitors can select tracks from the approved playlist but cannot upload audio or add their own songs through the website.
+Visitors can only pick from the approved playlist; they cannot upload songs. Local files play in the site's player, and streaming links open on their own services. Only add audio you own or have permission to use.
 
-Local audio files play in the site's music player. Streaming links open on their respective services.
+## 🖼 Managing Creator Profiles
 
-Only add audio you own or have permission to distribute or use.
+Creator names and photos are read-only for visitors.
 
- Managing Creator Profiles
+1. Put photos in `public/images/creators/`.
+2. Edit the creator cards in `app/site-content.html`.
+3. Edit `index.html` to update the standalone page too.
 
-Creator names and photographs are read-only for visitors and are maintained by the site administrator.
+## 🎨 Theme Preferences
 
-Relevant locations include:
+Use the fixed navigation to switch between Light and Dark Mode. Your choice is remembered in your current browser.
 
-public/images/creators/
-app/site-content.html
-index.html
+## 📝 Quiz Structure
 
-Store creator photographs in public/images/creators/.
-Update the creator cards in app/site-content.html for the relevant site content.
-Update index.html when changing the corresponding standalone static page.
+10 questions: 8 multiple-choice and 2 true-or-false, covering key events, figures, and concepts around Rizal and the Philippine Revolution.
 
-The Next.js and standalone pages provide a historical image viewer for supported portraits and monuments. Selecting an image opens an enlarged, keyboard-accessible view with descriptive historical information.
+## 📁 Important Project Files
 
-There are no visitor-facing controls for editing creator names or photographs.
+| Path | Purpose |
+|------|---------|
+| `app/` | Next.js application files and site content |
+| `app/site-content.html` | Creator cards and site content |
+| `public/images/creators/` | Creator photographs |
+| `public/music/playlist.json` | Listening-room playlist |
+| `public/music/README.md` | Playlist format guide |
+| `forum-schema.sql` | Supabase forum schema and security setup |
+| `index.html` | Standalone static website |
+| `.env.local` | Local environment variables (not committed) |
+| `package.json` | npm scripts and dependencies |
 
- Theme Preferences
+Check paths against the current repository if the structure changes.
 
-Visitors can switch between Light Mode and Dark Mode through the fixed navigation.
+## 🌐 Deployment
 
-The selected preference is remembered in the current browser, providing a more consistent experience when the visitor returns.
+1. Push the project to your Git repository.
+2. Import it into a host that supports Next.js (such as Vercel).
+3. If you want the forum, set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` in the host's environment settings.
+4. Confirm anonymous sign-ins, the schema, and RLS policies are set up.
+5. Deploy over **HTTPS**.
+6. Test the timeline, quiz, theme switching, image viewer, listening room, and forum on the deployed site.
 
- Quiz Structure
+## 🔒 Privacy and Security
 
-The educational quiz contains 10 questions:
+- Never commit `.env.local` or any file with private credentials.
+- Never put a Supabase service-role key in client-side code.
+- Keep RLS enabled and review all policies before deployment.
+- Use HTTPS in production.
+- Protect anonymous sign-in with CAPTCHA where available.
+- Only add properly licensed or authorized media.
 
-8 multiple-choice questions.
-2 true-or-false questions.
+## 🤝 Contributing
 
-The quiz provides an interactive way to review important events, historical figures, and concepts related to Rizal and the Philippine Revolution.
-
- Important Project Files
-Path	Purpose
-app/	Next.js application files and related site content
-app/site-content.html	Creator cards and associated site content
-public/images/creators/	Creator photographs
-public/music/playlist.json	Curated listening-room playlist
-public/music/README.md	Playlist format and music configuration guidance
-forum-schema.sql	Supabase forum database schema and security configuration
-index.html	Standalone static website
-.env.local	Local environment variables; not committed to Git
-package.json	npm scripts and project dependencies
-
-File names and paths should be checked against the current repository if the project structure changes.
-
- Deployment
-
-To publish the Next.js application:
-
-Push the project to your Git repository.
-Import the repository into a hosting platform that supports Next.js.
-Configure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY in the deployment environment if the forum is required.
-Confirm that anonymous sign-ins, the database schema, and row-level security policies are configured correctly.
-Deploy the application over HTTPS.
-Test the timeline, quiz, theme switching, image viewer, listening room, and forum in the deployed environment.
-
-The main website can operate without Supabase, but the shared forum requires the backend configuration described above.
-
- Privacy and Security
-Never commit .env.local or other files containing private credentials.
-Never place a Supabase service-role key in client-side code.
-Keep row-level security enabled and review all database policies before deployment.
-Use HTTPS for production deployments.
-Protect anonymous sign-in with CAPTCHA where available.
-Add only properly licensed or authorized media assets.
- Contributing
-
-Contributions that improve historical accuracy, accessibility, usability, educational value, or technical reliability are welcome.
+Contributions that improve historical accuracy, accessibility, usability, educational value, or reliability are welcome.
 
 Before submitting a change:
 
-Review the existing implementation and project conventions.
-Test the affected features locally.
-Verify historical claims and cite reliable references when adding factual content.
-Avoid committing secrets, unauthorized media, or unnecessary personal information.
-Describe your changes clearly when opening a pull request.
- Historical Accuracy
+1. Review the existing code and conventions.
+2. Test affected features locally.
+3. Verify historical claims and cite reliable references.
+4. Avoid committing secrets, unauthorized media, or unnecessary personal information.
+5. Describe your changes clearly in the pull request.
 
-This project is intended for educational purposes. Historical interpretations should be supported by reliable sources, such as scholarly publications, archival materials, and reputable Philippine historical institutions.
+## 📖 Historical Accuracy
 
-Rizal's ideas, the Propaganda Movement, and the Philippine Revolution should be understood within their broader colonial and historical context.
+This project is for educational purposes. Interpretations should be backed by reliable sources such as scholarly publications, archival materials, and reputable Philippine historical institutions. Rizal's ideas, the Propaganda Movement, and the Revolution should be understood in their broader colonial context.
 
- License
+## 📄 License
 
-No license information is specified here. If you intend to allow others to reuse, modify, or distribute the project, add an appropriate LICENSE file and update this section.
+No license has been specified yet. To allow others to reuse, modify, or distribute this project, add a `LICENSE` file and update this section.
 
- Acknowledgment
+## 🙏 Acknowledgment
 
-This project celebrates the life, ideas, and enduring legacy of Dr. José Rizal and the Filipino pursuit of education, unity, reform, and national freedom.
+This project celebrates the life, ideas, and legacy of Dr. José Rizal and the Filipino pursuit of education, unity, reform, and national freedom.
 
-“The youth is the hope of our future.”
+> "The youth is the hope of our future."
+> A sentiment commonly associated with Rizal's legacy. Verify the exact wording and attribution against a reliable historical source before using it as a direct quotation.
 
-— A sentiment commonly associated with Rizal's legacy; verify the exact wording and attribution against a reliable historical source before using it as a direct quotation.
-
-Explore history. Question ideas. Learn from the past.
+**Explore history. Question ideas. Learn from the past.**
